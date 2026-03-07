@@ -1,0 +1,513 @@
+{% extends "osnova.html" %}
+
+{% block naslov %}Sestavljanje testa — BioNaloga{% endblock %}
+
+{% block extra_style %}
+/* ===== LAYOUT ===== */
+.panel-filter  { width: 280px; background: #fff; border-right: 1px solid #ddd; display: flex; flex-direction: column; overflow: hidden; flex-shrink: 0; }
+.panel-naloge  { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: #fafafa; }
+.panel-test    { width: 360px; background: #fff; border-left: 1px solid #ddd; display: flex; flex-direction: column; overflow: hidden; flex-shrink: 0; }
+
+.panel-header {
+    padding: 10px 14px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #555;
+    border-bottom: 1px solid #ddd;
+    flex-shrink: 0;
+    background: #fff;
+}
+
+.panel-body { flex: 1; overflow-y: auto; padding: 10px 14px; }
+
+/* ===== FILTRI ===== */
+.filter-section { margin-bottom: 14px; }
+.filter-section h4 { font-size: 0.8rem; color: #888; margin-bottom: 6px; text-transform: uppercase; }
+
+.tree-node { margin-left: 0; }
+.tree-children { margin-left: 14px; border-left: 1px solid #e0e0e0; padding-left: 8px; }
+
+.tree-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+    padding: 2px 0;
+    font-size: 0.82rem;
+    line-height: 1.3;
+}
+.tree-item input[type=checkbox] { margin-top: 2px; flex-shrink: 0; accent-color: #1a5c2a; }
+.tree-toggle {
+    cursor: pointer;
+    color: #888;
+    font-size: 0.7rem;
+    user-select: none;
+    flex-shrink: 0;
+    width: 12px;
+    line-height: 1.8;
+}
+.tree-toggle.prazno { visibility: hidden; }
+
+select, input[type=text] {
+    width: 100%;
+    padding: 5px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 7px 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+.btn-primary { background: #1a5c2a; color: white; }
+.btn-primary:hover { background: #154d22; }
+.btn-secondary { background: #e0e0e0; color: #333; }
+.btn-secondary:hover { background: #ccc; }
+.btn-danger { background: #c0392b; color: white; font-size: 0.75rem; padding: 3px 8px; }
+.btn-danger:hover { background: #a93226; }
+.btn-sm { padding: 3px 8px; font-size: 0.75rem; }
+
+/* ===== SEZNAM NALOG ===== */
+#seznam-nalog { padding: 10px; display: flex; flex-direction: column; gap: 6px; }
+
+.naloga-kartica {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+.naloga-kartica:hover { border-color: #1a5c2a; box-shadow: 0 1px 4px rgba(26,92,42,0.15); }
+.naloga-kartica.izbrana { border-color: #1a5c2a; background: #f0f9f2; }
+
+.naloga-kartica .naloga-besedilo {
+    flex: 1;
+    font-size: 0.83rem;
+    line-height: 1.4;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+.naloga-meta {
+    font-size: 0.72rem;
+    color: #888;
+    margin-top: 4px;
+}
+.naloga-meta span { margin-right: 8px; }
+.badge {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    background: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}
+.badge-slika { background: #e3f2fd; color: #1565c0; border-color: #bbdefb; }
+
+.dodaj-gumb {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid #1a5c2a;
+    background: white;
+    color: #1a5c2a;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: background 0.15s;
+}
+.dodaj-gumb:hover { background: #1a5c2a; color: white; }
+.dodaj-gumb.ze-dodan { background: #1a5c2a; color: white; cursor: default; }
+
+#stanje-nalag { padding: 20px; color: #888; font-size: 0.85rem; text-align: center; }
+
+/* ===== TEST PANEL ===== */
+#test-seznam { display: flex; flex-direction: column; gap: 6px; }
+
+.test-naloga {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 0.82rem;
+}
+.test-naloga .stevilka {
+    font-weight: bold;
+    color: #1a5c2a;
+    flex-shrink: 0;
+    min-width: 18px;
+}
+.test-naloga .besedilo {
+    flex: 1;
+    line-height: 1.3;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.test-naloga .akcije { display: flex; flex-direction: column; gap: 2px; flex-shrink: 0; }
+.akcije button {
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 1px 5px;
+    font-size: 0.8rem;
+    line-height: 1.2;
+}
+.akcije button:hover { background: #eee; }
+
+.test-prazno { padding: 20px; color: #aaa; font-size: 0.85rem; text-align: center; }
+
+.test-footer {
+    padding: 12px 14px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+}
+.test-footer label { font-size: 0.8rem; color: #555; font-weight: 600; }
+
+.stevilo-nalog {
+    font-size: 0.8rem;
+    color: #666;
+    padding: 0 14px 6px;
+    flex-shrink: 0;
+}
+
+/* ===== LOADING ===== */
+.htmx-request #seznam-nalog { opacity: 0.5; }
+.loader { display: none; }
+.htmx-request .loader { display: inline; }
+
+/* scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+{% endblock %}
+
+{% block vsebina %}
+<!-- ===== FILTER PANEL ===== -->
+<div class="panel-filter">
+    <div class="panel-header">Filtri</div>
+    <div class="panel-body">
+        <form id="filter-form">
+
+            <!-- Vsebina -->
+            <div class="filter-section">
+                <h4 style="display:flex;justify-content:space-between;align-items:center">
+                    Vsebina
+                    <span style="display:flex;gap:6px">
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="izberiVsaVsebina(true)">Vse</button>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="izberiVsaVsebina(false)">Nič</button>
+                    </span>
+                </h4>
+                {% for poglavje in drevo_vsebine %}
+                <div class="tree-node">
+                    <div class="tree-item">
+                        {% if poglavje.otroci %}
+                        <span class="tree-toggle" onclick="preklopi(this)">▶</span>
+                        {% else %}
+                        <span class="tree-toggle prazno">▶</span>
+                        {% endif %}
+                        <input type="checkbox" name="vsebina" value="{{ poglavje.koda }}"
+                               onchange="posodobiFiltre()">
+                        <span>{{ poglavje.naziv }}</span>
+                    </div>
+                    {% if poglavje.otroci %}
+                    <div class="tree-children" style="display:none">
+                        {% for podpoglavje in poglavje.otroci %}
+                        <div class="tree-node">
+                            <div class="tree-item">
+                                {% if podpoglavje.otroci %}
+                                <span class="tree-toggle" onclick="preklopi(this)">▶</span>
+                                {% else %}
+                                <span class="tree-toggle prazno">▶</span>
+                                {% endif %}
+                                <input type="checkbox" name="vsebina" value="{{ podpoglavje.koda }}"
+                                       onchange="posodobiFiltre()">
+                                <span>{{ podpoglavje.naziv }}</span>
+                            </div>
+                            {% if podpoglavje.otroci %}
+                            <div class="tree-children" style="display:none">
+                                {% for tema in podpoglavje.otroci %}
+                                <div class="tree-node">
+                                    <div class="tree-item">
+                                        <span class="tree-toggle prazno">▶</span>
+                                        <input type="checkbox" name="vsebina" value="{{ tema.koda }}"
+                                               onchange="posodobiFiltre()">
+                                        <span>{{ tema.naziv }}</span>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Tip naloge -->
+            <div class="filter-section">
+                <h4>Tip naloge</h4>
+                <select name="tip_id" onchange="posodobiFiltre()">
+                    <option value="">— vsi tipi —</option>
+                    {% for tip in tipi_nalog %}
+                    <option value="{{ tip.id }}">{{ tip.naziv }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Slika -->
+            <div class="filter-section">
+                <h4>Slike</h4>
+                <select name="ima_sliko" onchange="posodobiFiltre()">
+                    <option value="">— vse naloge —</option>
+                    <option value="da">S sliko</option>
+                    <option value="ne">Brez slike</option>
+                </select>
+            </div>
+
+            <button type="button" class="btn btn-secondary" style="width:100%;margin-top:6px"
+                    onclick="pocistiFiltre()">Počisti filtre</button>
+        </form>
+    </div>
+</div>
+
+<!-- ===== NALOGE PANEL ===== -->
+<div class="panel-naloge">
+    <div class="panel-header">
+        Naloge
+        <span class="loader">⏳</span>
+    </div>
+    <div id="stanje-nalag" style="display:none"></div>
+    <div id="seznam-nalog-wrapper" style="flex:1;overflow-y:auto">
+        <div id="seznam-nalog">
+            <div style="padding:20px;color:#aaa;font-size:0.85rem;text-align:center">
+                Izberite vsaj en filter za prikaz nalog.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== TEST PANEL ===== -->
+<div class="panel-test">
+    <div class="panel-header">Moj test</div>
+    <div class="stevilo-nalog" id="stevilo-nalog">0 nalog</div>
+    <div class="panel-body" style="padding:0 10px">
+        <div id="test-seznam">
+            <div class="test-prazno">Naloge dodajte s klikom na +</div>
+        </div>
+    </div>
+    <div class="test-footer">
+        <label for="naslov-testa">Naslov testa</label>
+        <input type="text" id="naslov-testa" value="Test iz biologije">
+        <button class="btn btn-primary" onclick="izvoziTest()">Izvozi v Word (.docx)</button>
+        <button class="btn btn-secondary" onclick="pocistiTest()">Počisti test</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_script %}
+<script>
+// Stanje: seznam {id, besedilo, meta} v vrstnem redu za test
+let testNaloge = [];
+
+// ===== DREVO VSEBINE =====
+function preklopi(el) {
+    // el = span.tree-toggle, el.parentElement = div.tree-item, .parentElement = div.tree-node
+    const treeNode = el.parentElement.parentElement;
+    const otroci = treeNode.querySelector('.tree-children');
+    if (!otroci) return;
+    const odprt = otroci.style.display !== 'none';
+    otroci.style.display = odprt ? 'none' : 'block';
+    el.textContent = odprt ? '▶' : '▼';
+}
+
+// ===== IZBERI VSE VSEBINE =====
+function izberiVsaVsebina(izberi) {
+    document.querySelectorAll('input[name=vsebina]').forEach(cb => cb.checked = izberi);
+    // Odpri vsa poddrevesa pri izbiri
+    if (izberi) {
+        document.querySelectorAll('.tree-children').forEach(el => el.style.display = 'block');
+        document.querySelectorAll('.tree-toggle:not(.prazno)').forEach(el => el.textContent = '▼');
+    }
+    posodobiFiltre();
+}
+
+// ===== FILTRI =====
+function zberiFiltreUrl() {
+    const forma = document.getElementById('filter-form');
+    const params = new URLSearchParams();
+
+    // zberi vse obkljukane vsebine
+    forma.querySelectorAll('input[name=vsebina]:checked').forEach(cb => {
+        params.append('vsebina', cb.value);
+    });
+
+    const tip = forma.querySelector('select[name=tip_id]').value;
+    if (tip) params.set('tip_id', tip);
+
+    const slika = forma.querySelector('select[name=ima_sliko]').value;
+    if (slika) params.set('ima_sliko', slika);
+
+    return params;
+}
+
+function posodobiFiltre() {
+    const params = zberiFiltreUrl();
+    if ([...params.keys()].length === 0) {
+        document.getElementById('seznam-nalog').innerHTML =
+            '<div style="padding:20px;color:#aaa;font-size:0.85rem;text-align:center">Izberite vsaj en filter za prikaz nalog.</div>';
+        return;
+    }
+
+    fetch('/naloge?' + params.toString())
+        .then(r => r.text())
+        .then(html => {
+            document.getElementById('seznam-nalog').innerHTML = html;
+            osveziDodanjeGumbe();
+        });
+}
+
+function pocistiFiltre() {
+    const forma = document.getElementById('filter-form');
+    forma.querySelectorAll('input[type=checkbox]').forEach(cb => cb.checked = false);
+    forma.querySelectorAll('select').forEach(sel => sel.selectedIndex = 0);
+    document.getElementById('seznam-nalog').innerHTML =
+        '<div style="padding:20px;color:#aaa;font-size:0.85rem;text-align:center">Izberite vsaj en filter za prikaz nalog.</div>';
+}
+
+// ===== DODAJANJE V TEST =====
+function dodajNalogo(id, besedilo, meta) {
+    if (testNaloge.find(n => n.id === id)) return; // že v testu
+    testNaloge.push({id, besedilo, meta});
+    osveziTestPanel();
+    osveziDodanjeGumbe();
+}
+
+function odstraniNalogo(id) {
+    testNaloge = testNaloge.filter(n => n.id !== id);
+    osveziTestPanel();
+    osveziDodanjeGumbe();
+}
+
+function premakniGor(idx) {
+    if (idx === 0) return;
+    [testNaloge[idx-1], testNaloge[idx]] = [testNaloge[idx], testNaloge[idx-1]];
+    osveziTestPanel();
+}
+
+function premakniDol(idx) {
+    if (idx === testNaloge.length - 1) return;
+    [testNaloge[idx], testNaloge[idx+1]] = [testNaloge[idx+1], testNaloge[idx]];
+    osveziTestPanel();
+}
+
+function pocistiTest() {
+    testNaloge = [];
+    osveziTestPanel();
+    osveziDodanjeGumbe();
+}
+
+// ===== IZRIS TEST PANELA =====
+function osveziTestPanel() {
+    const seznam = document.getElementById('test-seznam');
+    const stevilo = document.getElementById('stevilo-nalog');
+
+    stevilo.textContent = testNaloge.length + ' nalog' + (testNaloge.length === 1 ? 'a' : testNaloge.length < 5 ? 'e' : '');
+
+    if (testNaloge.length === 0) {
+        seznam.innerHTML = '<div class="test-prazno">Naloge dodajte s klikom na +</div>';
+        return;
+    }
+
+    seznam.innerHTML = testNaloge.map((n, idx) => `
+        <div class="test-naloga">
+            <span class="stevilka">${idx + 1}.</span>
+            <span class="besedilo">${escHtml(n.besedilo)}</span>
+            <div class="akcije">
+                <button onclick="premakniGor(${idx})" title="Premakni gor">↑</button>
+                <button onclick="premakniDol(${idx})" title="Premakni dol">↓</button>
+                <button onclick="odstraniNalogo(${n.id})" title="Odstrani" style="color:#c0392b">✕</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+// ===== GUMBI V SEZNAMU NALOG =====
+function osveziDodanjeGumbe() {
+    const dodane = new Set(testNaloge.map(n => n.id));
+    document.querySelectorAll('.dodaj-gumb').forEach(gumb => {
+        const id = parseInt(gumb.dataset.id);
+        if (dodane.has(id)) {
+            gumb.classList.add('ze-dodan');
+            gumb.textContent = '✓';
+            gumb.onclick = null;
+        } else {
+            gumb.classList.remove('ze-dodan');
+            gumb.textContent = '+';
+            const besedilo = gumb.dataset.besedilo;
+            const meta = gumb.dataset.meta;
+            gumb.onclick = () => dodajNalogo(id, besedilo, meta);
+        }
+    });
+}
+
+// ===== IZVOZ =====
+function izvoziTest() {
+    if (testNaloge.length === 0) {
+        alert('Test je prazen. Dodajte vsaj eno nalogo.');
+        return;
+    }
+    const ids = testNaloge.map(n => n.id).join(',');
+    const naslov = document.getElementById('naslov-testa').value || 'Test iz biologije';
+
+    const forma = document.createElement('form');
+    forma.method = 'POST';
+    forma.action = '/izvozi';
+    forma.style.display = 'none';
+
+    const vnosIds = document.createElement('input');
+    vnosIds.type = 'hidden'; vnosIds.name = 'ids'; vnosIds.value = ids;
+
+    const vnosNaslov = document.createElement('input');
+    vnosNaslov.type = 'hidden'; vnosNaslov.name = 'naslov'; vnosNaslov.value = naslov;
+
+    forma.appendChild(vnosIds);
+    forma.appendChild(vnosNaslov);
+    document.body.appendChild(forma);
+    forma.submit();
+    document.body.removeChild(forma);
+}
+
+// ===== POMOŽNE =====
+function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+</script>
+{% endblock %}

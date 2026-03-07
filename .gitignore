@@ -1,0 +1,22 @@
+# Okolje
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# Baza in podatki
+baza.db
+
+# Uvožene datoteke
+input/
+testi_vital/
+testi_ds/
+slike/
+klasifikacije/
+
+# Izvoženi testi
+*.docx
+
+# macOS
+.DS_Store
