@@ -6,7 +6,7 @@ __pycache__/
 .env
 
 # Baza in podatki
-baza.db
+# baza.db
 
 # Uvožene datoteke
 input/
