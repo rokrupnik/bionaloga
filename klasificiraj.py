@@ -1,9 +1,16 @@
 """
 Klasifikacija nalog iz .docx datotek v mapi input/ z modelom claude-haiku-4-5.
 
+Nova logika:
+    1. Izvleči celotno besedilo iz Word datoteke
+    2. Grobo preveri koliko nalog je že v bazi (primerjaj začetke nalog)
+    3. Če < 50% novih → preskoči datoteko
+    4. Če >= 50% novih → pošlji CELOTEN test Haiku-ju, ki vrne vse naloge naenkrat
+    5. Vstavi klasificirane naloge v bazo
+
 Uporaba:
     python klasificiraj.py               # obdela vse nove datoteke
-    python klasificiraj.py --vzorec 10   # samo prvih 10 (za preizkus)
+    python klasificiraj.py --vzorec 5    # samo prvih 5 (za preizkus)
     python klasificiraj.py --datoteka "ime.docx"  # samo eno datoteko
 
 Rezultati se sproti shranjujejo v:
@@ -28,7 +35,7 @@ from xml.etree import ElementTree
 import anthropic
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(Path(__file__).parent / ".env", override=True)
 
 # ---------------------------------------------------------------------------
 # Poti
@@ -199,15 +206,6 @@ def inicializiraj_bazo(conn: sqlite3.Connection):
     conn.commit()
 
 
-def pridobi_ze_obdelane(conn: sqlite3.Connection) -> set[str]:
-    # Iz baze
-    vrstice = conn.execute("SELECT DISTINCT vir_datoteka FROM naloga WHERE vir_datoteka IS NOT NULL").fetchall()
-    v_bazi = {v[0] for v in vrstice}
-    # Iz mape done/ (fizično premaknjene datoteke)
-    v_done = {p.name for p in DONE_DIR.glob("*.docx")} if DONE_DIR.exists() else set()
-    return v_bazi | v_done
-
-
 SOFFICE = next(
     (p for p in [
         "soffice",
@@ -259,9 +257,8 @@ def _zamenjaj_slike(doc_xml: str, rid_to_ime: dict) -> str:
 
 
 def ekstrahiraj_besedilo_in_slike(pot: Path) -> tuple[str, dict]:
-    """Izvleče besedilo z [SLIKA:ime] placeholder-ji in shrani slike v slike/ (brez podmap).
+    """Izvleči besedilo z [SLIKA:ime] placeholder-ji in shrani slike v slike/.
 
-    Slike poimenuje kot <timestamp>_<counter>.<ext> — brez presledkov, brez podmap.
     Vrne (besedilo, {ime_v_placeholderju: ime_datoteke_v_slike_dir}).
     """
     ns = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
@@ -276,8 +273,6 @@ def ekstrahiraj_besedilo_in_slike(pot: Path) -> tuple[str, dict]:
             except KeyError:
                 rid_to_orig = {}
 
-            # Izvozi slike z novimi imeni ts_001.ext, ts_002.ext, ...
-            # rid_to_ime: rId → novo ime datoteke (kar bo v placeholderju)
             rid_to_ime = {}
             for counter, (rid, orig_ime) in enumerate(rid_to_orig.items(), 1):
                 ext = Path(orig_ime).suffix.lower()
@@ -285,7 +280,6 @@ def ekstrahiraj_besedilo_in_slike(pot: Path) -> tuple[str, dict]:
                 cilj = SLIKE_DIR / novo_ime
                 with z.open(f"word/media/{orig_ime}") as src, open(cilj, "wb") as dst:
                     shutil.copyfileobj(src, dst)
-                # Konvertiraj .emf/.wmf → .png takoj
                 if ext in {".emf", ".wmf"}:
                     png = _konvertiraj_emf(cilj)
                     if png:
@@ -293,7 +287,6 @@ def ekstrahiraj_besedilo_in_slike(pot: Path) -> tuple[str, dict]:
                         novo_ime = png.name
                 rid_to_ime[rid] = novo_ime
 
-            # Besedilo z [SLIKA:novo_ime] placeholder-ji
             doc_xml = z.read("word/document.xml").decode("utf-8")
             doc_xml = _zamenjaj_slike(doc_xml, rid_to_ime)
 
@@ -307,16 +300,81 @@ def ekstrahiraj_besedilo_in_slike(pot: Path) -> tuple[str, dict]:
     except Exception as e:
         raise RuntimeError(f"Napaka pri branju {pot.name}: {e}") from e
 
-    # slike_map: ime_v_placeholderju → ime_datoteke (enako, ker ni podmap)
     slike_map = {novo: novo for novo in rid_to_ime.values()}
     return "\n".join(odstavki), slike_map
 
 
+# ---------------------------------------------------------------------------
+# Grobi check za duplikate (na nivoju datoteke)
+# ---------------------------------------------------------------------------
+
+VZOREC_NALOGE = re.compile(r'^\d+\.\s*[^\d]', re.MULTILINE)
+PRAG_PODOBNOSTI = 0.92
+
+
+def _normaliziraj(besedilo: str) -> str:
+    """Odstrani odvečne presledke in pretvori v male črke za primerjavo."""
+    return " ".join(besedilo.split()).lower()
+
+
+def _izvleci_zacetke_nalog(besedilo: str) -> list[str]:
+    """Iz surovega besedila testa izvleči začetke nalog (prva vrstica po številki).
+
+    Vrne seznam normaliziranih začetkov (prvih ~80 znakov vsake naloge).
+    """
+    vrstice = besedilo.split("\n")
+    zacetki = []
+    for vrstica in vrstice:
+        vrstica = vrstica.strip()
+        if VZOREC_NALOGE.match(vrstica):
+            # Odstrani številko na začetku
+            brez_st = re.sub(r'^\d+\.\s*', '', vrstica)
+            norm = _normaliziraj(brez_st)
+            if len(norm) > 10:  # Preskoči prekratke vrstice
+                zacetki.append(norm[:80])
+    return zacetki
+
+
+def preveri_delez_novih(conn: sqlite3.Connection, besedilo: str) -> tuple[float, int]:
+    """Grobo preveri koliko nalog iz besedila je že v bazi.
+
+    Primerja začetke nalog (prvih 80 znakov) z začetki v bazi.
+    Vrne (delež_novih, skupno_nalog).
+    """
+    zacetki = _izvleci_zacetke_nalog(besedilo)
+    if not zacetki:
+        return 1.0, 0  # Ni prepoznanih nalog → obdelaj (Haiku bo razbral)
+
+    # Pridobi vse začetke iz baze (enkrat)
+    db_zacetki = conn.execute(
+        "SELECT lower(substr(besedilo, 1, 80)) FROM naloga"
+    ).fetchall()
+    db_norme = [_normaliziraj(z[0]) for z in db_zacetki]
+
+    nove = 0
+    for zacetek in zacetki:
+        je_nova = True
+        for db_norm in db_norme:
+            razmerje = SequenceMatcher(None, zacetek, db_norm[:80]).ratio()
+            if razmerje >= PRAG_PODOBNOSTI:
+                je_nova = False
+                break
+        if je_nova:
+            nove += 1
+
+    delez = nove / len(zacetki)
+    return delez, len(zacetki)
+
+
+# ---------------------------------------------------------------------------
+# API klic
+# ---------------------------------------------------------------------------
+
 def klici_api(odjemalec: anthropic.Anthropic, besedilo: str) -> list[dict]:
-    """Pošlje besedilo v API in vrne seznam nalog kot Python seznam."""
+    """Pošlje celotno besedilo testa v API in vrne vse klasificirane naloge naenkrat."""
     sporocilo = odjemalec.messages.create(
         model=MODEL,
-        max_tokens=4096,
+        max_tokens=8192,
         system=SISTEM_PROMPT,
         messages=[{"role": "user", "content": f"Klasificiraj naloge iz tega testa:\n\n{besedilo}"}],
     )
@@ -330,20 +388,12 @@ def klici_api(odjemalec: anthropic.Anthropic, besedilo: str) -> list[dict]:
     return json.loads(odgovor)
 
 
-PRAG_PODOBNOSTI = 0.92  # naloge z ujemanjem >= 92 % se štejejo za duplicate
-
-
-def _normaliziraj(besedilo: str) -> str:
-    """Odstrani odvečne presledke in pretvori v male črke za primerjavo."""
-    return " ".join(besedilo.split()).lower()
-
+# ---------------------------------------------------------------------------
+# Shranjevanje v bazo
+# ---------------------------------------------------------------------------
 
 def _ze_obstaja(conn: sqlite3.Connection, besedilo: str) -> bool:
-    """Vrne True, če v bazi že obstaja dovolj podobna naloga.
-
-    Segment (ena vrstica) primerjamo samo s PRVO VRSTICO vsakega DB zapisa.
-    Pre-filter: LIKE prvih_30_znakov% na prvi vrstici → fuzzy primerjava.
-    """
+    """Vrne True, če v bazi že obstaja dovolj podobna naloga (fuzzy match)."""
     norm = _normaliziraj(besedilo)
     kljuc = norm[:30].replace("%", "").replace("_", "")
     if not kljuc:
@@ -380,7 +430,6 @@ def shrani_naloge(conn: sqlite3.Connection, naloge: list[dict], ime_datoteke: st
             preskoceno += 1
             continue
 
-        # Poišči slike v besedilu: [SLIKA:ime_datoteke]
         reference_slik = re.findall(r'\[SLIKA:([^\]]+)\]', besedilo)
         ima_sliko = bool(reference_slik) or bool(n.get("ima_sliko"))
 
@@ -391,10 +440,7 @@ def shrani_naloge(conn: sqlite3.Connection, naloge: list[dict], ime_datoteke: st
         )
         naloga_id = cur.lastrowid
 
-        # Vstavi zapise za slike
         for vrstni_red, orig_ime in enumerate(reference_slik, 1):
-            # orig_ime je originalno ime (npr. image1.png) ali že prefiks (basename_image1.png)
-            # Poiščemo v slike_map, sicer vzamemo kot je
             relativna_pot = slike_map.get(orig_ime, orig_ime)
             conn.execute(
                 "INSERT INTO slika (naloga_id, ime_datoteke, vrstni_red) VALUES (?, ?, ?)",
@@ -417,8 +463,8 @@ def main():
                         help="Obdelaj samo prvih N datotek (za preizkus)")
     parser.add_argument("--datoteka", type=str, default=None,
                         help="Obdelaj samo to eno datoteko")
-    parser.add_argument("--debug", action="store_true",
-                        help="Izpiši podrobnosti o segmentih in fuzzy ujemanju")
+    parser.add_argument("--brez-preverjanja", action="store_true",
+                        help="Preskoči grobi check za duplikate (obdelaj vse)")
     args = parser.parse_args()
 
     KLASIFIKACIJE_DIR.mkdir(exist_ok=True)
@@ -426,7 +472,9 @@ def main():
 
     conn = sqlite3.connect(DB_POT)
     inicializiraj_bazo(conn)
-    ze_obdelane = pridobi_ze_obdelane(conn)
+
+    # Datoteke že v done/ preskočimo
+    v_done = {p.name for p in DONE_DIR.glob("*.docx")} if DONE_DIR.exists() else set()
 
     odjemalec = anthropic.Anthropic()
 
@@ -439,14 +487,14 @@ def main():
     else:
         datoteke = sorted(INPUT_DIR.glob("*.docx"))
 
-    # Filtriraj že obdelane
-    nove = [d for d in datoteke if d.name not in ze_obdelane]
+    # Filtriraj že premaknjene v done/
+    nove = [d for d in datoteke if d.name not in v_done]
 
     if args.vzorec:
         nove = nove[: args.vzorec]
 
     skupaj = len(nove)
-    print(f"Datotek za obdelavo: {skupaj}  (že obdelanih: {len(ze_obdelane)})")
+    print(f"Datotek za obdelavo: {skupaj}  (že v done/: {len(v_done)})")
 
     if skupaj == 0:
         print("Ni novih datotek.")
@@ -454,35 +502,49 @@ def main():
         return
 
     uspesno = 0
+    preskoceno_dat = 0
     napake = 0
 
     for i, pot in enumerate(nove, 1):
-        print(f"[{i:>4}/{skupaj}] {pot.name}", end=" ", flush=True)
+        print(f"\n[{i:>4}/{skupaj}] {pot.name}")
 
-        # Preveri, če JSON že obstaja (delna obdelava brez vpisa v bazo)
         json_pot = KLASIFIKACIJE_DIR / (pot.stem + ".json")
 
         try:
+            # 1. Izvleči besedilo in slike
             besedilo, slike_map = ekstrahiraj_besedilo_in_slike(pot)
 
+            if not besedilo.strip():
+                print("  PRESKOK — prazna datoteka")
+                continue
+
+            # 2. Grobi check: koliko nalog je že v bazi?
+            if not args.brez_preverjanja and not json_pot.exists():
+                delez_novih, st_nalog = preveri_delez_novih(conn, besedilo)
+                print(f"  Grobi check: {st_nalog} nalog zaznanih, {delez_novih:.0%} novih", end="")
+
+                if st_nalog > 0 and delez_novih < 0.5:
+                    print(f" → PRESKOK (premalo novih)")
+                    pot.rename(DONE_DIR / pot.name)
+                    preskoceno_dat += 1
+                    continue
+                else:
+                    print(f" → obdelujem")
+
+            # 3. Klasifikacija: iz predpomnilnika ali API
             if json_pot.exists():
                 naloge = json.loads(json_pot.read_text(encoding="utf-8"))
-                print(f"(iz predpomnilnika, {len(naloge)} nalog)", end=" ", flush=True)
+                print(f"  Iz predpomnilnika: {len(naloge)} nalog")
             else:
-                if not besedilo.strip():
-                    print("PRESKOK (prazna datoteka)")
-                    continue
-
-                # Poizkusi do 3-krat pri prehodnih napakah API
+                # Pošlji celoten test Haiku-ju
                 for poskus in range(3):
                     try:
                         naloge = klici_api(odjemalec, besedilo)
                         break
-                    except (anthropic.RateLimitError, anthropic.APIStatusError) as e:
-                        # RateLimitError (429) ali OverloadedError (529)
+                    except (anthropic.RateLimitError, anthropic.APIStatusError):
                         if poskus < 2:
                             cakaj = 30 * (poskus + 1)
-                            print(f"(preobremenjen/rate-limit, čakam {cakaj}s...)", end=" ", flush=True)
+                            print(f"  Rate limit, čakam {cakaj}s...")
                             time.sleep(cakaj)
                         else:
                             raise
@@ -490,30 +552,31 @@ def main():
                         raise
                     except (anthropic.APIError, json.JSONDecodeError) as e:
                         if poskus < 2:
-                            print(f"(napaka {e}, čakam 5s...)", end=" ", flush=True)
+                            print(f"  Napaka ({e}), ponoven poskus...")
                             time.sleep(5)
                         else:
                             raise
 
+                # Shrani JSON predpomnilnik
                 json_pot.write_text(json.dumps(naloge, ensure_ascii=False, indent=2), encoding="utf-8")
-                print(f"({len(naloge)} nalog, {len(slike_map)} slik)", end=" ", flush=True)
+                print(f"  Haiku vrnil: {len(naloge)} nalog, {len(slike_map)} slik")
 
-            vstavljeno, preskoceno = shrani_naloge(conn, naloge, pot.name, slike_map)
+            # 4. Vstavi v bazo
+            vstavljeno, dup = shrani_naloge(conn, naloge, pot.name, slike_map)
             pot.rename(DONE_DIR / pot.name)
-            dup = f", {preskoceno} duplikatov" if preskoceno else ""
-            print(f"-> {vstavljeno} v bazo{dup}, premaknjeno v done/")
+            dup_info = f", {dup} duplikatov" if dup else ""
+            print(f"  → {vstavljeno} v bazo{dup_info}, premaknjeno v done/")
             uspesno += 1
 
         except Exception as e:
-            print(f"NAPAKA: {e}")
+            print(f"  NAPAKA: {e}")
             napake += 1
-            # Nadaljuj z naslednjo datoteko
             continue
 
     conn.close()
-    print(f"\nKonec. Uspesno: {uspesno}, napake: {napake}")
+    print(f"\n{'='*60}")
+    print(f"Končano. Uspešno: {uspesno}, preskočeno: {preskoceno_dat}, napake: {napake}")
     print(f"Baza: {DB_POT}")
-    print(f"JSON predpomnilnik: {KLASIFIKACIJE_DIR}/")
 
 
 if __name__ == "__main__":
