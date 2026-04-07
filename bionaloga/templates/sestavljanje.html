@@ -49,13 +49,15 @@
 }
 .tree-toggle.prazno { visibility: hidden; }
 
-select, input[type=text] {
+select, input[type=text], input[type=number], textarea {
     width: 100%;
     padding: 5px 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 0.85rem;
+    font-family: inherit;
 }
+textarea { resize: vertical; min-height: 80px; }
 
 .btn {
     display: inline-block;
@@ -76,6 +78,27 @@ select, input[type=text] {
 
 /* ===== SEZNAM NALOG ===== */
 #seznam-nalog { padding: 10px; display: flex; flex-direction: column; gap: 6px; }
+
+/* Grupiranje po temah */
+.skupina-tema { margin-bottom: 12px; }
+.tema-naslov {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1a5c2a;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 6px 0 4px;
+    border-bottom: 2px solid #1a5c2a;
+    margin-bottom: 6px;
+}
+
+/* Izbirni tip: 2-stolpčna mreža */
+.izbirne-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 6px;
+}
 
 .naloga-kartica {
     background: white;
@@ -116,6 +139,23 @@ select, input[type=text] {
     border: 1px solid #c8e6c9;
 }
 .badge-slika { background: #e3f2fd; color: #1565c0; border-color: #bbdefb; }
+
+.kartica-akcije { display: flex; gap: 4px; align-items: center; flex-shrink: 0; }
+
+.uredi-gumb {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    background: white;
+    color: #666;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.uredi-gumb:hover { background: #f0f0f0; border-color: #999; }
 
 .dodaj-gumb {
     flex-shrink: 0;
@@ -195,6 +235,43 @@ select, input[type=text] {
     padding: 0 14px 6px;
     flex-shrink: 0;
 }
+
+/* ===== NAKLJUČNI IZBOR ===== */
+.nakljucni-section {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.nakljucni-section input[type=number] {
+    width: 70px;
+    text-align: center;
+}
+
+/* ===== MODAL ===== */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+.modal-overlay.prikazano { display: flex; }
+.modal {
+    background: white;
+    border-radius: 10px;
+    padding: 24px;
+    width: 540px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+.modal h3 { margin-bottom: 16px; font-size: 1rem; color: #333; }
+.modal .polje { margin-bottom: 12px; }
+.modal .polje label { display: block; font-size: 0.8rem; font-weight: 600; color: #555; margin-bottom: 4px; }
+.modal .gumbi { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; }
 
 /* ===== LOADING ===== */
 .htmx-request #seznam-nalog { opacity: 0.5; }
@@ -292,8 +369,21 @@ select, input[type=text] {
                 </select>
             </div>
 
+            <!-- Naključni izbor -->
+            <div class="filter-section">
+                <h4>Naključni izbor</h4>
+                <div class="nakljucni-section">
+                    <input type="number" id="stevilo-nakljucnih" min="1" value="10" placeholder="N">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="nakljucniIzbor()">Izberi naključno</button>
+                </div>
+            </div>
+
             <button type="button" class="btn btn-secondary" style="width:100%;margin-top:6px"
                     onclick="pocistiFiltre()">Počisti filtre</button>
+
+            <!-- Dodaj nalogo -->
+            <button type="button" class="btn btn-primary" style="width:100%;margin-top:6px"
+                    onclick="odpriDodaj()">+ Nova naloga</button>
         </form>
     </div>
 </div>
@@ -330,6 +420,45 @@ select, input[type=text] {
         <button class="btn btn-secondary" onclick="pocistiTest()">Počisti test</button>
     </div>
 </div>
+
+<!-- ===== MODAL ZA DODAJANJE/UREJANJE ===== -->
+<div class="modal-overlay" id="modal-naloga">
+    <div class="modal">
+        <h3 id="modal-naslov">Nova naloga</h3>
+        <input type="hidden" id="modal-id" value="">
+        <div class="polje">
+            <label for="modal-besedilo">Besedilo naloge</label>
+            <textarea id="modal-besedilo" rows="6"></textarea>
+        </div>
+        <div class="polje">
+            <label for="modal-vsebina">Vsebina (tema)</label>
+            <select id="modal-vsebina">
+                <option value="">— izberi —</option>
+                {% for v in vse_vsebine %}
+                <option value="{{ v.koda }}">{{ v.koda }} — {{ v.naziv }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="polje">
+            <label for="modal-tip">Tip naloge</label>
+            <select id="modal-tip">
+                <option value="">— izberi —</option>
+                {% for tip in tipi_nalog %}
+                <option value="{{ tip.id }}">{{ tip.naziv }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="polje">
+            <label>
+                <input type="checkbox" id="modal-slika"> Ima sliko
+            </label>
+        </div>
+        <div class="gumbi">
+            <button class="btn btn-secondary" onclick="zapriModal()">Prekliči</button>
+            <button class="btn btn-primary" onclick="shraniNalogo()">Shrani</button>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block extra_script %}
@@ -339,7 +468,6 @@ let testNaloge = [];
 
 // ===== DREVO VSEBINE =====
 function preklopi(el) {
-    // el = span.tree-toggle, el.parentElement = div.tree-item, .parentElement = div.tree-node
     const treeNode = el.parentElement.parentElement;
     const otroci = treeNode.querySelector('.tree-children');
     if (!otroci) return;
@@ -348,10 +476,8 @@ function preklopi(el) {
     el.textContent = odprt ? '▶' : '▼';
 }
 
-// ===== IZBERI VSE VSEBINE =====
 function izberiVsaVsebina(izberi) {
     document.querySelectorAll('input[name=vsebina]').forEach(cb => cb.checked = izberi);
-    // Odpri vsa poddrevesa pri izbiri
     if (izberi) {
         document.querySelectorAll('.tree-children').forEach(el => el.style.display = 'block');
         document.querySelectorAll('.tree-toggle:not(.prazno)').forEach(el => el.textContent = '▼');
@@ -363,18 +489,13 @@ function izberiVsaVsebina(izberi) {
 function zberiFiltreUrl() {
     const forma = document.getElementById('filter-form');
     const params = new URLSearchParams();
-
-    // zberi vse obkljukane vsebine
     forma.querySelectorAll('input[name=vsebina]:checked').forEach(cb => {
         params.append('vsebina', cb.value);
     });
-
     const tip = forma.querySelector('select[name=tip_id]').value;
     if (tip) params.set('tip_id', tip);
-
     const slika = forma.querySelector('select[name=ima_sliko]').value;
     if (slika) params.set('ima_sliko', slika);
-
     return params;
 }
 
@@ -385,7 +506,6 @@ function posodobiFiltre() {
             '<div style="padding:20px;color:#aaa;font-size:0.85rem;text-align:center">Izberite vsaj en filter za prikaz nalog.</div>';
         return;
     }
-
     fetch('/naloge?' + params.toString())
         .then(r => r.text())
         .then(html => {
@@ -402,9 +522,40 @@ function pocistiFiltre() {
         '<div style="padding:20px;color:#aaa;font-size:0.85rem;text-align:center">Izberite vsaj en filter za prikaz nalog.</div>';
 }
 
+// ===== NAKLJUČNI IZBOR =====
+function nakljucniIzbor() {
+    const params = zberiFiltreUrl();
+    if ([...params.keys()].length === 0) {
+        alert('Najprej izberite vsaj en filter.');
+        return;
+    }
+    const stevilo = parseInt(document.getElementById('stevilo-nakljucnih').value) || 10;
+    params.set('stevilo', stevilo);
+
+    fetch('/naloge/nakljucne?' + params.toString())
+        .then(r => r.json())
+        .then(naloge => {
+            if (naloge.length === 0) {
+                alert('Ni nalog z izbranimi filtri.');
+                return;
+            }
+            // Počisti test in dodaj naključne
+            testNaloge = [];
+            naloge.forEach(n => {
+                testNaloge.push({
+                    id: n.id,
+                    besedilo: n.besedilo,
+                    meta: (n.vsebina_naziv || '') + ' — ' + (n.tip_naziv || '')
+                });
+            });
+            osveziTestPanel();
+            osveziDodanjeGumbe();
+        });
+}
+
 // ===== DODAJANJE V TEST =====
 function dodajNalogo(id, besedilo, meta) {
-    if (testNaloge.find(n => n.id === id)) return; // že v testu
+    if (testNaloge.find(n => n.id === id)) return;
     testNaloge.push({id, besedilo, meta});
     osveziTestPanel();
     osveziDodanjeGumbe();
@@ -477,6 +628,66 @@ function osveziDodanjeGumbe() {
         }
     });
 }
+
+// ===== MODAL: DODAJ / UREDI NALOGO =====
+function odpriDodaj() {
+    document.getElementById('modal-naslov').textContent = 'Nova naloga';
+    document.getElementById('modal-id').value = '';
+    document.getElementById('modal-besedilo').value = '';
+    document.getElementById('modal-vsebina').value = '';
+    document.getElementById('modal-tip').value = '';
+    document.getElementById('modal-slika').checked = false;
+    document.getElementById('modal-naloga').classList.add('prikazano');
+}
+
+function odpriUredi(id) {
+    fetch('/naloge/' + id)
+        .then(r => r.json())
+        .then(n => {
+            document.getElementById('modal-naslov').textContent = 'Uredi nalogo #' + n.id;
+            document.getElementById('modal-id').value = n.id;
+            document.getElementById('modal-besedilo').value = n.besedilo;
+            document.getElementById('modal-vsebina').value = n.vsebina_koda || '';
+            document.getElementById('modal-tip').value = n.tip_id || '';
+            document.getElementById('modal-slika').checked = !!n.ima_sliko;
+            document.getElementById('modal-naloga').classList.add('prikazano');
+        });
+}
+
+function zapriModal() {
+    document.getElementById('modal-naloga').classList.remove('prikazano');
+}
+
+function shraniNalogo() {
+    const id = document.getElementById('modal-id').value;
+    const besedilo = document.getElementById('modal-besedilo').value.trim();
+    if (!besedilo) {
+        alert('Besedilo naloge je obvezno.');
+        return;
+    }
+
+    const podatki = new FormData();
+    podatki.append('besedilo', besedilo);
+    podatki.append('vsebina_koda', document.getElementById('modal-vsebina').value);
+    podatki.append('tip_id', document.getElementById('modal-tip').value);
+    podatki.append('ima_sliko', document.getElementById('modal-slika').checked ? '1' : '0');
+
+    const url = id ? `/naloge/${id}/uredi` : '/naloge';
+
+    fetch(url, { method: 'POST', body: podatki })
+        .then(r => r.json())
+        .then(rez => {
+            if (rez.ok) {
+                zapriModal();
+                posodobiFiltre(); // osveži seznam
+            }
+        });
+}
+
+// Zapri modal s klikom na overlay
+document.getElementById('modal-naloga').addEventListener('click', function(e) {
+    if (e.target === this) zapriModal();
+});
 
 // ===== IZVOZ =====
 function izvoziTest() {

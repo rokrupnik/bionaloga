@@ -1,6 +1,7 @@
+import random
 import webbrowser
 from fastapi import FastAPI, Request, Form, Query
-from fastapi.responses import HTMLResponse, Response
+from fastapi.responses import HTMLResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pathlib import Path
@@ -41,6 +42,7 @@ async def domov(request: Request):
         "request": request,
         "drevo_vsebine": zgradi_drevo_vsebine(baza.pridobi_vsebino()),
         "tipi_nalog": baza.pridobi_tipe_nalog(),
+        "vse_vsebine": baza.pridobi_vsebino(),
     })
 
 
@@ -63,6 +65,74 @@ async def seznam_nalog(
         "request": request,
         "naloge": naloge,
     })
+
+
+@app.get("/naloge/nakljucne", response_class=JSONResponse)
+async def nakljucne_naloge(
+    vsebina: Annotated[list[str] | None, Query()] = None,
+    tip_id: int | None = None,
+    ima_sliko: str | None = None,
+    stevilo: int = 10,
+):
+    """Vrne naključno izbrane naloge iz filtriranega nabora."""
+    ima_sliko_bool = None
+    if ima_sliko == "da":
+        ima_sliko_bool = True
+    elif ima_sliko == "ne":
+        ima_sliko_bool = False
+
+    naloge = baza.poisci_naloge(vsebina or [], tip_id, ima_sliko_bool)
+    naloge_seznam = [dict(n) for n in naloge]
+
+    if stevilo < len(naloge_seznam):
+        naloge_seznam = random.sample(naloge_seznam, stevilo)
+
+    return naloge_seznam
+
+
+@app.get("/naloge/{naloga_id}", response_class=JSONResponse)
+async def pridobi_nalogo(naloga_id: int):
+    """Vrne podatke ene naloge za urejanje."""
+    naloga = baza.pridobi_nalogo(naloga_id)
+    if not naloga:
+        return JSONResponse({"error": "Naloga ne obstaja"}, status_code=404)
+    return dict(naloga)
+
+
+@app.post("/naloge", response_class=JSONResponse)
+async def dodaj_nalogo(
+    besedilo: Annotated[str, Form()],
+    vsebina_koda: Annotated[str, Form()] = "",
+    tip_id: Annotated[str, Form()] = "",
+    ima_sliko: Annotated[str, Form()] = "0",
+):
+    """Dodaj novo nalogo."""
+    nov_id = baza.dodaj_nalogo(
+        besedilo=besedilo.strip(),
+        vsebina_koda=vsebina_koda if vsebina_koda else None,
+        tip_id=int(tip_id) if tip_id else None,
+        ima_sliko=ima_sliko == "1",
+    )
+    return {"id": nov_id, "ok": True}
+
+
+@app.post("/naloge/{naloga_id}/uredi", response_class=JSONResponse)
+async def uredi_nalogo(
+    naloga_id: int,
+    besedilo: Annotated[str, Form()],
+    vsebina_koda: Annotated[str, Form()] = "",
+    tip_id: Annotated[str, Form()] = "",
+    ima_sliko: Annotated[str, Form()] = "0",
+):
+    """Posodobi obstoječo nalogo."""
+    baza.posodobi_nalogo(
+        naloga_id=naloga_id,
+        besedilo=besedilo.strip(),
+        vsebina_koda=vsebina_koda if vsebina_koda else None,
+        tip_id=int(tip_id) if tip_id else None,
+        ima_sliko=ima_sliko == "1",
+    )
+    return {"id": naloga_id, "ok": True}
 
 
 @app.post("/izvozi")

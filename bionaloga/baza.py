@@ -99,3 +99,40 @@ def pridobi_slike_naloge(naloga_id: int):
             "SELECT ime_datoteke FROM slika WHERE naloga_id = ? ORDER BY vrstni_red",
             (naloga_id,),
         ).fetchall()
+
+
+def pridobi_nalogo(naloga_id: int):
+    """Vrne eno nalogo po ID-ju."""
+    with povezava() as conn:
+        return conn.execute(
+            """SELECT n.id, n.besedilo, n.vsebina_koda, n.tip_id, n.ima_sliko,
+                      v.naziv AS vsebina_naziv, t.naziv AS tip_naziv
+               FROM naloga n
+               LEFT JOIN vsebina v ON n.vsebina_koda = v.koda
+               LEFT JOIN tip_naloge t ON n.tip_id = t.id
+               WHERE n.id = ?""",
+            (naloga_id,),
+        ).fetchone()
+
+
+def dodaj_nalogo(besedilo: str, vsebina_koda: str | None, tip_id: int | None, ima_sliko: bool) -> int:
+    """Vstavi novo nalogo in vrne njen ID."""
+    with povezava() as conn:
+        cur = conn.execute(
+            """INSERT INTO naloga (besedilo, vsebina_koda, tip_id, ima_sliko, vir_datoteka)
+               VALUES (?, ?, ?, ?, 'ročni vnos')""",
+            (besedilo, vsebina_koda or None, tip_id or None, 1 if ima_sliko else 0),
+        )
+        conn.commit()
+        return cur.lastrowid
+
+
+def posodobi_nalogo(naloga_id: int, besedilo: str, vsebina_koda: str | None, tip_id: int | None, ima_sliko: bool):
+    """Posodobi obstoječo nalogo."""
+    with povezava() as conn:
+        conn.execute(
+            """UPDATE naloga SET besedilo = ?, vsebina_koda = ?, tip_id = ?, ima_sliko = ?
+               WHERE id = ?""",
+            (besedilo, vsebina_koda or None, tip_id or None, 1 if ima_sliko else 0, naloga_id),
+        )
+        conn.commit()

@@ -3,30 +3,90 @@
     Ni nalog z izbranimi filtri.
 </div>
 {% else %}
+
+{# Grupiraj naloge po vsebina_naziv #}
+{% set ns = namespace(skupine={}, vrstni_red=[]) %}
 {% for naloga in naloge %}
-<div class="naloga-kartica" id="kartica-{{ naloga.id }}">
-    <div style="flex:1">
-        <div class="naloga-besedilo">{{ naloga.besedilo }}</div>
-        <div class="naloga-meta">
-            {% if naloga.vsebina_naziv %}
-            <span>{{ naloga.vsebina_naziv }}</span>
-            {% endif %}
-            {% if naloga.tip_naziv %}
-            <span class="badge">{{ naloga.tip_naziv }}</span>
-            {% endif %}
-            {% if naloga.ima_sliko %}
-            <span class="badge badge-slika">📷 slika</span>
-            {% endif %}
+    {% set tema = naloga.vsebina_naziv or 'Brez teme' %}
+    {% if tema not in ns.skupine %}
+        {% set _ = ns.skupine.update({tema: []}) %}
+        {% set ns.vrstni_red = ns.vrstni_red + [tema] %}
+    {% endif %}
+    {% set _ = ns.skupine[tema].append(naloga) %}
+{% endfor %}
+
+{% for tema in ns.vrstni_red %}
+<div class="skupina-tema">
+    <div class="tema-naslov">{{ tema | upper }}</div>
+
+    {# Razdeli na izbirne in ostale #}
+    {% set izbirne = [] %}
+    {% set ostale = [] %}
+    {% for n in ns.skupine[tema] %}
+        {% if n.tip_naziv == 'Izbirni tip' %}
+            {% set _ = izbirne.append(n) %}
+        {% else %}
+            {% set _ = ostale.append(n) %}
+        {% endif %}
+    {% endfor %}
+
+    {# Izbirni tip: 2-stolpčna preglednica #}
+    {% if izbirne %}
+    <div class="izbirne-grid">
+        {% for naloga in izbirne %}
+        <div class="naloga-kartica" id="kartica-{{ naloga.id }}">
+            <div style="flex:1">
+                <div class="naloga-besedilo">{{ naloga.besedilo }}</div>
+                <div class="naloga-meta">
+                    <span class="badge">Izbirni tip</span>
+                    {% if naloga.ima_sliko %}
+                    <span class="badge badge-slika">slika</span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="kartica-akcije">
+                <button class="uredi-gumb" onclick="odpriUredi({{ naloga.id }})" title="Uredi">&#9998;</button>
+                <button class="dodaj-gumb"
+                        data-id="{{ naloga.id }}"
+                        data-besedilo="{{ naloga.besedilo | replace('"', '&quot;') }}"
+                        data-meta="{{ naloga.vsebina_naziv or '' }} — {{ naloga.tip_naziv or '' }}"
+                        onclick="dodajNalogo({{ naloga.id }}, this.dataset.besedilo, this.dataset.meta)">
+                    +
+                </button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {# Ostale naloge: navaden seznam #}
+    {% for naloga in ostale %}
+    <div class="naloga-kartica" id="kartica-{{ naloga.id }}">
+        <div style="flex:1">
+            <div class="naloga-besedilo">{{ naloga.besedilo }}</div>
+            <div class="naloga-meta">
+                {% if naloga.tip_naziv %}
+                <span class="badge">{{ naloga.tip_naziv }}</span>
+                {% endif %}
+                {% if naloga.ima_sliko %}
+                <span class="badge badge-slika">slika</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="kartica-akcije">
+            <button class="uredi-gumb" onclick="odpriUredi({{ naloga.id }})" title="Uredi">&#9998;</button>
+            <button class="dodaj-gumb"
+                    data-id="{{ naloga.id }}"
+                    data-besedilo="{{ naloga.besedilo | replace('"', '&quot;') }}"
+                    data-meta="{{ naloga.vsebina_naziv or '' }} — {{ naloga.tip_naziv or '' }}"
+                    onclick="dodajNalogo({{ naloga.id }}, this.dataset.besedilo, this.dataset.meta)">
+                +
+            </button>
         </div>
     </div>
-    <button class="dodaj-gumb"
-            data-id="{{ naloga.id }}"
-            data-besedilo="{{ naloga.besedilo | replace('"', '&quot;') }}"
-            data-meta="{{ naloga.vsebina_naziv or '' }} — {{ naloga.tip_naziv or '' }}"
-            onclick="dodajNalogo({{ naloga.id }}, this.dataset.besedilo, this.dataset.meta)">
-        +
-    </button>
+    {% endfor %}
 </div>
 {% endfor %}
+
 <script>osveziDodanjeGumbe();</script>
 {% endif %}
