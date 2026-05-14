@@ -1,6 +1,7 @@
+import random
 import webbrowser
 from fastapi import FastAPI, Request, Form, Query
-from fastapi.responses import HTMLResponse, Response
+from fastapi.responses import HTMLResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pathlib import Path
@@ -63,6 +64,63 @@ async def seznam_nalog(
         "request": request,
         "naloge": naloge,
     })
+
+
+@app.get("/naloge/nakljucne-po-tipu")
+async def nakljucne_po_tipu(
+    vsebina: Annotated[list[str] | None, Query()] = None,
+    izbirni: int = 0,
+    kratki: int = 0,
+    daljsi: int = 0,
+    dopolnjevanje: int = 0,
+):
+    # tip_id: 1=Izbirni, 2=Kratki, 3=Daljši, 4=Dopolnjevanje
+    tipi = [(1, izbirni), (2, kratki), (3, daljsi), (4, dopolnjevanje)]
+    rezultat = []
+    for tip_id, stevilo in tipi:
+        if stevilo <= 0:
+            continue
+        vse = baza.poisci_naloge(vsebina or [], tip_id, None)
+        vzorec = random.sample(list(vse), min(stevilo, len(vse)))
+        rezultat.extend(vzorec)
+    return JSONResponse([
+        {
+            "id": n["id"],
+            "besedilo": n["besedilo"],
+            "vsebina_naziv": n["vsebina_naziv"] or "",
+            "tip_naziv": n["tip_naziv"] or "",
+        }
+        for n in rezultat
+    ])
+
+
+@app.get("/naloge/{naloga_id}")
+async def pridobi_nalogo(naloga_id: int):
+    naloga = baza.pridobi_nalogo(naloga_id)
+    if not naloga:
+        return Response("Naloga ne obstaja.", status_code=404)
+    return JSONResponse({
+        "id": naloga["id"],
+        "besedilo": naloga["besedilo"],
+        "vsebina_koda": naloga["vsebina_koda"] or "",
+        "tip_id": naloga["tip_id"] or "",
+    })
+
+
+@app.post("/naloge/{naloga_id}/uredi")
+async def uredi_nalogo(
+    naloga_id: int,
+    besedilo: Annotated[str, Form()],
+    vsebina_koda: Annotated[str, Form()] = "",
+    tip_id: Annotated[str, Form()] = "",
+):
+    baza.posodobi_nalogo(
+        naloga_id,
+        besedilo,
+        vsebina_koda or None,
+        int(tip_id) if tip_id.isdigit() else None,
+    )
+    return Response(status_code=204)
 
 
 @app.post("/izvozi")

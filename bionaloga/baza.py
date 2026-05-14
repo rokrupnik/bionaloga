@@ -93,6 +93,27 @@ def pridobi_naloge_po_ids(ids: list[int]):
     return [po_id[i] for i in ids if i in po_id]
 
 
+def pridobi_nalogo(naloga_id: int):
+    with povezava() as conn:
+        return conn.execute(
+            """SELECT n.id, n.besedilo, n.vsebina_koda, n.tip_id, n.ima_sliko,
+                      v.naziv AS vsebina_naziv, t.naziv AS tip_naziv
+               FROM naloga n
+               LEFT JOIN vsebina v ON n.vsebina_koda = v.koda
+               LEFT JOIN tip_naloge t ON n.tip_id = t.id
+               WHERE n.id = ?""",
+            (naloga_id,),
+        ).fetchone()
+
+
+def posodobi_nalogo(naloga_id: int, besedilo: str, vsebina_koda: str | None, tip_id: int | None):
+    with povezava() as conn:
+        conn.execute(
+            "UPDATE naloga SET besedilo = ?, vsebina_koda = ?, tip_id = ? WHERE id = ?",
+            (besedilo, vsebina_koda or None, tip_id or None, naloga_id),
+        )
+
+
 def pridobi_slike_naloge(naloga_id: int):
     with povezava() as conn:
         return conn.execute(

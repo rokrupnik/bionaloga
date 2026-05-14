@@ -201,6 +201,37 @@ select, input[type=text] {
 .loader { display: none; }
 .htmx-request .loader { display: inline; }
 
+/* ===== NAKLJUČNI IZBOR ===== */
+.nakljucni-vrstice { display: flex; flex-direction: column; gap: 6px; }
+.nakljucni-vrstica { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; }
+.nakljucni-vrstica label { flex: 1; color: #444; }
+.nakljucni-vrstica input[type=number] { width: 58px; padding: 4px 6px; }
+
+/* ===== MODAL ===== */
+.modal-ozadje {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.45); z-index: 1000;
+    align-items: center; justify-content: center;
+}
+.modal-ozadje.odprt { display: flex; }
+.modal-vsebina {
+    background: #fff; border-radius: 8px; width: 600px; max-width: 96vw;
+    max-height: 90vh; display: flex; flex-direction: column;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+}
+.modal-glava {
+    padding: 14px 18px; border-bottom: 1px solid #ddd;
+    font-weight: 700; font-size: 0.95rem; display: flex; justify-content: space-between;
+}
+.modal-telo { padding: 16px 18px; flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+.modal-noga { padding: 12px 18px; border-top: 1px solid #ddd; display: flex; gap: 8px; justify-content: flex-end; }
+.modal-telo label { font-size: 0.8rem; font-weight: 600; color: #555; margin-bottom: 3px; display: block; }
+.modal-telo textarea { width: 100%; min-height: 140px; resize: vertical; padding: 7px 9px;
+    border: 1px solid #ccc; border-radius: 4px; font-size: 0.85rem; font-family: inherit; box-sizing: border-box; }
+.modal-telo select { padding: 5px 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.85rem; }
+.zapri-gumb { background: none; border: none; font-size: 1.3rem; cursor: pointer; color: #888; line-height: 1; }
+.zapri-gumb:hover { color: #333; }
+
 /* scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
@@ -295,6 +326,30 @@ select, input[type=text] {
             <button type="button" class="btn btn-secondary" style="width:100%;margin-top:6px"
                     onclick="pocistiFiltre()">Počisti filtre</button>
         </form>
+
+        <div style="border-top:1px solid #ddd;padding:12px 14px 14px">
+            <h4 style="font-size:0.8rem;color:#888;margin-bottom:8px;text-transform:uppercase">Naključni izbor</h4>
+            <div class="nakljucni-vrstice">
+                <div class="nakljucni-vrstica">
+                    <label>Izbirni tip</label>
+                    <input type="number" id="nak-izbirni" min="0" value="0" style="width:58px">
+                </div>
+                <div class="nakljucni-vrstica">
+                    <label>Kratki odgovor</label>
+                    <input type="number" id="nak-kratki" min="0" value="0" style="width:58px">
+                </div>
+                <div class="nakljucni-vrstica">
+                    <label>Daljši odgovor</label>
+                    <input type="number" id="nak-daljsi" min="0" value="0" style="width:58px">
+                </div>
+                <div class="nakljucni-vrstica">
+                    <label>Dopolnjevanje</label>
+                    <input type="number" id="nak-dopolnjevanje" min="0" value="0" style="width:58px">
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" style="width:100%;margin-top:10px"
+                    onclick="nakljucnePoTipu()">Dodaj v test</button>
+        </div>
     </div>
 </div>
 
@@ -330,6 +385,44 @@ select, input[type=text] {
         <button class="btn btn-secondary" onclick="pocistiTest()">Počisti test</button>
     </div>
 </div>
+{% endblock %}
+
+<!-- ===== EDIT MODAL ===== -->
+<div class="modal-ozadje" id="uredi-modal" onclick="if(event.target===this)zapriUredi()">
+    <div class="modal-vsebina">
+        <div class="modal-glava">
+            Uredi nalogo
+            <button class="zapri-gumb" onclick="zapriUredi()">✕</button>
+        </div>
+        <div class="modal-telo">
+            <div>
+                <label>Besedilo</label>
+                <textarea id="uredi-besedilo"></textarea>
+            </div>
+            <div style="display:flex;gap:12px">
+                <div style="flex:1">
+                    <label>Vsebina (koda)</label>
+                    <input type="text" id="uredi-vsebina-koda" placeholder="npr. 02.01.01">
+                </div>
+                <div>
+                    <label>Tip naloge</label>
+                    <select id="uredi-tip-id">
+                        <option value="">— brez —</option>
+                        <option value="1">Izbirni tip</option>
+                        <option value="2">Kratki odgovor</option>
+                        <option value="3">Daljši odgovor</option>
+                        <option value="4">Dopolnjevanje/ujemanje</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="modal-noga">
+            <button class="btn btn-secondary" onclick="zapriUredi()">Prekliči</button>
+            <button class="btn btn-primary" onclick="shraniUredi()">Shrani</button>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block extra_script %}
@@ -503,6 +596,73 @@ function izvoziTest() {
     document.body.appendChild(forma);
     forma.submit();
     document.body.removeChild(forma);
+}
+
+// ===== NAKLJUČNI IZBOR PO TIPU =====
+function nakljucnePoTipu() {
+    const params = zberiFiltreUrl();
+    params.set('izbirni', document.getElementById('nak-izbirni').value || 0);
+    params.set('kratki', document.getElementById('nak-kratki').value || 0);
+    params.set('daljsi', document.getElementById('nak-daljsi').value || 0);
+    params.set('dopolnjevanje', document.getElementById('nak-dopolnjevanje').value || 0);
+
+    fetch('/naloge/nakljucne-po-tipu?' + params.toString())
+        .then(r => r.json())
+        .then(naloge => {
+            if (naloge.length === 0) {
+                alert('Ni nalog, ki bi ustrezale filtrom in zahtevam.');
+                return;
+            }
+            naloge.forEach(n => {
+                if (!testNaloge.find(t => t.id === n.id)) {
+                    testNaloge.push({
+                        id: n.id,
+                        besedilo: n.besedilo,
+                        meta: (n.vsebina_naziv || '') + ' — ' + (n.tip_naziv || ''),
+                    });
+                }
+            });
+            osveziTestPanel();
+            osveziDodanjeGumbe();
+        });
+}
+
+// ===== UREDI MODAL =====
+let urediNalogaId = null;
+
+function odpriUredi(id) {
+    urediNalogaId = id;
+    fetch('/naloge/' + id)
+        .then(r => r.json())
+        .then(n => {
+            document.getElementById('uredi-besedilo').value = n.besedilo;
+            document.getElementById('uredi-vsebina-koda').value = n.vsebina_koda || '';
+            document.getElementById('uredi-tip-id').value = n.tip_id || '';
+            document.getElementById('uredi-modal').classList.add('odprt');
+        });
+}
+
+function zapriUredi() {
+    document.getElementById('uredi-modal').classList.remove('odprt');
+    urediNalogaId = null;
+}
+
+function shraniUredi() {
+    if (!urediNalogaId) return;
+    const forma = new FormData();
+    forma.append('besedilo', document.getElementById('uredi-besedilo').value);
+    forma.append('vsebina_koda', document.getElementById('uredi-vsebina-koda').value);
+    forma.append('tip_id', document.getElementById('uredi-tip-id').value);
+
+    fetch('/naloge/' + urediNalogaId + '/uredi', { method: 'POST', body: forma })
+        .then(r => {
+            if (r.ok) {
+                zapriUredi();
+                posodobiFiltre();
+            } else {
+                alert('Napaka pri shranjevanju.');
+            }
+        });
 }
 
 // ===== POMOŽNE =====
