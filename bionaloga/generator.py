@@ -25,34 +25,124 @@ def _preveri_slike(besedilo: str, slike_po_imenu: dict) -> list[str]:
     return napake
 
 
+# ---------------------------------------------------------------------------
+# Markdown tabele
+# ---------------------------------------------------------------------------
+
+def _je_tabela_vrstica(vrstica: str) -> bool:
+    s = vrstica.strip()
+    return s.startswith("|") and s.endswith("|") and len(s) > 2
+
+
+def _je_separator(vrstica: str) -> bool:
+    return bool(re.match(r'^\|[\s\-:]+(\|[\s\-:]+)*\|$', vrstica.strip()))
+
+
+def _razcleni_md_vrstico(vrstica: str) -> list[str]:
+    v = vrstica.strip()
+    if v.startswith("|"):
+        v = v[1:]
+    if v.endswith("|"):
+        v = v[:-1]
+    return [c.strip() for c in v.split("|")]
+
+
+def _razdeli_na_bloke(tekst: str) -> list[tuple[str, object]]:
+    """Razdeli besedilo na bloke: ('text', str) ali ('tabela', list[str])."""
+    vrstice = tekst.split("\n")
+    bloki = []
+    i = 0
+    while i < len(vrstice):
+        if _je_tabela_vrstica(vrstice[i]):
+            tabela_vrstice = []
+            while i < len(vrstice) and _je_tabela_vrstica(vrstice[i]):
+                tabela_vrstice.append(vrstice[i])
+                i += 1
+            bloki.append(("tabela", tabela_vrstice))
+        else:
+            tekst_vrstice = []
+            while i < len(vrstice) and not _je_tabela_vrstica(vrstice[i]):
+                tekst_vrstice.append(vrstice[i])
+                i += 1
+            skupaj = "\n".join(tekst_vrstice).strip()
+            if skupaj:
+                bloki.append(("text", skupaj))
+    return bloki
+
+
+def _dodaj_md_tabelo(doc: Document, md_vrstice: list[str]):
+    """Pretvori markdown vrstice v python-docx tabelo."""
+    podatki = [v for v in md_vrstice if not _je_separator(v)]
+    if not podatki:
+        return
+
+    vrstice_celic = [_razcleni_md_vrstico(v) for v in podatki]
+    st_stolpcev = max(len(v) for v in vrstice_celic)
+    if st_stolpcev == 0:
+        return
+
+    tabela = doc.add_table(rows=len(vrstice_celic), cols=st_stolpcev)
+    try:
+        tabela.style = "Table Grid"
+    except Exception:
+        pass
+
+    for i, vrstica in enumerate(vrstice_celic):
+        for j in range(st_stolpcev):
+            vrednost = vrstica[j] if j < len(vrstica) else ""
+            celica = tabela.cell(i, j)
+            celica.text = vrednost
+            if i == 0 and vrednost:
+                for run in celica.paragraphs[0].runs:
+                    run.bold = True
+
+
+# ---------------------------------------------------------------------------
+# Vstavljanje besedila in slik
+# ---------------------------------------------------------------------------
+
 def _dodaj_besedilo_s_slikami(doc: Document, besedilo: str, slike_po_imenu: dict, stevilka: int):
-    """Razbije besedilo na segmente pri [SLIKA:...] in vstavi slike na pravo mesto.
-    Placeholder-ji se ne izpišejo — bodisi se vstavi slika, bodisi se segment preskoči.
-    """
+    """Razbije besedilo na segmente (slike, tabele, tekst) in jih vstavi v dokument."""
     segmenti = re.split(r'(\[SLIKA:[^\]]+\])', besedilo)
 
-    prvi = True
+    prvi = True  # Številka naloge še ni bila dodana
+
     for segment in segmenti:
         m = re.match(r'\[SLIKA:([^\]]+)\]', segment)
         if m:
+            # Slika — pred njo dodaj številko če je prva stvar v nalogi
+            if prvi:
+                odst = doc.add_paragraph()
+                odst.paragraph_format.space_before = Pt(6)
+                odst.add_run(f"{stevilka}. ").bold = True
+                prvi = False
             ime = m.group(1).strip()
             pot = slike_po_imenu.get(ime)
             if pot and pot.exists() and pot.suffix.lower() in PODPRTI_FORMATI:
                 doc.add_picture(str(pot), width=Inches(4))
                 doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
-            # Manjkajoče / nepodprte slike tiho preskočimo (napaka je bila javljena prej)
         else:
             tekst = segment.strip()
             if not tekst:
                 continue
-            if prvi:
-                odst = doc.add_paragraph()
-                odst.paragraph_format.space_before = Pt(6)
-                odst.add_run(f"{stevilka}. ").bold = True
-                odst.add_run(tekst)
-                prvi = False
-            else:
-                doc.add_paragraph(tekst)
+            bloki = _razdeli_na_bloke(tekst)
+            for tip, vsebina in bloki:
+                if tip == "tabela":
+                    if prvi:
+                        odst = doc.add_paragraph()
+                        odst.paragraph_format.space_before = Pt(6)
+                        odst.add_run(f"{stevilka}. ").bold = True
+                        prvi = False
+                    _dodaj_md_tabelo(doc, vsebina)
+                else:
+                    if prvi:
+                        odst = doc.add_paragraph()
+                        odst.paragraph_format.space_before = Pt(6)
+                        odst.add_run(f"{stevilka}. ").bold = True
+                        odst.add_run(vsebina)
+                        prvi = False
+                    else:
+                        doc.add_paragraph(vsebina)
 
     if prvi:
         odst = doc.add_paragraph()

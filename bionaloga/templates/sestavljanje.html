@@ -278,6 +278,12 @@ textarea { resize: vertical; min-height: 80px; }
 .loader { display: none; }
 .htmx-request .loader { display: inline; }
 
+/* ===== NAKLJUČNI IZBOR ===== */
+.nakljucni-vrstice { display: flex; flex-direction: column; gap: 6px; }
+.nakljucni-vrstica { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; }
+.nakljucni-vrstica label { flex: 1; color: #444; }
+.nakljucni-vrstica input[type=number] { width: 58px; padding: 4px 6px; }
+
 /* scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
@@ -385,6 +391,30 @@ textarea { resize: vertical; min-height: 80px; }
             <button type="button" class="btn btn-primary" style="width:100%;margin-top:6px"
                     onclick="odpriDodaj()">+ Nova naloga</button>
         </form>
+
+        <div style="border-top:1px solid #ddd;padding:12px 14px 14px">
+            <h4 style="font-size:0.8rem;color:#888;margin-bottom:8px;text-transform:uppercase">Naključni izbor</h4>
+            <div class="nakljucni-vrstice">
+                <div class="nakljucni-vrstica">
+                    <label>Izbirni tip</label>
+                    <input type="number" id="nak-izbirni" min="0" value="0" style="width:58px">
+                </div>
+                <div class="nakljucni-vrstica">
+                    <label>Kratki odgovor</label>
+                    <input type="number" id="nak-kratki" min="0" value="0" style="width:58px">
+                </div>
+                <div class="nakljucni-vrstica">
+                    <label>Daljši odgovor</label>
+                    <input type="number" id="nak-daljsi" min="0" value="0" style="width:58px">
+                </div>
+                <div class="nakljucni-vrstica">
+                    <label>Dopolnjevanje</label>
+                    <input type="number" id="nak-dopolnjevanje" min="0" value="0" style="width:58px">
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" style="width:100%;margin-top:10px"
+                    onclick="nakljucnePoTipu()">Dodaj v test</button>
+        </div>
     </div>
 </div>
 
@@ -714,6 +744,35 @@ function izvoziTest() {
     document.body.appendChild(forma);
     forma.submit();
     document.body.removeChild(forma);
+}
+
+// ===== NAKLJUČNI IZBOR PO TIPU =====
+function nakljucnePoTipu() {
+    const params = zberiFiltreUrl();
+    params.set('izbirni', document.getElementById('nak-izbirni').value || 0);
+    params.set('kratki', document.getElementById('nak-kratki').value || 0);
+    params.set('daljsi', document.getElementById('nak-daljsi').value || 0);
+    params.set('dopolnjevanje', document.getElementById('nak-dopolnjevanje').value || 0);
+
+    fetch('/naloge/nakljucne-po-tipu?' + params.toString())
+        .then(r => r.json())
+        .then(naloge => {
+            if (naloge.length === 0) {
+                alert('Ni nalog, ki bi ustrezale filtrom in zahtevam.');
+                return;
+            }
+            naloge.forEach(n => {
+                if (!testNaloge.find(t => t.id === n.id)) {
+                    testNaloge.push({
+                        id: n.id,
+                        besedilo: n.besedilo,
+                        meta: (n.vsebina_naziv || '') + ' — ' + (n.tip_naziv || ''),
+                    });
+                }
+            });
+            osveziTestPanel();
+            osveziDodanjeGumbe();
+        });
 }
 
 // ===== POMOŽNE =====

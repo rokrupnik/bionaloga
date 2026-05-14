@@ -90,6 +90,34 @@ async def nakljucne_naloge(
     return naloge_seznam
 
 
+@app.get("/naloge/nakljucne-po-tipu", response_class=JSONResponse)
+async def nakljucne_po_tipu(
+    vsebina: Annotated[list[str] | None, Query()] = None,
+    izbirni: int = 0,
+    kratki: int = 0,
+    daljsi: int = 0,
+    dopolnjevanje: int = 0,
+):
+    """Vrne naključni izbor nalog po tipu."""
+    tipi = [(1, izbirni), (2, kratki), (3, daljsi), (4, dopolnjevanje)]
+    rezultat = []
+    for tip_id, stevilo in tipi:
+        if stevilo <= 0:
+            continue
+        vse = baza.poisci_naloge(vsebina or [], tip_id, None)
+        vzorec = random.sample(list(vse), min(stevilo, len(vse)))
+        rezultat.extend(vzorec)
+    return [
+        {
+            "id": n["id"],
+            "besedilo": n["besedilo"],
+            "vsebina_naziv": n["vsebina_naziv"] or "",
+            "tip_naziv": n["tip_naziv"] or "",
+        }
+        for n in rezultat
+    ]
+
+
 @app.get("/naloge/{naloga_id}", response_class=JSONResponse)
 async def pridobi_nalogo(naloga_id: int):
     """Vrne podatke ene naloge za urejanje."""
