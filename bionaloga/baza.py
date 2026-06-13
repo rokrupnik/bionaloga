@@ -96,9 +96,55 @@ def pridobi_naloge_po_ids(ids: list[int]):
 def pridobi_slike_naloge(naloga_id: int):
     with povezava() as conn:
         return conn.execute(
-            "SELECT ime_datoteke FROM slika WHERE naloga_id = ? ORDER BY vrstni_red",
+            "SELECT id, ime_datoteke, vrstni_red FROM slika WHERE naloga_id = ? ORDER BY vrstni_red",
             (naloga_id,),
         ).fetchall()
+
+
+def pridobi_sliko(slika_id: int):
+    """Vrne en slika zapis (id, naloga_id, ime_datoteke)."""
+    with povezava() as conn:
+        return conn.execute(
+            "SELECT id, naloga_id, ime_datoteke FROM slika WHERE id = ?",
+            (slika_id,),
+        ).fetchone()
+
+
+def dodaj_sliko(naloga_id: int, ime_datoteke: str) -> int:
+    """Doda sliko k nalogi (vrstni_red = naslednji prosti) in vrne njen ID."""
+    with povezava() as conn:
+        naslednji = conn.execute(
+            "SELECT COALESCE(MAX(vrstni_red), 0) + 1 FROM slika WHERE naloga_id = ?",
+            (naloga_id,),
+        ).fetchone()[0]
+        cur = conn.execute(
+            "INSERT INTO slika (naloga_id, ime_datoteke, vrstni_red) VALUES (?, ?, ?)",
+            (naloga_id, ime_datoteke, naslednji),
+        )
+        conn.execute("UPDATE naloga SET ima_sliko = 1 WHERE id = ?", (naloga_id,))
+        conn.commit()
+        return cur.lastrowid
+
+
+def izbrisi_sliko(slika_id: int):
+    """Pobriše slika zapis. Vrne (naloga_id, ime_datoteke) ali None."""
+    with povezava() as conn:
+        vrstica = conn.execute(
+            "SELECT naloga_id, ime_datoteke FROM slika WHERE id = ?", (slika_id,)
+        ).fetchone()
+        if not vrstica:
+            return None
+        conn.execute("DELETE FROM slika WHERE id = ?", (slika_id,))
+        # Če nalogi ne ostane nobena slika, počisti ima_sliko
+        preostale = conn.execute(
+            "SELECT COUNT(*) FROM slika WHERE naloga_id = ?", (vrstica["naloga_id"],)
+        ).fetchone()[0]
+        if preostale == 0:
+            conn.execute(
+                "UPDATE naloga SET ima_sliko = 0 WHERE id = ?", (vrstica["naloga_id"],)
+            )
+        conn.commit()
+        return vrstica["naloga_id"], vrstica["ime_datoteke"]
 
 
 def pridobi_nalogo(naloga_id: int):

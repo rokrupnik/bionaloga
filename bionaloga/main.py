@@ -1,6 +1,8 @@
 import random
+import re
+import shutil
 import webbrowser
-from fastapi import FastAPI, Request, Form, Query
+from fastapi import FastAPI, Request, Form, Query, File, UploadFile
 from fastapi.responses import HTMLResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -11,6 +13,8 @@ from . import baza, generator
 
 POT = Path(__file__).parent
 SLIKE_POT = POT.parent / "slike"
+
+PODPRTI_FORMATI = {".png", ".jpg", ".jpeg", ".gif", ".bmp", ".tiff"}
 
 app = FastAPI(title="BioNaloga")
 
@@ -120,11 +124,16 @@ async def nakljucne_po_tipu(
 
 @app.get("/naloge/{naloga_id}", response_class=JSONResponse)
 async def pridobi_nalogo(naloga_id: int):
-    """Vrne podatke ene naloge za urejanje."""
+    """Vrne podatke ene naloge za urejanje, vključno s slikami."""
     naloga = baza.pridobi_nalogo(naloga_id)
     if not naloga:
         return JSONResponse({"error": "Naloga ne obstaja"}, status_code=404)
-    return dict(naloga)
+    podatki = dict(naloga)
+    podatki["slike"] = [
+        {"id": s["id"], "ime_datoteke": s["ime_datoteke"]}
+        for s in baza.pridobi_slike_naloge(naloga_id)
+    ]
+    return podatki
 
 
 @app.post("/naloge", response_class=JSONResponse)
@@ -161,6 +170,77 @@ async def uredi_nalogo(
         ima_sliko=ima_sliko == "1",
     )
     return {"id": naloga_id, "ok": True}
+
+
+@app.post("/naloge/{naloga_id}/slika", response_class=JSONResponse)
+async def nalozi_sliko(naloga_id: int, slika: UploadFile = File(...)):
+    """Naloži sliko k nalogi: shrani datoteko, doda slika zapis in [SLIKA:ime] v besedilo."""
+    naloga = baza.pridobi_nalogo(naloga_id)
+    if not naloga:
+        return JSONResponse({"error": "Naloga ne obstaja"}, status_code=404)
+
+    ext = Path(slika.filename or "").suffix.lower()
+    if ext not in PODPRTI_FORMATI:
+        return JSONResponse(
+            {"error": f"Nepodprt format ({ext}). Podprti: {', '.join(sorted(PODPRTI_FORMATI))}"},
+            status_code=400,
+        )
+
+    # Enolično ime: rocno_<naloga>_<n>.<ext>, brez prepisa obstoječih
+    n = 1
+    while True:
+        ime = f"rocno_{naloga_id}_{n}{ext}"
+        if not (SLIKE_POT / ime).exists():
+            break
+        n += 1
+
+    SLIKE_POT.mkdir(exist_ok=True)
+    with open(SLIKE_POT / ime, "wb") as f:
+        shutil.copyfileobj(slika.file, f)
+
+    baza.dodaj_sliko(naloga_id, ime)
+
+    # Dodaj placeholder na konec besedila, da se slika izriše v Wordu
+    novo_besedilo = (naloga["besedilo"].rstrip() + f"\n[SLIKA:{ime}]").strip()
+    baza.posodobi_nalogo(
+        naloga_id=naloga_id,
+        besedilo=novo_besedilo,
+        vsebina_koda=naloga["vsebina_koda"],
+        tip_id=naloga["tip_id"],
+        ima_sliko=True,
+    )
+
+    return {"ok": True, "ime": ime, "besedilo": novo_besedilo}
+
+
+@app.delete("/naloge/{naloga_id}/slika/{slika_id}", response_class=JSONResponse)
+async def izbrisi_sliko(naloga_id: int, slika_id: int):
+    """Pobriše sliko: zapis, datoteko in [SLIKA:ime] placeholder iz besedila."""
+    rezultat = baza.izbrisi_sliko(slika_id)
+    if not rezultat:
+        return JSONResponse({"error": "Slika ne obstaja"}, status_code=404)
+    _, ime = rezultat
+
+    # Pobriši datoteko (samo ročno naložene, da ne posežemo v deljene izvirne slike)
+    if ime.startswith("rocno_"):
+        pot = SLIKE_POT / ime
+        if pot.exists():
+            pot.unlink()
+
+    # Odstrani [SLIKA:ime] placeholder iz besedila
+    naloga = baza.pridobi_nalogo(naloga_id)
+    if naloga:
+        vzorec = r'\s*\[SLIKA:' + re.escape(ime) + r'\]'
+        novo_besedilo = re.sub(vzorec, "", naloga["besedilo"]).strip()
+        baza.posodobi_nalogo(
+            naloga_id=naloga_id,
+            besedilo=novo_besedilo,
+            vsebina_koda=naloga["vsebina_koda"],
+            tip_id=naloga["tip_id"],
+            ima_sliko=bool(baza.pridobi_slike_naloge(naloga_id)),
+        )
+
+    return {"ok": True}
 
 
 @app.post("/izvozi")

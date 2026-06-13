@@ -273,6 +273,32 @@ textarea { resize: vertical; min-height: 80px; }
 .modal .polje label { display: block; font-size: 0.8rem; font-weight: 600; color: #555; margin-bottom: 4px; }
 .modal .gumbi { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; }
 
+/* ===== SLIKE V MODALU ===== */
+.modal-slike { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.modal-slika-kartica {
+    position: relative;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 3px;
+    background: #fafafa;
+}
+.modal-slika-kartica img { display: block; max-width: 90px; max-height: 90px; border-radius: 3px; }
+.modal-slika-kartica .ime { font-size: 0.62rem; color: #888; max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.modal-slika-brisi {
+    position: absolute;
+    top: -7px; right: -7px;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    border: none;
+    background: #c0392b;
+    color: white;
+    font-size: 0.8rem;
+    line-height: 1;
+    cursor: pointer;
+}
+.modal-slika-brisi:hover { background: #a93226; }
+.pomoc { font-size: 0.75rem; color: #888; margin-top: 4px; }
+
 /* ===== LOADING ===== */
 .htmx-request #seznam-nalog { opacity: 0.5; }
 .loader { display: none; }
@@ -479,9 +505,13 @@ textarea { resize: vertical; min-height: 80px; }
             </select>
         </div>
         <div class="polje">
-            <label>
-                <input type="checkbox" id="modal-slika"> Ima sliko
-            </label>
+            <label>Slike</label>
+            <div class="modal-slike" id="modal-slike-seznam"></div>
+            <input type="file" id="modal-slika-datoteka" accept="image/png,image/jpeg,image/gif,image/bmp,image/tiff">
+            <div class="pomoc">
+                Po nalaganju se na konec besedila doda oznaka <code>[SLIKA:ime]</code> —
+                premakni jo na želeno mesto. Tam se slika izriše v Word dokumentu.
+            </div>
         </div>
         <div class="gumbi">
             <button class="btn btn-secondary" onclick="zapriModal()">Prekliči</button>
@@ -666,7 +696,8 @@ function odpriDodaj() {
     document.getElementById('modal-besedilo').value = '';
     document.getElementById('modal-vsebina').value = '';
     document.getElementById('modal-tip').value = '';
-    document.getElementById('modal-slika').checked = false;
+    document.getElementById('modal-slika-datoteka').value = '';
+    izrisiModalSlike([]);
     document.getElementById('modal-naloga').classList.add('prikazano');
 }
 
@@ -679,8 +710,37 @@ function odpriUredi(id) {
             document.getElementById('modal-besedilo').value = n.besedilo;
             document.getElementById('modal-vsebina').value = n.vsebina_koda || '';
             document.getElementById('modal-tip').value = n.tip_id || '';
-            document.getElementById('modal-slika').checked = !!n.ima_sliko;
+            document.getElementById('modal-slika-datoteka').value = '';
+            izrisiModalSlike(n.slike || []);
             document.getElementById('modal-naloga').classList.add('prikazano');
+        });
+}
+
+function izrisiModalSlike(slike) {
+    const vsebnik = document.getElementById('modal-slike-seznam');
+    if (!slike.length) {
+        vsebnik.innerHTML = '<div style="font-size:0.78rem;color:#aaa">Naloga še nima slik.</div>';
+        return;
+    }
+    vsebnik.innerHTML = slike.map(s => `
+        <div class="modal-slika-kartica">
+            <button class="modal-slika-brisi" title="Odstrani sliko"
+                    onclick="izbrisiSliko(${s.id})">✕</button>
+            <img src="/slike/${encodeURIComponent(s.ime_datoteke)}" alt="${escHtml(s.ime_datoteke)}">
+            <div class="ime">${escHtml(s.ime_datoteke)}</div>
+        </div>
+    `).join('');
+}
+
+function izbrisiSliko(slikaId) {
+    const nalogaId = document.getElementById('modal-id').value;
+    if (!nalogaId) return;
+    if (!confirm('Odstranim to sliko iz naloge?')) return;
+    fetch(`/naloge/${nalogaId}/slika/${slikaId}`, { method: 'DELETE' })
+        .then(r => r.json())
+        .then(rez => {
+            if (rez.ok) odpriUredi(nalogaId); // ponovno naloži (osveži besedilo + slike)
+            else alert(rez.error || 'Napaka pri brisanju slike.');
         });
 }
 
@@ -688,7 +748,7 @@ function zapriModal() {
     document.getElementById('modal-naloga').classList.remove('prikazano');
 }
 
-function shraniNalogo() {
+async function shraniNalogo() {
     const id = document.getElementById('modal-id').value;
     const besedilo = document.getElementById('modal-besedilo').value.trim();
     if (!besedilo) {
@@ -696,22 +756,38 @@ function shraniNalogo() {
         return;
     }
 
+    const datoteka = document.getElementById('modal-slika-datoteka').files[0];
+
     const podatki = new FormData();
     podatki.append('besedilo', besedilo);
     podatki.append('vsebina_koda', document.getElementById('modal-vsebina').value);
     podatki.append('tip_id', document.getElementById('modal-tip').value);
-    podatki.append('ima_sliko', document.getElementById('modal-slika').checked ? '1' : '0');
+    // ima_sliko izhaja iz placeholderjev v besedilu (vsaka slika ima [SLIKA:ime])
+    podatki.append('ima_sliko', besedilo.includes('[SLIKA:') ? '1' : '0');
 
     const url = id ? `/naloge/${id}/uredi` : '/naloge';
 
-    fetch(url, { method: 'POST', body: podatki })
-        .then(r => r.json())
-        .then(rez => {
-            if (rez.ok) {
-                zapriModal();
-                posodobiFiltre(); // osveži seznam
-            }
-        });
+    try {
+        const rez = await (await fetch(url, { method: 'POST', body: podatki })).json();
+        if (!rez.ok) { alert('Napaka pri shranjevanju naloge.'); return; }
+
+        const nalogaId = id || rez.id;
+
+        // Če je izbrana slika — naloži jo (server doda [SLIKA:ime] placeholder)
+        if (datoteka) {
+            const slikaForma = new FormData();
+            slikaForma.append('slika', datoteka);
+            const sRez = await (await fetch(`/naloge/${nalogaId}/slika`, {
+                method: 'POST', body: slikaForma,
+            })).json();
+            if (!sRez.ok) { alert(sRez.error || 'Napaka pri nalaganju slike.'); return; }
+        }
+
+        zapriModal();
+        posodobiFiltre(); // osveži seznam
+    } catch (e) {
+        alert('Napaka: ' + e);
+    }
 }
 
 // Zapri modal s klikom na overlay
