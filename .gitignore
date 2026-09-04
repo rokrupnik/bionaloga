@@ -7,6 +7,10 @@ __pycache__/
 
 # Baza in podatki
 # baza.db
+baza_v0.db
+
+# Dnevniki
+*.log
 
 # Uvožene datoteke
 input/
