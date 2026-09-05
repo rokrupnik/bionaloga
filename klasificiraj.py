@@ -456,8 +456,20 @@ def shrani_naloge(conn: sqlite3.Connection, naloge: list[dict], ime_datoteke: st
             preskoceno += 1
             continue
 
-        reference_slik = re.findall(r'\[SLIKA:([^\]]+)\]', besedilo)
-        ima_sliko = bool(reference_slik) or bool(n.get("ima_sliko"))
+        # Referenca, ki se ne razreši v obstoječo datoteko (risba brez vgrajene
+        # slike → [SLIKA:neznana], ali povezana zunanja slika), mora ven iz
+        # besedila: generator tako nalogo sicer v celoti izpusti iz testa.
+        veljavne = []
+        for orig_ime in re.findall(r'\[SLIKA:([^\]]+)\]', besedilo):
+            relativna_pot = slike_map.get(orig_ime, orig_ime)
+            if relativna_pot != "neznana" and (SLIKE_DIR / relativna_pot).exists():
+                veljavne.append((orig_ime, relativna_pot))
+            else:
+                besedilo = re.sub(
+                    r'\s*\[SLIKA:' + re.escape(orig_ime) + r'\]', '', besedilo)
+        besedilo = besedilo.strip()
+
+        ima_sliko = bool(veljavne)
 
         cur = conn.execute(
             """INSERT INTO naloga (besedilo, vsebina_koda, tip_id, ima_sliko, vir_datoteka, vir_tip)
@@ -466,8 +478,7 @@ def shrani_naloge(conn: sqlite3.Connection, naloge: list[dict], ime_datoteke: st
         )
         naloga_id = cur.lastrowid
 
-        for vrstni_red, orig_ime in enumerate(reference_slik, 1):
-            relativna_pot = slike_map.get(orig_ime, orig_ime)
+        for vrstni_red, (_, relativna_pot) in enumerate(veljavne, 1):
             conn.execute(
                 "INSERT INTO slika (naloga_id, ime_datoteke, vrstni_red) VALUES (?, ?, ?)",
                 (naloga_id, relativna_pot, vrstni_red),
