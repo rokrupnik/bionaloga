@@ -9,6 +9,9 @@ __pycache__/
 # baza.db
 baza_v0.db
 
+# Vmesni rezultati uvoza RIC nalog (izpeljani iz input/ric/)
+ric_delo/
+
 # Dnevniki
 *.log
 

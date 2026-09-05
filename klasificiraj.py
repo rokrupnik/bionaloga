@@ -241,19 +241,17 @@ def _preberi_relacije(rels_xml: str) -> dict:
 
 
 def _zamenjaj_slike(doc_xml: str, rid_to_ime: dict) -> str:
-    """Zamenja w:drawing in w:pict z [SLIKA:ime] placeholder-ji."""
+    """Zamenja w:drawing, w:pict in w:object z [SLIKA:ime] placeholder-ji.
 
-    def placeholder(match):
-        blok = match.group(0)
-        rid_m = re.search(r'r:embed="(rId\d+)"', blok) or re.search(r'r:link="(rId\d+)"', blok) or re.search(r'r:id="(rId\d+)"', blok)
-        if rid_m:
-            ime = rid_to_ime.get(rid_m.group(1), f"neznana_{rid_m.group(1)}")
-            return f'<w:r><w:t>[SLIKA:{ime}]</w:t></w:r>'
-        return '<w:r><w:t>[SLIKA:neznana]</w:t></w:r>'
-
-    doc_xml = re.sub(r'<w:drawing[ >].*?</w:drawing>', placeholder, doc_xml, flags=re.DOTALL)
-    doc_xml = re.sub(r'<w:pict>.*?</w:pict>', placeholder, doc_xml, flags=re.DOTALL)
-    return doc_xml
+    Zamenjavo opravi izvozi_slike._zamenjaj_gnezdene, ki šteje globino oznak.
+    Ne-požrešni regex je tu prej lomil dokumente: risba lahko vsebuje besedilno
+    polje z lastno risbo, zato se je ujemanje končalo pri notranjem zaključku in
+    pustilo sirote — od tod pretekle napake "mismatched tag" pri branju .docx.
+    Prav tako prej ni obravnaval <w:object> (vgrajeni OLE), kjer je slika v
+    <v:imagedata r:id> — od tod zapisi ime_datoteke='neznana'.
+    """
+    from izvozi_slike import zamenjaj_slike_v_xml
+    return zamenjaj_slike_v_xml(doc_xml, rid_to_ime)
 
 
 def ekstrahiraj_besedilo_in_slike(pot: Path) -> tuple[str, dict]:
@@ -372,20 +370,20 @@ def preveri_delez_novih(conn: sqlite3.Connection, besedilo: str) -> tuple[float,
 
 def klici_api(odjemalec: anthropic.Anthropic, besedilo: str) -> list[dict]:
     """Pošlje celotno besedilo testa v API in vrne vse klasificirane naloge naenkrat."""
+    # Model prepiše celotno besedilo nalog v JSON, zato je izhod približno tako
+    # velik kot vhod. Pri 8192 se je odgovor pri večjih testih odrezal sredi
+    # JSON-a ("Unterminated string") in datoteka je padla. Haiku 4.5 zmore 64k.
     sporocilo = odjemalec.messages.create(
         model=MODEL,
-        max_tokens=8192,
+        max_tokens=32000,
         system=SISTEM_PROMPT,
         messages=[{"role": "user", "content": f"Klasificiraj naloge iz tega testa:\n\n{besedilo}"}],
     )
     odgovor = sporocilo.content[0].text.strip()
 
-    # Izvleči JSON (včasih model doda ```json ... ```)
-    if odgovor.startswith("```"):
-        vrstice = odgovor.splitlines()
-        odgovor = "\n".join(vrstice[1:-1] if vrstice[-1].strip() == "```" else vrstice[1:])
-
-    return json.loads(odgovor)
+    # Izvleči JSON (model doda ```json ... ```, uvodni stavek ali več arrayev)
+    from uvozi_ric import _izlusci_json
+    return _izlusci_json(odgovor)
 
 
 # ---------------------------------------------------------------------------

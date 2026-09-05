@@ -31,32 +31,84 @@ def preberi_relacije(rels_xml: str) -> dict:
 
 
 def zamenjaj_slike_v_xml(doc_xml: str, rid_to_ime: dict) -> str:
-    """Zamenja w:drawing in w:pict elemente z besedilnimi placeholder-ji [SLIKA:ime]."""
+    """Zamenja w:drawing, w:pict in w:object elemente z besedilnimi placeholder-ji [SLIKA:ime]."""
+
+    def _placeholder(rid: str | None) -> str:
+        if not rid:
+            return '<w:r><w:t>[SLIKA:neznana]</w:t></w:r>'
+        ime = rid_to_ime.get(rid, f"neznana_{rid}")
+        return f'<w:r><w:t>[SLIKA:{ime}]</w:t></w:r>'
 
     def placeholder_drawing(match):
         blok = match.group(0)
         # Poiščemo r:embed="rIdXX" ali r:link="rIdXX"
-        rid_m = re.search(r'r:embed="(rId\d+)"', blok)
-        if not rid_m:
-            rid_m = re.search(r'r:link="(rId\d+)"', blok)
-        if rid_m:
-            rid = rid_m.group(1)
-            ime = rid_to_ime.get(rid, f"neznana_{rid}")
-            return f'<w:r><w:t>[SLIKA:{ime}]</w:t></w:r>'
-        return '<w:r><w:t>[SLIKA:neznana]</w:t></w:r>'
+        rid_m = re.search(r'r:embed="(rId\d+)"', blok) or re.search(r'r:link="(rId\d+)"', blok)
+        return _placeholder(rid_m.group(1) if rid_m else None)
 
-    def placeholder_pict(match):
+    def placeholder_vml(match):
+        """w:pict in w:object: sliko nosi <v:imagedata r:id>.
+
+        V w:object je poleg nje še <o:OLEObject r:id>, ki kaže na vgrajeni objekt
+        (npr. Visio) in ne na sliko — zato imagedata iščemo eksplicitno in šele
+        nato pademo na splošni r:id.
+        """
         blok = match.group(0)
-        rid_m = re.search(r'r:id="(rId\d+)"', blok)
-        if rid_m:
-            rid = rid_m.group(1)
-            ime = rid_to_ime.get(rid, f"neznana_{rid}")
-            return f'<w:r><w:t>[SLIKA:{ime}]</w:t></w:r>'
-        return '<w:r><w:t>[SLIKA:neznana]</w:t></w:r>'
+        rid_m = (
+            re.search(r'<v:imagedata[^>]*r:id="(rId\d+)"', blok)
+            or re.search(r'<v:imagedata[^>]*r:href="(rId\d+)"', blok)
+            or re.search(r'r:id="(rId\d+)"', blok)
+        )
+        return _placeholder(rid_m.group(1) if rid_m else None)
 
-    xml = re.sub(r'<w:drawing[ >].*?</w:drawing>', placeholder_drawing, doc_xml, flags=re.DOTALL)
-    xml = re.sub(r'<w:pict>.*?</w:pict>', placeholder_pict, xml, flags=re.DOTALL)
+    xml = _zamenjaj_gnezdene(doc_xml, "w:drawing", placeholder_drawing)
+    xml = _zamenjaj_gnezdene(xml, "w:pict", placeholder_vml)
+    xml = _zamenjaj_gnezdene(xml, "w:object", placeholder_vml)
     return xml
+
+
+def _zamenjaj_gnezdene(xml: str, oznaka: str, zamenjava) -> str:
+    """Zamenja vsak NAJBOLJ ZUNANJI <oznaka>…</oznaka> z rezultatom zamenjave().
+
+    Ne-požrešni regex tu ne deluje: risbe so lahko gnezdene (npr. <w:drawing> z
+    besedilnim poljem, ki vsebuje svoj <w:drawing>). Regex bi se ustavil pri
+    prvem zaključku in pustil notranje zaključne oznake sirote — dokument potem
+    ni več veljaven XML. Zato štejemo globino.
+    """
+    odpri = re.compile(rf'<{re.escape(oznaka)}[ >]')
+    zapri = f'</{oznaka}>'
+    rezultat = []
+    i = 0
+    while True:
+        m = odpri.search(xml, i)
+        if not m:
+            rezultat.append(xml[i:])
+            break
+        rezultat.append(xml[i:m.start()])
+
+        globina, j = 0, m.start()
+        while j < len(xml):
+            mo = odpri.search(xml, j)
+            mz = xml.find(zapri, j)
+            if mz == -1:
+                break                      # ni zaključka — pustimo pri miru
+            if mo and mo.start() < mz:
+                globina += 1
+                j = mo.end()
+            else:
+                globina -= 1
+                j = mz + len(zapri)
+                if globina == 0:
+                    break
+        if globina != 0:
+            rezultat.append(xml[m.start():])   # neuravnoteženo: ne diramo
+            break
+
+        class _M:
+            def __init__(self, s): self._s = s
+            def group(self, n=0): return self._s
+        rezultat.append(zamenjava(_M(xml[m.start():j])))
+        i = j
+    return "".join(rezultat)
 
 
 def izvozi_slike(vhodna_pot: str):
