@@ -23,7 +23,8 @@ def pridobi_tipe_nalog():
         return conn.execute("SELECT id, naziv FROM tip_naloge ORDER BY id").fetchall()
 
 
-def poisci_naloge(vsebina_kode: list[str] | None, tip_id: int | None, ima_sliko: bool | None):
+def poisci_naloge(vsebina_kode: list[str] | None, tip_id: int | None, ima_sliko: bool | None,
+                  vir_tip: str | None = None):
     """Vrne naloge po izbranih filtrih. Koda poglavja (raven 1) ujame tudi vse podkode."""
     pogoji = []
     parametri = []
@@ -56,10 +57,15 @@ def poisci_naloge(vsebina_kode: list[str] | None, tip_id: int | None, ima_sliko:
         pogoji.append("n.ima_sliko = ?")
         parametri.append(1 if ima_sliko else 0)
 
+    if vir_tip:
+        pogoji.append("n.vir_tip = ?")
+        parametri.append(vir_tip)
+
     where = ("WHERE " + " AND ".join(pogoji)) if pogoji else ""
 
     sql = f"""
         SELECT n.id, n.besedilo, n.vsebina_koda, n.tip_id, n.ima_sliko,
+               n.vir_tip, n.resitev,
                v.naziv AS vsebina_naziv, t.naziv AS tip_naziv
         FROM naloga n
         LEFT JOIN vsebina v ON n.vsebina_koda = v.koda
@@ -79,6 +85,7 @@ def pridobi_naloge_po_ids(ids: list[int]):
     placeholders = ",".join("?" * len(ids))
     sql = f"""
         SELECT n.id, n.besedilo, n.vsebina_koda, n.tip_id, n.ima_sliko,
+               n.vir_tip, n.resitev,
                v.naziv AS vsebina_naziv, t.naziv AS tip_naziv
         FROM naloga n
         LEFT JOIN vsebina v ON n.vsebina_koda = v.koda
@@ -152,6 +159,7 @@ def pridobi_nalogo(naloga_id: int):
     with povezava() as conn:
         return conn.execute(
             """SELECT n.id, n.besedilo, n.vsebina_koda, n.tip_id, n.ima_sliko,
+                      n.vir_tip, n.resitev,
                       v.naziv AS vsebina_naziv, t.naziv AS tip_naziv
                FROM naloga n
                LEFT JOIN vsebina v ON n.vsebina_koda = v.koda
@@ -161,24 +169,44 @@ def pridobi_nalogo(naloga_id: int):
         ).fetchone()
 
 
-def dodaj_nalogo(besedilo: str, vsebina_koda: str | None, tip_id: int | None, ima_sliko: bool) -> int:
+def dodaj_nalogo(besedilo: str, vsebina_koda: str | None, tip_id: int | None, ima_sliko: bool,
+                 resitev: str | None = None) -> int:
     """Vstavi novo nalogo in vrne njen ID."""
     with povezava() as conn:
         cur = conn.execute(
-            """INSERT INTO naloga (besedilo, vsebina_koda, tip_id, ima_sliko, vir_datoteka)
-               VALUES (?, ?, ?, ?, 'ročni vnos')""",
-            (besedilo, vsebina_koda or None, tip_id or None, 1 if ima_sliko else 0),
+            """INSERT INTO naloga (besedilo, vsebina_koda, tip_id, ima_sliko, vir_datoteka,
+                                  vir_tip, resitev)
+               VALUES (?, ?, ?, ?, 'ročni vnos', 'sola', ?)""",
+            (besedilo, vsebina_koda or None, tip_id or None, 1 if ima_sliko else 0,
+             resitev or None),
         )
         conn.commit()
         return cur.lastrowid
 
 
-def posodobi_nalogo(naloga_id: int, besedilo: str, vsebina_koda: str | None, tip_id: int | None, ima_sliko: bool):
+def posodobi_nalogo(naloga_id: int, besedilo: str, vsebina_koda: str | None, tip_id: int | None,
+                    ima_sliko: bool, resitev: str | None = None):
     """Posodobi obstoječo nalogo."""
     with povezava() as conn:
         conn.execute(
-            """UPDATE naloga SET besedilo = ?, vsebina_koda = ?, tip_id = ?, ima_sliko = ?
+            """UPDATE naloga SET besedilo = ?, vsebina_koda = ?, tip_id = ?, ima_sliko = ?,
+                                resitev = ?
                WHERE id = ?""",
-            (besedilo, vsebina_koda or None, tip_id or None, 1 if ima_sliko else 0, naloga_id),
+            (besedilo, vsebina_koda or None, tip_id or None, 1 if ima_sliko else 0,
+             resitev or None, naloga_id),
         )
         conn.commit()
+
+
+def izbrisi_nalogo(naloga_id: int):
+    """Pobriše nalogo in njene slika zapise. Vrne seznam imen slik ali None."""
+    with povezava() as conn:
+        obstaja = conn.execute("SELECT 1 FROM naloga WHERE id = ?", (naloga_id,)).fetchone()
+        if not obstaja:
+            return None
+        slike = [v["ime_datoteke"] for v in conn.execute(
+            "SELECT ime_datoteke FROM slika WHERE naloga_id = ?", (naloga_id,))]
+        conn.execute("DELETE FROM slika WHERE naloga_id = ?", (naloga_id,))
+        conn.execute("DELETE FROM naloga WHERE id = ?", (naloga_id,))
+        conn.commit()
+        return slike

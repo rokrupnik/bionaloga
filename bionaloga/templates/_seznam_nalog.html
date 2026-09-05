@@ -46,6 +46,7 @@
             </div>
             <div class="kartica-akcije">
                 <button class="uredi-gumb" onclick="odpriUredi({{ naloga.id }})" title="Uredi">&#9998;</button>
+                <button class="brisi-gumb" onclick="izbrisiNalogo({{ naloga.id }})" title="Pobriši nalogo">&#10005;</button>
                 <button class="dodaj-gumb"
                         data-id="{{ naloga.id }}"
                         data-besedilo="{{ naloga.besedilo | replace('"', '&quot;') }}"
@@ -75,6 +76,7 @@
         </div>
         <div class="kartica-akcije">
             <button class="uredi-gumb" onclick="odpriUredi({{ naloga.id }})" title="Uredi">&#9998;</button>
+            <button class="brisi-gumb" onclick="izbrisiNalogo({{ naloga.id }})" title="Pobriši nalogo">&#10005;</button>
             <button class="dodaj-gumb"
                     data-id="{{ naloga.id }}"
                     data-besedilo="{{ naloga.besedilo | replace('"', '&quot;') }}"

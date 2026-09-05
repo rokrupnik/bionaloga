@@ -1,6 +1,7 @@
 import random
 import re
 import shutil
+import unicodedata
 import webbrowser
 from fastapi import FastAPI, Request, Form, Query, File, UploadFile
 from fastapi.responses import HTMLResponse, JSONResponse, Response
@@ -8,6 +9,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pathlib import Path
 from typing import Annotated
+from urllib.parse import quote
 
 from . import baza, generator
 
@@ -56,6 +58,7 @@ async def seznam_nalog(
     vsebina: Annotated[list[str] | None, Query()] = None,
     tip_id: int | None = None,
     ima_sliko: str | None = None,
+    vir_tip: str | None = None,
 ):
     ima_sliko_bool = None
     if ima_sliko == "da":
@@ -63,7 +66,7 @@ async def seznam_nalog(
     elif ima_sliko == "ne":
         ima_sliko_bool = False
 
-    naloge = baza.poisci_naloge(vsebina or [], tip_id, ima_sliko_bool)
+    naloge = baza.poisci_naloge(vsebina or [], tip_id, ima_sliko_bool, vir_tip)
 
     return predloge.TemplateResponse("_seznam_nalog.html", {
         "request": request,
@@ -77,6 +80,7 @@ async def nakljucne_naloge(
     tip_id: int | None = None,
     ima_sliko: str | None = None,
     stevilo: int = 10,
+    vir_tip: str | None = None,
 ):
     """Vrne naključno izbrane naloge iz filtriranega nabora."""
     ima_sliko_bool = None
@@ -85,7 +89,7 @@ async def nakljucne_naloge(
     elif ima_sliko == "ne":
         ima_sliko_bool = False
 
-    naloge = baza.poisci_naloge(vsebina or [], tip_id, ima_sliko_bool)
+    naloge = baza.poisci_naloge(vsebina or [], tip_id, ima_sliko_bool, vir_tip)
     naloge_seznam = [dict(n) for n in naloge]
 
     if stevilo < len(naloge_seznam):
@@ -101,6 +105,7 @@ async def nakljucne_po_tipu(
     kratki: int = 0,
     daljsi: int = 0,
     dopolnjevanje: int = 0,
+    vir_tip: str | None = None,
 ):
     """Vrne naključni izbor nalog po tipu."""
     tipi = [(1, izbirni), (2, kratki), (3, daljsi), (4, dopolnjevanje)]
@@ -108,7 +113,7 @@ async def nakljucne_po_tipu(
     for tip_id, stevilo in tipi:
         if stevilo <= 0:
             continue
-        vse = baza.poisci_naloge(vsebina or [], tip_id, None)
+        vse = baza.poisci_naloge(vsebina or [], tip_id, None, vir_tip)
         vzorec = random.sample(list(vse), min(stevilo, len(vse)))
         rezultat.extend(vzorec)
     return [
@@ -142,6 +147,7 @@ async def dodaj_nalogo(
     vsebina_koda: Annotated[str, Form()] = "",
     tip_id: Annotated[str, Form()] = "",
     ima_sliko: Annotated[str, Form()] = "0",
+    resitev: Annotated[str, Form()] = "",
 ):
     """Dodaj novo nalogo."""
     nov_id = baza.dodaj_nalogo(
@@ -149,6 +155,7 @@ async def dodaj_nalogo(
         vsebina_koda=vsebina_koda if vsebina_koda else None,
         tip_id=int(tip_id) if tip_id else None,
         ima_sliko=ima_sliko == "1",
+        resitev=resitev.strip() or None,
     )
     return {"id": nov_id, "ok": True}
 
@@ -160,6 +167,7 @@ async def uredi_nalogo(
     vsebina_koda: Annotated[str, Form()] = "",
     tip_id: Annotated[str, Form()] = "",
     ima_sliko: Annotated[str, Form()] = "0",
+    resitev: Annotated[str, Form()] = "",
 ):
     """Posodobi obstoječo nalogo."""
     baza.posodobi_nalogo(
@@ -168,8 +176,27 @@ async def uredi_nalogo(
         vsebina_koda=vsebina_koda if vsebina_koda else None,
         tip_id=int(tip_id) if tip_id else None,
         ima_sliko=ima_sliko == "1",
+        resitev=resitev.strip() or None,
     )
     return {"id": naloga_id, "ok": True}
+
+
+@app.delete("/naloge/{naloga_id}", response_class=JSONResponse)
+async def izbrisi_nalogo(naloga_id: int):
+    """Pobriše nalogo z vsemi slika zapisi."""
+    slike = baza.izbrisi_nalogo(naloga_id)
+    if slike is None:
+        return JSONResponse({"error": "Naloga ne obstaja"}, status_code=404)
+
+    # Ročno naložene slike so vezane na eno nalogo, zato gredo z njo. Izvornih
+    # (iz uvoza) se ne dotikamo — deli si jih lahko več nalog.
+    for ime in slike:
+        if ime.startswith("rocno_"):
+            pot = SLIKE_POT / ime
+            if pot.exists():
+                pot.unlink()
+
+    return {"ok": True, "izbrisanih_slik": sum(1 for i in slike if i.startswith("rocno_"))}
 
 
 @app.post("/naloge/{naloga_id}/slika", response_class=JSONResponse)
@@ -208,6 +235,7 @@ async def nalozi_sliko(naloga_id: int, slika: UploadFile = File(...)):
         vsebina_koda=naloga["vsebina_koda"],
         tip_id=naloga["tip_id"],
         ima_sliko=True,
+        resitev=naloga["resitev"],   # sicer bi jo prepisali s prazno
     )
 
     return {"ok": True, "ime": ime, "besedilo": novo_besedilo}
@@ -238,6 +266,7 @@ async def izbrisi_sliko(naloga_id: int, slika_id: int):
             vsebina_koda=naloga["vsebina_koda"],
             tip_id=naloga["tip_id"],
             ima_sliko=bool(baza.pridobi_slike_naloge(naloga_id)),
+            resitev=naloga["resitev"],   # sicer bi jo prepisali s prazno
         )
 
     return {"ok": True}
@@ -247,19 +276,31 @@ async def izbrisi_sliko(naloga_id: int, slika_id: int):
 async def izvozi_test(
     ids: Annotated[str, Form()],
     naslov: Annotated[str, Form()] = "Test iz biologije",
+    z_resitvami: Annotated[str, Form()] = "0",
 ):
     id_seznam = [int(i) for i in ids.split(",") if i.strip().isdigit()]
     if not id_seznam:
         return Response("Ni izbranih nalog.", status_code=400)
 
-    vsebina, napake = generator.generiraj_test(id_seznam, naslov)
+    vsebina, napake = generator.generiraj_test(
+        id_seznam, naslov, z_resitvami=z_resitvami == "1")
 
     if napake:
         import logging
         for n in napake:
             logging.warning(n)
 
-    headers = {"Content-Disposition": f'attachment; filename="{naslov}.docx"'}
+    # Ime datoteke gre v HTTP glavo, ki je latin-1: šumniki v naslovu (ali v
+    # priponi "z rešitvami") bi vrgli UnicodeEncodeError. Zato ASCII različica
+    # za stare odjemalce + RFC 5987 filename* za pravo ime.
+    pripona = " (z resitvami)" if z_resitvami == "1" else ""
+    ime_dat = f"{naslov}{pripona}.docx"
+    ascii_ime = unicodedata.normalize("NFKD", ime_dat).encode("ascii", "ignore").decode() or "test.docx"
+    headers = {
+        "Content-Disposition":
+            f'attachment; filename="{ascii_ime}"; '
+            f"filename*=UTF-8''{quote(ime_dat)}"
+    }
     if napake:
         headers["X-Izpuscene-Naloge"] = str(len(napake))
 

@@ -157,6 +157,21 @@ textarea { resize: vertical; min-height: 80px; }
 }
 .uredi-gumb:hover { background: #f0f0f0; border-color: #999; }
 
+.brisi-gumb {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid #e3b8b3;
+    background: white;
+    color: #c0392b;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.brisi-gumb:hover { background: #c0392b; color: white; border-color: #c0392b; }
+
 .dodaj-gumb {
     flex-shrink: 0;
     width: 28px;
@@ -391,6 +406,16 @@ textarea { resize: vertical; min-height: 80px; }
                 </select>
             </div>
 
+            <!-- Vir nalog -->
+            <div class="filter-section">
+                <h4>Vir</h4>
+                <select name="vir_tip" onchange="posodobiFiltre()">
+                    <option value="">— vsi viri —</option>
+                    <option value="matura">Matura (RIC)</option>
+                    <option value="sola">Šolski testi</option>
+                </select>
+            </div>
+
             <!-- Slika -->
             <div class="filter-section">
                 <h4>Slike</h4>
@@ -472,6 +497,9 @@ textarea { resize: vertical; min-height: 80px; }
     <div class="test-footer">
         <label for="naslov-testa">Naslov testa</label>
         <input type="text" id="naslov-testa" value="Test iz biologije">
+        <label style="display:flex;align-items:center;gap:6px;font-weight:400">
+            <input type="checkbox" id="izvoz-resitve" style="width:auto"> Dodaj rešitve na konec
+        </label>
         <button class="btn btn-primary" onclick="izvoziTest()">Izvozi v Word (.docx)</button>
         <button class="btn btn-secondary" onclick="pocistiTest()">Počisti test</button>
     </div>
@@ -503,6 +531,11 @@ textarea { resize: vertical; min-height: 80px; }
                 <option value="{{ tip.id }}">{{ tip.naziv }}</option>
                 {% endfor %}
             </select>
+        </div>
+        <div class="polje">
+            <label for="modal-resitev">Rešitev <span style="font-weight:400;color:#888">(neobvezno)</span></label>
+            <textarea id="modal-resitev" rows="2"
+                      placeholder="npr. B   ali   opis pričakovanega odgovora"></textarea>
         </div>
         <div class="polje">
             <label>Slike</label>
@@ -556,6 +589,9 @@ function zberiFiltreUrl() {
     if (tip) params.set('tip_id', tip);
     const slika = forma.querySelector('select[name=ima_sliko]').value;
     if (slika) params.set('ima_sliko', slika);
+
+    const vir = forma.querySelector('select[name=vir_tip]').value;
+    if (vir) params.set('vir_tip', vir);
     return params;
 }
 
@@ -689,6 +725,23 @@ function osveziDodanjeGumbe() {
     });
 }
 
+// ===== BRISANJE NALOGE =====
+function izbrisiNalogo(id) {
+    if (!confirm('Trajno pobrišem to nalogo iz baze?\n\nTega ni mogoče razveljaviti.')) return;
+    fetch('/naloge/' + id, { method: 'DELETE' })
+        .then(r => r.json())
+        .then(rez => {
+            if (!rez.ok) { alert(rez.error || 'Napaka pri brisanju.'); return; }
+            // odstrani iz sestavljenega testa, če je tam
+            if (testNaloge.find(n => n.id === id)) {
+                testNaloge = testNaloge.filter(n => n.id !== id);
+                osveziTestPanel();
+            }
+            const kartica = document.getElementById('kartica-' + id);
+            if (kartica) kartica.remove();
+        });
+}
+
 // ===== MODAL: DODAJ / UREDI NALOGO =====
 function odpriDodaj() {
     document.getElementById('modal-naslov').textContent = 'Nova naloga';
@@ -696,6 +749,7 @@ function odpriDodaj() {
     document.getElementById('modal-besedilo').value = '';
     document.getElementById('modal-vsebina').value = '';
     document.getElementById('modal-tip').value = '';
+    document.getElementById('modal-resitev').value = '';
     document.getElementById('modal-slika-datoteka').value = '';
     izrisiModalSlike([]);
     document.getElementById('modal-naloga').classList.add('prikazano');
@@ -710,6 +764,7 @@ function odpriUredi(id) {
             document.getElementById('modal-besedilo').value = n.besedilo;
             document.getElementById('modal-vsebina').value = n.vsebina_koda || '';
             document.getElementById('modal-tip').value = n.tip_id || '';
+            document.getElementById('modal-resitev').value = n.resitev || '';
             document.getElementById('modal-slika-datoteka').value = '';
             izrisiModalSlike(n.slike || []);
             document.getElementById('modal-naloga').classList.add('prikazano');
@@ -764,6 +819,7 @@ async function shraniNalogo() {
     podatki.append('tip_id', document.getElementById('modal-tip').value);
     // ima_sliko izhaja iz placeholderjev v besedilu (vsaka slika ima [SLIKA:ime])
     podatki.append('ima_sliko', besedilo.includes('[SLIKA:') ? '1' : '0');
+    podatki.append('resitev', document.getElementById('modal-resitev').value);
 
     const url = id ? `/naloge/${id}/uredi` : '/naloge';
 
@@ -814,6 +870,11 @@ function izvoziTest() {
 
     const vnosNaslov = document.createElement('input');
     vnosNaslov.type = 'hidden'; vnosNaslov.name = 'naslov'; vnosNaslov.value = naslov;
+
+    const vnosResitve = document.createElement('input');
+    vnosResitve.type = 'hidden'; vnosResitve.name = 'z_resitvami';
+    vnosResitve.value = document.getElementById('izvoz-resitve').checked ? '1' : '0';
+    forma.appendChild(vnosResitve);
 
     forma.appendChild(vnosIds);
     forma.appendChild(vnosNaslov);

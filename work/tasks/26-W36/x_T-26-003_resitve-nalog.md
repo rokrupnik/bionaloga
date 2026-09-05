@@ -1,12 +1,12 @@
 ---
 task: T-26-003
 title: Rešitve nalog — hramba in izvoz testa z rešitvami
-status: open
+status: done
 assignee: [ROK]
 requested-by: VITAL
 week: 26-W36
 created: 2026-09-05
-completed:
+completed: 2026-09-05
 notified:
 blocked-by: []
 visibility: team
@@ -28,11 +28,11 @@ Out: samodejno ocenjevanje, točkovnik.
 
 ## Acceptance criteria
 
-- [ ] Naloga lahko hrani rešitev (prazno, kjer je ni)
-- [ ] Rešitev je vidna in urejljiva v modalu za urejanje naloge
-- [ ] `POST /izvozi` sprejme zastavico za rešitve; brez nje se izvoz ne
+- [x] Naloga lahko hrani rešitev (prazno, kjer je ni)
+- [x] Rešitev je vidna in urejljiva v modalu za urejanje naloge
+- [x] `POST /izvozi` sprejme zastavico za rešitve; brez nje se izvoz ne
       spremeni glede na sedanjega
-- [ ] Z zastavico so rešitve v .docx izpisane pri vsaki nalogi (ali na koncu)
+- [x] Z zastavico so rešitve v .docx izpisane pri vsaki nalogi (ali na koncu)
 
 ## Notes
 
@@ -54,4 +54,20 @@ Za obstoječe (šolske) naloge rešitev večinoma ni — stolpec ostane prazen.
 
 ## Result
 
-<!-- Napisano po izvedbi. -->
+Stolpec `naloga.resitev` je nastal že ob uvozu RIC nalog (1.135 jih ima
+rešitev). Modal ima polje »Rešitev (neobvezno)«, izvoz pa izbiro
+»Dodaj rešitve na konec«.
+
+Rešitve gredo na novo stran pod naslov »Rešitve«, oštevilčene po nalogah v
+testu — izpuščene naloge ne premaknejo številk. Naloga brez rešitve dobi »—«,
+izvoz pa v opozorilih pove, koliko takih je.
+
+**Popravljena obstoječa napaka:** ime datoteke gre v HTTP glavo, ki je latin-1,
+zato bi vsak naslov s šumniki (»Test čebele«) vrgel `UnicodeEncodeError` in
+izvoz bi padel s 500. Zdaj ASCII različica + RFC 5987 `filename*`.
+
+**Ujeta regresija:** nalaganje/brisanje slike je klicalo `posodobi_nalogo()`
+brez rešitve in bi jo tiho prepisalo s prazno. Pokrito s testom.
+
+Testi: `test_vmesnik.py::test_izvoz_z_resitvami`, `::test_resitev_prezivi_slike`,
+`::test_ime_datoteke_s_sumniki`.

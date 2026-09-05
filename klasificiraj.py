@@ -368,22 +368,50 @@ def preveri_delez_novih(conn: sqlite3.Connection, besedilo: str) -> tuple[float,
 # API klic
 # ---------------------------------------------------------------------------
 
+# Structured outputs: API jamči veljaven JSON po tej shemi. Brez tega je model
+# v slovenskem besedilu z narekovaji („goba") vračal neubežane narekovaje in
+# JSON se ni dal razčleniti ("Expecting ',' delimiter") — to je bil najpogostejši
+# vzrok padlih datotek v prejšnjih tekih.
+SHEMA_ODGOVORA = {
+    "type": "object",
+    "properties": {
+        "naloge": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "besedilo": {"type": "string"},
+                    "vsebina_koda": {"type": "string"},
+                    "tip_naziv": {"type": "string", "enum": TIPI},
+                    "ima_sliko": {"type": "boolean"},
+                },
+                "required": ["besedilo", "vsebina_koda", "tip_naziv", "ima_sliko"],
+                "additionalProperties": False,
+            },
+        }
+    },
+    "required": ["naloge"],
+    "additionalProperties": False,
+}
+
+
 def klici_api(odjemalec: anthropic.Anthropic, besedilo: str) -> list[dict]:
     """Pošlje celotno besedilo testa v API in vrne vse klasificirane naloge naenkrat."""
     # Model prepiše celotno besedilo nalog v JSON, zato je izhod približno tako
     # velik kot vhod. Pri 8192 se je odgovor pri večjih testih odrezal sredi
     # JSON-a ("Unterminated string") in datoteka je padla. Haiku 4.5 zmore 64k.
-    sporocilo = odjemalec.messages.create(
+    # Pri velikem max_tokens SDK zahteva streaming (varovalo za >10 min zahteve).
+    with odjemalec.messages.stream(
         model=MODEL,
         max_tokens=32000,
         system=SISTEM_PROMPT,
         messages=[{"role": "user", "content": f"Klasificiraj naloge iz tega testa:\n\n{besedilo}"}],
-    )
-    odgovor = sporocilo.content[0].text.strip()
+        output_config={"format": {"type": "json_schema", "schema": SHEMA_ODGOVORA}},
+    ) as tok:
+        sporocilo = tok.get_final_message()
 
-    # Izvleči JSON (model doda ```json ... ```, uvodni stavek ali več arrayev)
-    from uvozi_ric import _izlusci_json
-    return _izlusci_json(odgovor)
+    besedilo_odgovora = next(b.text for b in sporocilo.content if b.type == "text")
+    return json.loads(besedilo_odgovora)["naloge"]
 
 
 # ---------------------------------------------------------------------------
@@ -432,8 +460,8 @@ def shrani_naloge(conn: sqlite3.Connection, naloge: list[dict], ime_datoteke: st
         ima_sliko = bool(reference_slik) or bool(n.get("ima_sliko"))
 
         cur = conn.execute(
-            """INSERT INTO naloga (besedilo, vsebina_koda, tip_id, ima_sliko, vir_datoteka)
-               VALUES (?, ?, ?, ?, ?)""",
+            """INSERT INTO naloga (besedilo, vsebina_koda, tip_id, ima_sliko, vir_datoteka, vir_tip)
+               VALUES (?, ?, ?, ?, ?, 'sola')""",
             (besedilo, vsebina_koda, tip_id, 1 if ima_sliko else 0, ime_datoteke),
         )
         naloga_id = cur.lastrowid

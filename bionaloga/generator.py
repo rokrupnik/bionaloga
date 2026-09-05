@@ -150,11 +150,14 @@ def _dodaj_besedilo_s_slikami(doc: Document, besedilo: str, slike_po_imenu: dict
         odst.add_run(f"{stevilka}. ").bold = True
 
 
-def generiraj_test(ids_nalog: list[int], naslov: str = "Test iz biologije") -> tuple[bytes, list[str]]:
+def generiraj_test(ids_nalog: list[int], naslov: str = "Test iz biologije",
+                   z_resitvami: bool = False) -> tuple[bytes, list[str]]:
     """Ustvari .docx test z izbranimi nalogami.
 
     Vrne (vsebina_docx, seznam_napak).
     Naloge z manjkajočimi/nepodprtimi slikami so izpuščene iz dokumenta.
+    Če je z_resitvami=True, se na koncu doda razdelek z rešitvami; oštevilčenje
+    ustreza nalogam v testu (izpuščene naloge ne pokvarijo številčenja).
     """
     naloge = baza.pridobi_naloge_po_ids(ids_nalog)
 
@@ -164,6 +167,7 @@ def generiraj_test(ids_nalog: list[int], naslov: str = "Test iz biologije") -> t
     doc.add_paragraph("")
 
     napake = []
+    resitve = []
     stevilka = 1
     for naloga in naloge:
         slike_po_imenu = {}
@@ -178,7 +182,23 @@ def generiraj_test(ids_nalog: list[int], naslov: str = "Test iz biologije") -> t
             continue
 
         _dodaj_besedilo_s_slikami(doc, naloga["besedilo"], slike_po_imenu, stevilka)
+        if z_resitvami:
+            r = naloga["resitev"] if "resitev" in naloga.keys() else None
+            resitve.append((stevilka, (r or "").strip()))
         stevilka += 1
+
+    if z_resitvami and resitve:
+        doc.add_page_break()
+        naslov_r = doc.add_heading("Rešitve", level=1)
+        naslov_r.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        for st, r in resitve:
+            odst = doc.add_paragraph()
+            odst.paragraph_format.space_before = Pt(4)
+            odst.add_run(f"{st}. ").bold = True
+            odst.add_run(r if r else "—")
+        brez = sum(1 for _, r in resitve if not r)
+        if brez:
+            napake.append(f"Brez shranjene rešitve: {brez} nalog (označene z —)")
 
     buffer = io.BytesIO()
     doc.save(buffer)
