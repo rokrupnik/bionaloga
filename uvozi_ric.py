@@ -539,18 +539,35 @@ def preslikaj_resitve(odstavki: list[str], naloge: list[dict]) -> dict[int, str]
     return resitve
 
 
+# T-26-008: tretji vzorec — 'NASLOV\nx.1 <odgovor>\nx.2 …'. Isto obliko imajo
+# tudi prava kratka vprašanja, zato blok priznamo šele, kadar v besedilu ni ne
+# vprašaja ne velelnika. Velelnik lovimo samo v velelniški obliki: 'označite' je
+# vprašanje, 'označeno' v opombi ocenjevalca pa ne.
+NASLOV_XN = re.compile(r"^[A-ZČŠŽĐ][A-ZČŠŽĐ0-9 ,\-/()\.]{2,60}\n\s*[Xx]\.1\b")
+VELELNIK = re.compile(
+    r"\b(?:navedi|zapiši|izračunaj|imenuj|naštej|poimenuj|določi|razloži|pojasni|"
+    r"utemelji|opiši|dopolni|označi|nariši|vpiši|podčrtaj|obkroži|poveži|razvrsti|"
+    r"razporedi|prikaži|odčitaj|ugotovi|primerjaj|vriši|osenči|sklepaj|izberi|"
+    r"napiši|postavi|presodi|popravi|obrazloži|dokaži|analiziraj|razmisli)(?:te)?\b",
+    re.I)
+
+
 def je_blok_resitev(besedilo: str) -> bool:
     """Ali je to blok rešitev in ne naloga?
 
     Model kljub navodilu občasno vrne blok rešitev kot nalogo (v vzorcu 15 %).
-    Oba vzorca sta v besedilu nedvoumna, zato ju odfiltriramo v kodi in se ne
-    zanašamo na prompt — učitelj v testu ne sme dobiti odgovorov namesto vprašanj.
+    Vsi trije vzorci so v besedilu nedvoumni, zato jih odfiltriramo v kodi in se
+    ne zanašamo na prompt — učitelj v testu ne sme dobiti odgovorov namesto
+    vprašanj.
     """
     t = besedilo.lstrip()
     if t.startswith("Rešitev"):
         return True
     # razpredelnica rešitev iz RIC predloge
     if re.search(r"\|\s*Naloga\s*\|\s*Točke\s*\|", besedilo):
+        return True
+    # blok pod-odgovorov 'x.1 …' pod naslovom, brez vprašanja
+    if NASLOV_XN.match(t) and "?" not in t and not VELELNIK.search(t):
         return True
     return False
 

@@ -1,0 +1,570 @@
+T-26-008 — bloki rešitev v tabeli naloga: 189
+od tega preslikanih v naloga.resitev: 51
+
+--- id=10006 vir=Encimi rešitve.docx (brez preslikave)
+ENCIMI 1 |  | x.1 Razgradnja večjih molekul, glikoliza, sinteza beljakovin, sinteza hormonov
+
+--- id=16425 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+VODNI EKOSISTEMI | x.1 | | Dejavnik | Zgornji tok | Spodnji tok | | |---|---|---| | | Količina kisika | velika | majhna | | | Temperatura vode | nizka | visoka | | | Število planktonskih organizmov | majhno / jih ni | veliko | | | Število porabnikov | majhno | veliko | | x.2	Količina kisika je odvisna od temperature, hitrosti toka / mešanja vode z zrakom / porabe kisika. | x.3	V njih je visoka pri
+
+--- id=16426 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+GOZD | x.1	B | x.2	Pionirski organizmi prenesejo velika nihanja v temperaturi. | x.3	svetloba, temperatura | x.4	Zaradi dihanja organizmov, ki živijo v tleh. | x.5	Razkrojijo se do mineralov / do anorganskih snovi. | x.6	v listih, plodovih, lesu, cvetovih, semenih, brstih, koreninah … | x.7	z glivami | x.8	s koreninami
+
+--- id=16427 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+JEZERO | x.1	Črka A označuje: trofogeni sloj jezera. | Črka B označuje: trofolitični sloj jezera. | x.2	V sloju A je primarna proizvodnja, v sloju B je ni. | x.3	V sloju A, ki je osvetljen, poteka fotosinteza, v sloju B pa ni svetlobe. | x.4	Vzrok je večja poraba kisika pri razkrojnih procesih, kakršen je njegov dotok iz zgornjega sloja. / Potekajo razkrojni procesi, pri katerih se porablja kisik 
+
+--- id=16428 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+PLANKTON | x.1	Zadrževanje v zgornjih slojih vode / organizmi počasneje tonijo / lebdenje | x.2	V zgornji plasti vode / v trofogenem sloju / v epilimniju / osvetljeni del vode | x.3	Ker tu ni dovolj svetlobe za fotosintezo. | x.4	Ribe se hranijo s planktonom. | x.5	Fitoplankton - zooplankton - ribja mladica - ščuka / fitoplankton - zooplankton - paglavec dvoživke - čaplja | x.6	Povečanje količine 
+
+--- id=16429 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+TUJE VRSTE | x.1 	Abiotski / biotski dejavniki so za to vrsto neugodni (lahko so našteti konkretni abiotski ali biotski dejavniki) | x.2 	Širjenje kavlerpe je hitrejše. | x.3 	Strup prizadene rastlinojede organizme / organizme, ki se neposredno hranijo s kavlerpo. | x.4 	V kompeticiji je kavlerpa uspešnejša. | x.5 | | odgovor | točkovanje | | |---|---| | | Kavlerpa vpliva prek prehranjevalne verig
+
+--- id=16430 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+CVETENJE VODA | x.1	V vodi je veliko mineralnih snovi. | x.2	Zmanjkalo je mineralnih snovi. | x.3	Celice alg razpadajo in se sprostijo organske snovi, te pa bakterije razgradijo v anorganske. | x.4	Zmanjkalo je kisika/ strupi v vodi. | x.5	Na sterilno petrijevko bi razlili 1 ml vode (1 točka) in po inkubaciji prešteli število razvitih kolonij( 1 točka). | x.6	Gojišče bi inkubirali v anaerobnih raz
+
+--- id=16431 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+ŽIVALI | x.1	Žival A, žival B in žival C. | x.2	Organizem E / trakulja. | x.3	Hranilne snovi iz gostiteljevega črevesa absorbirajo skozi telesno površino / ugreznjeno povrhnjico. | x.4	Organizmi A, B in C / žuželka, deževnik in rak. | x.5	Po vzdušnicah / trahejah / zračnicah. | x.6	Metanefridiji so lijakasta izločala, ki se odpirajo v celom, Malpighijeve cevke pa so slepo zaprte cevke / metanefrid
+
+--- id=16432 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+JEZERO | x.1	Pozimi je temperatura na površini nižja kakor na dnu, poleti pa je obratno. | x.2 | | Biopolimer, ki vsebuje dušik | Naloga biopolimera | | |---|---| | | Beljakovina | Ogradi celico / katalizira reakcije … | | | Nukleinska kislina | Zapisuje lastnosti organizmov / prenaša dedni zapis v naslednjo generacijo … | | 1 točka se podeli za pravilno zapisan stolpec ali vrstico. | x.3	Aminokis
+
+--- id=16433 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+ALGE | x.1	Nima razvitih pravih tkiv / organov / vse celice so enake. | x.2	V celični steni. | x.3	Pritrjanje alge. | x.4	So primarni proizvajalci. | x.5	Z različnimi fotosintetskimi barvili. | x.6	Kloroplast / plastid. | x.7	Opravljajo fotosintezo / so avtotrofi / imajo klorofil A. | x.8	Imajo prokariontsko celično zgradbo. / So prokarionti.
+
+--- id=16434 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+KORALNJAKI | x.1	Pritrjen na podlago / sesilni način življenja. | x.2	Zvezdasti / radialen. | x.3	Ožigalna celica / ožigalnica z ožigalko /ožigalka. | x.4	Lov / obramba. | x.5	Ker imajo kamene korale apnenčasto ogrodje. | x.6	Alge jim dajejo hrano in kisik / alge jim dajejo produkte fotosinteze. | x.7	Ker zooksantele za uspevanje potrebujejo svetlobo. | x.8	Plavajoče ličinke prenašajo morski tokov
+
+--- id=16435 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+EKOLOGIJA | x.1	Ker je primarni proizvajalec z veliko biomaso. / Ker proizvaja hrano s fotosintezo/ker je avtotrofni organizem. | x.2	Zveri in rovka. | x.3	Piramida biomas: | [SLIKA:delovanje ekosistema_image265.png] | x.4	Številčna piramida: | [SLIKA:delovanje ekosistema_image266.png] | x.5	Priskledništvo / komenzalizem. | x.6	Zalubne uši in gosenice pedicov so primarni porabniki, neposredno veza
+
+--- id=16436 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+JEZERO | x.1	3 | x.2	Dupeljsko jezero in Zeleno jezero (1 točka). Ker imata isti vrsti makrofitov, ki sta enako      številčni. (1 točka) | x.3	Pomanjkanje svetlobe. | x.4	Ne. Najgloblje (Krnsko) jezero ima največ vrst, naslednji dve po globini (Jezero na Planini pri Jezeru in Spodnje Kriško jezero) pa najmanj. | x.5	Pretvarjajo svetlobno energijo v kemijsko/energijo organskih snovi. | x.6	Živali 
+
+--- id=16437 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+PREHRANJEVALNI SPLET | x.1	Miši, zajci, veverice, semenojede ptice in rastlinojede žuželke. | x.2	Rastline → rastlinojede žuželke → žabe in krastače → kače → ujede. / Rastline → rastlinojede žuželke → pajki → žužkojede ptice → ujede. / Rastline → rastlinojede žuželke → žužkojede ptice → kače → ujede. | x.3	Različna vrsta/sestava hrane./ Ker se zajci hranijo z rastlinami. | x.4	Ptica porabi mnogo e
+
+--- id=16438 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+TALNE ŽIVALI | x.1	Da imajo rastline na voljo minerale/hranila. / Da se obnavljajo porabljene mineralne snovi v tleh. | Nepriznano je samo kroženje snovi/brez navedbe mineralov. | x.2	Kraljestvo cepljivk/kraljestvo bakterij, kraljestvo gliv in kraljestvo živali. | x.3	Majhna/nizka. Rastlinska hrana je zaradi celuloze težko prebavljiva/količina iztrebkov je velika. | Nepravilno navajanje dolžine pr
+
+--- id=16439 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+EKOLOGIJA | x.1	Kožuh z gosto dlako, plast podkožnega maščevja, široka stopala ali kopita, velika čokata telesa, majhna ušesa (dve od naštetih). | x.2	Široko strpnostno območje / so evritermni. | x.3	Velike živali imajo manj površine na enoto prostornine telesa/manjše razmerje med površino in volumnom (1 točka) in zato prek površine izgubljajo manj toplote (1 točka). | x.4	S selitvami. | x.5	Zarad
+
+--- id=16440 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+MORJE | x.1 | [SLIKA:delovanje ekosistema_image267.jpeg]  [SLIKA:delovanje ekosistema_image268.jpeg] | x.2	Fizikalni dejavniki tega dela morja so: nizka temperatura/stalna temperatura, tema, visok pritisk. | x.3	Ta dejavnik je svetloba. | x.4	To pomeni, da so ti organizmi prilagojeni tako, da lahko nekaj časa preživijo tudi zunaj vode. / Ti organizmi oseko preživijo na suhem. | x.5 | [SLIKA:delova
+
+--- id=16441 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+EKOLOGIJA | x.1	V ekosistemu mora biti dovolj vode, svetlobe, CO2  in mineralnih snovi/ustrezna temperatura. | Dva ali trije našteti dejavniki 1 točka, vsi našteti 2 točki. | x.2	Biomasa potrošnikov bo največja v mešanem gozdu. | x.3	Potrošniki energijo/hrano dobijo od primarnih proizvajalcev. Če je primarnih proizvajalcev več, bodo potrošniki dobili več hrane/energije in tudi njihova biomasa bo v
+
+--- id=16442 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+TRADICIONALNO KMETIJSTVO | x.1	Različne rastline potrebujejo minerale v različnih razmerjih. S kolobarjenjem dosežemo, da se porabi večina obstoječih mineralov. | x.2	Za gradnjo organskih snovi, ki vsebujejo dušik. / Za gradnjo aminokislin/beljakovin /nukleotidov/organskih dušikovih baz/nukleinskih kislin. | x.3	Detelja/stročnice živi / živijo v sožitju z dušikovimi bakterijami, ki vežejo zračni d
+
+--- id=16443 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+MNOGOČLENARJI | x.1	Skupna značilnost vseh mnogočlenarjev je trebušnjača. | x.2	Parni gangliji/bočne žile/(parne) celomske vrečke/metanefridiji. En odgovor za 1 točko. | x.3	Kri s transportnim barvilom prenese več kisika zato, ker se na transportno barvilo lahko veže več kisika kakor v samo transportno tekočino. | x.4	Dihalni plini se pri deževniku izmenjujejo na površini telesa/med celicami in tr
+
+--- id=16444 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+PREHRANJEVALNA VERIGA | x.1	Primarni producenti so zato, ker vsebujejo algo/cepljivko, ki opravlja fotosintezo. | x.2	Energija vstopa v prehranjevalno verigo kot svetloba. | x.3	Krastača dobi energijo v obliki organskih snovi/beljakovin, maščob, ogljikovih hidratov/kemijsko vezane energije. | x.4	Potrošniki pretvarjajo energijo v sebi lastno obliko s presnovnim procesom celičnega dihanja/vrenja. |
+
+--- id=16445 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+GLOBALNO SEGREVANJE | x.1	Metan/dušikovi oksidi/žveplovi oksidi. | x.2	Sproščanje CO2 povzroča celično dihanje in alkoholno vrenje. | x.3	Bili so v ogljikovih hidratih, beljakovinah, maščobah/škrobu/glukozi/aminokislinah … | x.4	To omogoča fotosinteza. | x.5	Manjša biomasa primarnih proizvajalcev/rastlin med fotosintezo veže manj CO2, zato ga več ostane v atmosferi. | x.6	V prehranjevalnih verigah
+
+--- id=16446 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+AKVARIJ | x.1	Naravni ekosistemi so samoohranjajoči/se sami ohranjajo, akvarij pa deluje samo, če ga vzdržujemo. | x.2	Manjši ko so mehurčki, večja je njihova površina, prek katere prehaja kisik iz zraka v vodo/večji mehurčki imajo manjšo površino, prek katere prehaja v vodo manj kisika. | x.3	Vir ogljikovega dioksida je še izdihani ogljikov dioksid, ki nastaja pri celičnem dihanju/heterotrofnih p
+
+--- id=16447 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+TALNI EKOSISTEM | x.1	Ogljikovega dioksida. | x.2	Ker so v tleh samo organizmi, ki ogljikov dioksid proizvajajo, ne pa tudi organizmi, ki ga porabljajo. / Ker so v tleh samo organizmi, ki ogljikov dioksid proizvajajo, izmenjava plinov med zrakom v prsti in zrakom nad tlemi pa je počasna. | x.3	Vir organskih delcev so odmrli deli rastlin, odmrle živali. | x.4	Iz njih pridobijo energijo za svoje del
+
+--- id=16448 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+GLOBALNO SEGREVANJE | x.1	Koralnjaki dobijo od alg sladkorje in kisik/produkte fotosinteze. | x.2	Korale postanejo bele, ker pri povišani temperaturi simbiontske alge propadejo. | x.3	Primarna produkcija alg se do koncentracije 0.04 povečuje, potem ostaja enaka. | x.4	Večja ko je primarna produkcija, več hrane imajo korale in hitreje rastejo. | x.5	CO2/ogljikov dioksid se raztaplja v morski vodi i
+
+--- id=16449 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+ODNOSI MED ORGANIZMI | x.1	1 točka za vse tri navedene odnose. | | ORGANIZMI | VRSTA ODNOSA | | |---|---| | | Mravlje, ki gojijo listne uši, s katerih izločki se hranijo. | Pravo sožitje / mutualizem/simbioza | | | Klop, ki se pritrdi na srno, da se napije njene krvi. | Zajedavstvo | | | Čmrlj, ki oprašuje cvetove travniške kadulje, s katere nektarjem se hrani (žuželka). | Pravo sožitje / mutualiz
+
+--- id=16450 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+EKOLOGIJA RASTLIN | x.1 | | Rastline | Voda v kozarcu | Povečanje mase vodne mete v % | Masa rastlin po poskusu v g | | |---|---|---|---| | | A | Deževnica | 60 | 16 | | | B | Voda iz Temze | 90 | 19 | | | C | Voda iz parka | 125 | 22,5 | | | D | Voda iz parka in vrtni gnoj | 310 | 41 | | x.2	Na različno povečanje mase rastlin je vplivala različna količina fosfatov, nitratov, amonijevih ionov, Mg 
+
+--- id=16451 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+RAZSOLJEVANJE MORSKE VODE | x.1	Voda pride v ozračje z izhlapevanjem. | x.2 | [SLIKA:delovanje ekosistema_image272.png] | x.3	Voda prehaja iz prostora B v prostor A zato, ker je njena koncentracija v prostoru B večja kakor v prostoru A/ker je koncentracija raztopljenih snovi v prostoru A večja kakor v prostoru B/ker ima raztopina v prostoru A višji osmotski tlak. | x.4	Polprepustna membrana ni pre
+
+--- id=16452 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+PRIRASTEK LESA | x.1	Prirastek lesa se je med letoma 1990 in 2005 povečal za 2.200.000 do 2.400.000 m3. | x.2	Na povečanje prirastka lesa med letoma 1990 in 2005 je vplivalo povečanje površine gozdov v Sloveniji. | x.3	CO2 se je vezal med fotosintezo. | x.4	Drevesa porabijo organske snovi kot vir energije/vir snovi za rast in razmnoževanje/ ustvarjanje zalog snovi in energije (2 navedbi za 1 točko
+
+--- id=16453 vir=RIC/delovanje ekosistema.docx (brez preslikave)
+BOLNI ALIGATORJI | x.1	Organske snovi so hrana za bakterije, ki jih razgrajujejo. Za razkroj organskih snovi bakterije porabljajo kisik. Več ko je organskih snovi, več kisika porabijo za njihov razkroj. | x.2	Zarodki rib potrebujejo kisik za pridobivanje energije/ATP/za opravljanje celičnega dihanja. (1 točka) Zaradi pomanjkanja kisika zarodki niso mogli dobro opravljati celičnega dihanja in dobit
+
+--- id=16855 vir=RIC/fotosinteza.docx (brez preslikave)
+LISTNE REŽE | x.1 | [SLIKA:fotosinteza_image169.jpeg] | x.2	Izmenjavo plinov in vode / transpiracijo. / Sprejemanje ogljikovega dioksida, oddajanje kisika in vode. | x.3	Lokvanjevi listi so v stiku z zrakom samo prek zgornje povrhnjice. | x.4	Fotosinteza. | x.5	Sinteza sladkorjev pri fotosintezi v celicah zapiralkah. / Povečana količina sladkorjev v celicah zapiralkah/ Povečan ozmotski tlak./ Pove
+
+--- id=17061 vir=RIC/genetsko uravnavanje.docx (brez preslikave)
+BAKTERIJE | x.1	Bakterije se od enoceličarjev drugih kraljestev razlikujejo po tem, da so prokarionti/da imajo DNA prosto v citoplazmi/da se delijo s cepitvijo. | x.2	Bakterije v omenjenem biotehnološkem postopku opravljajo mlečnokislinsko vrenje. | x.3 | [SLIKA:genetsko uravnavanje_image97.png] | x.4 | [SLIKA:genetsko uravnavanje_image98.png] | x.5	Presnovni procesi bakterijam omogočajo sintezo A
+
+--- id=17205 vir=RIC/hormonski sistem.docx (brez preslikave)
+SLADKORNA BOLEZEN | x.1	Glukoza predstavlja hrano / vir energije za naše celice. | x.2	Glukoza pride v kri iz jeter. | x.3	Trebušna slinavka. | x.4	Izloča prebavne encime / sodeluje v procesu prebave / ima še prebavno vlogo. | x.5	Dvig krvnega sladkorja povzroči izločanje vode iz telesnih celic zato, ker je kri hipertonična v primerjavi s celicami / zaradi razlike v koncentraciji vode v celicah in
+
+--- id=17206 vir=RIC/hormonski sistem.docx (brez preslikave)
+FEROMONI | x.1	Kemoreceptorska celica mora imeti receptorske molekule/receptorje v membrani. | x.2	Odgovor kemoreceptorske celice je depolarizacija/nastanek akcijskega potenciala. | x.3	Samica je na sliki A, samec pa na sliki B. Samec ima močno razvejene tipalnice, kjer so kemoreceptorji, torej je kemoreceptorskih celic več in je večja verjetnost, da se bombikol veže nanje./Samica ima majhne in ne
+
+--- id=17365 vir=RIC/izločalni sistem.docx (brez preslikave)
+IZLOČALA | x.1	vzdrževanje homeostaze vode / mineralnih snovi / pH … | x.2	A: metanefridij | [SLIKA:izločalni sistem_image91.png] | x.3	varčevanje z vodo | x.4	v jetrih | x.5	B: dovodna arteriola | C: Bowmanova kapsula | x.6	precejanje (filtracija krvi) | x.7	Voda se povratno resorbira nazaj v kri / reabsorbira v kri. | x.8	glukoza / krvni sladkor
+
+--- id=17366 vir=RIC/izločalni sistem.docx (brez preslikave)
+ŽIVALI | x.1	Žival A, žival B in žival C. | x.2	Organizem E / trakulja. | x.3	Hranilne snovi iz gostiteljevega črevesa absorbirajo skozi telesno površino / ugreznjeno povrhnjico. | x.4	Organizmi A, B in C / žuželka, deževnik in rak. | x.5	Po vzdušnicah / trahejah / zračnicah. | x.6	Metanefridiji so lijakasta izločala, ki se odpirajo v celom, Malpighijeve cevke pa so slepo zaprte cevke / metanefrid
+
+--- id=17367 vir=RIC/izločalni sistem.docx (brez preslikave)
+ORGANSKI SISTEMI | x.1	Tkivo je skupek celic z enako zgradbo in nalogo. | x.2	Mišično tkivo, živčno tkivo, krovno tkivo, žlezno tkivo, vezivno tkivo (krvno tkivo, rahlo vezivno tkivo) – dve od imenovanih | x.3	Organski sistem C | x.4 | [SLIKA:izločalni sistem_image92.png] | x.5	Prebava / razgradnja hranilnih snovi in vsrkavanje hranilnih snovi v kri oz. limfo. | x.6	Škrge. | x.7 | [SLIKA:izločalni
+
+--- id=17368 vir=RIC/izločalni sistem.docx (brez preslikave)
+IZLOČALA | x.1	V celico vdira več vode (1 točka), ki jo krčljivi mehurček s povečano frekvenco utripanja iztiska iz celice (1 točka). | x.2	Uravnavanje stalne koncentracije vode v telesu./ Uravnavanje količine vode in ionov v telesnih tekočinah/notranjem okolju. / Ohranjanje stalne sestave telesnih tekočin. | x.3 | [SLIKA:izločalni sistem_image94.png] | x.4	V varčevanju z vodo. | x.5	Prenos sečnin
+
+--- id=17370 vir=RIC/izločalni sistem.docx (brez preslikave)
+IZLOČALA | x.1 | | [SLIKA:izločalni sistem_image96.png] | [SLIKA:izločalni sistem_image97.png] | | Dve pravilni oznaki 1 točka, vse pravilno označeno 2 točki. | x.2	Ledvice uravnavajo količino vode v telesu, količino ionov/mineralov/soli, izločajo sečnino. / Uravnavajo krvni tlak/količino vode v krvni plazmi/količino v vodi topnih vitaminov. (Tri od navedenih nalog za 1 točko) | x.3	S filtracijo k
+
+--- id=17371 vir=RIC/izločalni sistem.docx (brez preslikave)
+SRCE IN KRVNI TLAK | x.1 | [SLIKA:izločalni sistem_image98.png] | Puščica kaže steno levega prekata. | x.2	Levi prekat (ventrikel) ima debelejšo steno od desnega, ker mora ustvariti večjo silo (tlak), da kri doseže vse dele telesa. Desni pa kri potiska samo do pljuč. | x.3	A: arterija, B: kapilara. | x.4 | [SLIKA:izločalni sistem_image99.png] | x.5	Višji kot je krvni tlak, več filtrata nastaja, ni
+
+--- id=17372 vir=RIC/izločalni sistem.docx (brez preslikave)
+LEDVICE | x.1	Odstranjevanje sečnine/uree/dušikovih razkrojkov (1 točka) in uravnavanje količine vode/soli v krvi/osmoregulacija (1 točka). | x.2	U – sečevod, V – sečnica. | x.3	Stene žil so iz ene plasti celic. | x.4	Voda, glukoza, Na+, Cl–, sečnina/manjše beljakovine/aminokisline/vitamini topni v vodi. Dve snovi za 1 točko, štiri snovi za 2 točki. | x.5	Ta značilnost omogoča povečan pritisk krvi
+
+--- id=17373 vir=RIC/izločalni sistem.docx (brez preslikave)
+JETRA | x.1	Vloga arterije je oskrbeti jetrne celice s kisikom. | x.2	Dojetrna (dverna, portalna) vena prinaša kri iz prebavil/črevesja. | x.3	Kri v dojetrni veni vsebuje vsrkane proizvode prebave/maščobe, sladkorje, strupene snovi …, kri, ki pa izstopa, vsebuje manjšo količino hranilnih snovi in več presnovnih proizvodov jeter (smiselna primerjava ene od snovi, ki je povezana z delovanjem jeter).
+
+--- id=17849 vir=RIC/načini dedovanja.docx (brez preslikave)
+ALBINIZEM | x.1	Obkrožena stara starša osebe A | [SLIKA:načini dedovanja_image110.png] | x.2	Ker so v tej družini albini mati in otroka obeh spolov, oče pa ne / za boleznijo obolevajo otroci obeh spolov, tudi ko je mati albin, oče pa ne. | x.3	aa | x.4	Oče: Aa | Mati: Aa | x.5	Ker je alel za albinizem recesiven / ker imajo razen alela za albinizem še alel za normalno pigmentacijo, ki je prevladujo
+
+--- id=17852 vir=RIC/načini dedovanja.docx (brez preslikave)
+GENETIKA LABRADORCEV | x.1	Kromosomi so take oblike v metafazi mitoze/mejoze/v času delitve jedra. | x.2	Podvojevanje DNA. | x.3	V profazi mejoze nastane 39 bivalentov/kromatidnih tetrad. | x.4	Genotip osebka je EeBb. | x.5 | [SLIKA:načini dedovanja_image122.png] | x.6 | [SLIKA:načini dedovanja_image123.png] | x.7	Različni aleli nastanejo z mutacijo obstoječega gena. | x.8 | [SLIKA:načini dedovanj
+
+--- id=18537 vir=RIC/presnovne povezave.docx -> resitev naloge 18375
+PROCESI V RASTLINAH | x.1 | [SLIKA:presnovne povezave_image247.png] | kriterij ocenjevanja: | izbira in oznaka osi | izbira in oznaka enot ( graf znotraj mm papirja) | oblika krivulj | oznaka krivulj | x.2	Ker so kaleča semena potrebovala O2   za celično dihanje / za spreminjanje E v hrani v ATP /… | x.3	V vodo | x.4	Četrti in peti dan | x.5	Ko so se razvili zeleni listi so rastline začele opravlj
+
+--- id=18559 vir=RIC/presnovne povezave.docx (brez preslikave)
+PRESNOVA OGLJIKOVIH HIDRATOV | x.1	Črka B in glukoza. | x.2	Krompir vsebuje več škroba, zelena solata pa več celuloze / iz krompirja lahko dobi človek več energije kakor iz zelene solate (1 točka). | Ker krompir vsebuje škrob, ki ga naši encimi lahko razgradijo do glukoze, zelena solata pa vsebuje pretežno celulozo, ki je naši encimi ne morejo razgraditi do osnovne enote. / Ker je škrob prebavljiv
+
+--- id=18566 vir=RIC/presnovne povezave.docx (brez preslikave)
+GLOBALNO SEGREVANJE | x.1	Metan/dušikovi oksidi/žveplovi oksidi. | x.2	Sproščanje CO2 povzroča celično dihanje in alkoholno vrenje. | x.3	Bili so v ogljikovih hidratih, beljakovinah, maščobah/škrobu/glukozi/aminokislinah … | x.4	To omogoča fotosinteza. | x.5	Manjša biomasa primarnih proizvajalcev/rastlin med fotosintezo veže manj CO2, zato ga več ostane v atmosferi. | x.6	V prehranjevalnih verigah
+
+--- id=18578 vir=RIC/presnovne povezave.docx (brez preslikave)
+FOTOSINTEZA IN KISIK | x.1	Sproščal se je: v epruveti 2.in 4Porabljal se je: v epruveti 8. in 6 | x.2	Kisik sodeluje kot reaktant v celičnem dihanju, produkt pa je pri fotosintezi. | x.3	V epruveti številka 8 je potekalo celično dihanje. | x.4	Kisik je končni prejemnik elektronov v dihalni verigi/v celičnem dihanju. | x.5	Kisik se sprosti iz vode. | x.6	Rastline porabijo sproščeni kisik pri celičn
+
+--- id=18579 vir=RIC/presnovne povezave.docx (brez preslikave)
+ENCIMI V VSAKDANJEM ŽIVLJENJU | x.1	B. Pri reakciji z encimi je aktivacijska energija nižja. | x.2	V pralnih praških encimi razgradijo organske snovi in jih tako naredijo topne v vodi. | x.3	Vzrok za neizdelovanje lastnih encimov so mutacije na genih za izdelavo teh encimov/so okvare njihove DNA. | x.4	Encim potrebuje nekaj časa, da razgradi glukozo v glukonsko kislino, ki jo zazna senzor. | x.5	I
+
+--- id=18580 vir=RIC/presnovne povezave.docx (brez preslikave)
+FOTOSINTEZA | x.1 | [SLIKA:presnovne povezave_image273.png] | x.2	Absorbira svetlobno energijo/pod vplivom svetlobe odda elektron/pretvarja energijo svetlobe v kemijsko energijo/omogoča pretvorbo energije svetlobe v kemijsko energijo. | x.3	Težki izotop kisika se pojavi v glukozi. | x.4	Iz ogljikovih hidratov je zgrajena celična stena/škrobno zrno. | x.5	Celice izgradijo same aminokisline/beljakov
+
+--- id=18581 vir=RIC/presnovne povezave.docx (brez preslikave)
+RAZSOLJEVANJE MORSKE VODE | x.1	Voda pride v ozračje z izhlapevanjem. | x.2 | [SLIKA:presnovne povezave_image274.png] | x.3	Voda prehaja iz prostora B v prostor A zato, ker je njena koncentracija v prostoru B večja kakor v prostoru A/ker je koncentracija raztopljenih snovi v prostoru A večja kakor v prostoru B/ker ima raztopina v prostoru A višji osmotski tlak. | x.4	Polprepustna membrana ni prepu
+
+--- id=18582 vir=RIC/presnovne povezave.docx (brez preslikave)
+BAKTERIJE | x.1	Bakterije se od enoceličarjev drugih kraljestev razlikujejo po tem, da so prokarionti/da imajo DNA prosto v citoplazmi/da se delijo s cepitvijo. | x.2	Bakterije v omenjenem biotehnološkem postopku opravljajo mlečnokislinsko vrenje. | x.3 | [SLIKA:presnovne povezave_image275.png] | x.4 | [SLIKA:presnovne povezave_image276.png] | x.5	Presnovni procesi bakterijam omogočajo sintezo ATP
+
+--- id=18583 vir=RIC/presnovne povezave.docx (brez preslikave)
+BOLNI ALIGATORJI | x.1	Organske snovi so hrana za bakterije, ki jih razgrajujejo. Za razkroj organskih snovi bakterije porabljajo kisik. Več ko je organskih snovi, več kisika porabijo za njihov razkroj. | x.2	Zarodki rib potrebujejo kisik za pridobivanje energije/ATP/za opravljanje celičnega dihanja. (1 točka) Zaradi pomanjkanja kisika zarodki niso mogli dobro opravljati celičnega dihanja in dobit
+
+--- id=18627 vir=RIC/rast in razvoj rastlin.docx (brez preslikave)
+SNOVI V CELICI | x.1	Narisana in izpolnjena shema | [SLIKA:rast in razvoj rastlin_image98.png] | x.2	V obliki nitratnega, amonijevega, fosfatnega iona / v obliki ionov | x.3	Ksilem | x.4	V stebričastem / asimilatnem tkivu | x.5	Škrob | x.6	Gomolji / korenine / semena / | x.7	Zaradi razlik v ozmotskih tlakih / zaradi hipertoničnosti okolja | x.8	Da je voda v poskusnem gomolju izhajala iz krompirja 
+
+--- id=18628 vir=RIC/rast in razvoj rastlin.docx (brez preslikave)
+KROVNA TKIVA | x.1	Zaščita rastline pred izsušitvijo. | x.2	V sušnih predelih / visokogorje. | x.3	Kutikulo / sluz. | x.4	Daje oporo telesu / mehanska zaščita / pritrdišče mišic / zaščita pred izsušitvijo / shranjevanje in izločanje nerabnih snovi. ( 1 točka za dve od navedenih nalog hitinjače) | x.5	Levitev omogoča rast organizma. | x.6	Dlaka zadržuje telesno toploto / dlaka preprečuje ohlajanje 
+
+--- id=18629 vir=RIC/rast in razvoj rastlin.docx (brez preslikave)
+PRESNOVA | x.1 | [SLIKA:rast in razvoj rastlin_image99.png] | x.2	Iz vode. | x.3	S puščico označena in poimenovana celica palisadnega tkiva in gobastega tkiva (lahko označena celica zapiralka). | [SLIKA:rast in razvoj rastlin_image100.png] | x.4	V kloroplastih. | x.5	Da odstranimo barvila./ Da lahko dokazujemo škrob, je treba iz listov odstraniti fotosintetske pigmente. / Liste v alkoholu razbarva
+
+--- id=18630 vir=RIC/rast in razvoj rastlin.docx (brez preslikave)
+RASTLINE | x.1	A-praprotnice, B-semenke, C-mahovi. | x.2	Sporofitsko/nespolno generacijo/diploidno generacijo. | x.3	Za oploditev ni potrebna voda, razvijejo seme, dobro zaščiten gametofit v cvetu (dve od naštetih). | x.4	Asimilacijsko tkivo/stebričasto tkivo/gobasto tkivo, prevajalno tkivo/ksilem/floem, krovno tkivo. | x.5	Embrio/zarodek/kalček. | x.6	Iz diploidne zigote/iz oplojene jajčne celice
+
+--- id=18631 vir=RIC/rast in razvoj rastlin.docx (brez preslikave)
+SISTEMATIKA RASTLIN | x.1	Število rodov: 5 | Število vrst: 6 | x.2 | | Kraljestvo | Deblo | Poddeblo | Razred | | |---|---|---|---| | | rastline | semenke | kritosemenke | enokaličnice | | x.3	Semena je moral navlažiti. | x.4	V posodi so bila pražena bučna semena. Pri praženju se uničijo kalčki. | x.5	Koreninica. | x.6	Ker je proso enokaličnica, ga je prepoznal po vzporedno žilnatih listih/po šopa
+
+--- id=18632 vir=RIC/rast in razvoj rastlin.docx (brez preslikave)
+EKOLOGIJA RASTLIN | x.1 | | Rastline | Voda v kozarcu | Povečanje mase vodne mete v % | Masa rastlin po poskusu v g | | |---|---|---|---| | | A | Deževnica | 60 | 16 | | | B | Voda iz Temze | 90 | 19 | | | C | Voda iz parka | 125 | 22,5 | | | D | Voda iz parka in vrtni gnoj | 310 | 41 | | x.2	Na različno povečanje mase rastlin je vplivala različna količina fosfatov, nitratov, amonijevih ionov, Mg 
+
+--- id=18633 vir=RIC/rast in razvoj rastlin.docx (brez preslikave)
+LIST IN FOTOSINTEZA | x.1	Ščiti pred vdorom mikroorganizmov, ščiti pred mehanskimi poškodbami, izloča kutikulo, preprečuje prehajanje snovi/vode/plinov. (2 navedbi za točko.) | x.2	To je prevajalno tkivo/ksilem/floem. | x.3	Ti prostori so napolnjeni z zrakom/plinom/CO2, O2 in vodnimi hlapi. | x.4	Fotosinteza ne poteka, ker v list ne vstopa CO2. | x.5	Kisik izhaja iz listov zaradi razlike v koncent
+
+--- id=18970 vir=RIC/raziskovanje in poskusi.docx -> resitev naloge 18711
+SEMENA | x.1 | | Čas v urah | Volumen vode v merilnem valju brez semen (ml) | Volumen vode v merilnem valju s semeni (ml) | Volumen 20 semen fižola (ml) | Povprečni volumen enega semena fižola (ml) | | |---|---|---|---|---| | | 0,0 | 50 | 59 | 9 | 0,45 | | | 1,0 | 50 | 60 | 10 | 0,5 | | | 2,0 | 50 | 61 | 11 | 0,55 | | | 3,0 | 50 | 63 | 13 | 0,65 | | | 4,0 | 50 | 64,5 | 14,l | 0,71 | | | 5,0 | 50 |
+
+--- id=18971 vir=RIC/raziskovanje in poskusi.docx -> resitev naloge 18726
+PRESNOVA BAKTERIJ | x.1	Naraščanje temperature od 0 oC do 40 oC  pospeši presnovne procese (prepis zapisa iz slike ni pravilni odgovor). | x.2	Vzrok uničenja bakterij je koagulacija/skrknjenje beljakovin/denaturacija encimov. | x.3 | [SLIKA:raziskovanje in poskusi_image410.png] | Kriterij: Izbira osi in oznaka osi (lahko samo hitrost reakcije) 1 točka;oblika krivulje (začetek ni na 0, vrh krivulje
+
+--- id=18972 vir=RIC/raziskovanje in poskusi.docx -> resitev naloge 18728
+SRCE IN KRVNI TLAK | x.1 | [SLIKA:raziskovanje in poskusi_image411.png] | Puščica kaže steno levega prekata. | x.2	Levi prekat (ventrikel) ima debelejšo steno od desnega, ker mora ustvariti večjo silo (tlak), da kri doseže vse dele telesa. Desni pa kri potiska samo do pljuč. | x.3	A: arterija, B: kapilara. | x.4 | [SLIKA:raziskovanje in poskusi_image412.png] | x.5	Višji kot je krvni tlak, več filt
+
+--- id=18973 vir=RIC/raziskovanje in poskusi.docx -> resitev naloge 18729
+ASPARTAM | x.1	Beljakovine/proteini. | x.2	Aspartam uvrščamo med peptide/dipeptide.Vez med asparaginsko kislino in fenilalaninom je peptidna vez. | x.3	Ker dipeptidi/beljakovine ne vplivajo na vsebnost krvnega sladkorja. / Ker je aspartam sestavljen iz aminokislin, te pa ne vplivajo na vsebnost krvnega sladkorja / ne prispevajo k njegovemu povišanju. / Aspartam ni ogljikov hidrat in zato ne vpliva
+
+--- id=18974 vir=RIC/raziskovanje in poskusi.docx -> resitev naloge 18730
+SISTEMATIKA RASTLIN | x.1	Število rodov: 5 | Število vrst: 6 | x.2 | | Kraljestvo | Deblo | Poddeblo | Razred | | |---|---|---|---| | | rastline | semenke | kritosemenke | enokaličnice | | x.3	Semena je moral navlažiti. | x.4	V posodi so bila pražena bučna semena. Pri praženju se uničijo kalčki. | x.5	Koreninica. | x.6	Ker je proso enokaličnica, ga je prepoznal po vzporedno žilnatih listih/po šopa
+
+--- id=18975 vir=RIC/raziskovanje in poskusi.docx -> resitev naloge 18732
+ŽIVO SREBRO | x.1	Največ Hg (metiliranega živega srebra) bodo vsebovali tuni, ker so na vrhu prehranjevalne verige in se zato v njihovih tkivih nakopiči največ metilnega živega srebra./Tuni, ker so na koncu prehranjevalne verige, vzdolž prehranjevalne verige se v tkivih živali živo srebro koncentrira/kopiči/bioakumulira. | x.2	Več kakor 3,14 kg. | x.3	Ne, ker bi pri takem načinu prehranjevanja kot
+
+--- id=18976 vir=RIC/raziskovanje in poskusi.docx -> resitev naloge 18733
+GENETIKA LABRADORCEV | x.1	Kromosomi so take oblike v metafazi mitoze/mejoze/v času delitve jedra. | x.2	Podvojevanje DNA. | x.3	V profazi mejoze nastane 39 bivalentov/kromatidnih tetrad. | x.4	Genotip osebka je EeBb. | x.5 | [SLIKA:raziskovanje in poskusi_image414.png] | x.6 | [SLIKA:raziskovanje in poskusi_image415.png] | x.7	Različni aleli nastanejo z mutacijo obstoječega gena. | x.8 | [SLIKA:r
+
+--- id=18977 vir=RIC/raziskovanje in poskusi.docx -> resitev naloge 18734
+PRESNOVA V CELICAH | x.1	Iz okolja morajo dobiti kisik in hrano/ogljikove hidrate/glukozo/… (oboje za točko) | x.2	Prevladujoča skupina organskih snovi v živilih:1. skupine: ogljikovi hidrati,3. skupine: beljakovine,4. skupine: maščobe/lipidi. | x.3	Dijak bi moral zaužiti 1570g kruha/1,57 kg kruha (Priznano od 1500 do 1600 g/1,5 do 1,6 kg kruha). | x.4	Molekule iz organskih snovi 1. skupine se lah
+
+--- id=18978 vir=RIC/raziskovanje in poskusi.docx -> resitev naloge 18735
+RASTNI HORMON | x.1 | [SLIKA:raziskovanje in poskusi_image417.png] | x.2 | [SLIKA:raziskovanje in poskusi_image418.png] | x.3	Na promotor se veže polimeraza RNK, ki omogoča prepisovanje DNK/gena za rastni hormon v mRNK. | x.4	Dodati je treba antibiotik, proti kateremu je bakterija z vnesenim genom odporna/za katerega je bakterija neobčutljiva. | x.5	Zlepi gen za rastni hormon s plazmidom / zlepi k
+
+--- id=18979 vir=RIC/raziskovanje in poskusi.docx -> resitev naloge 18736
+GLOBALNO SEGREVANJE | x.1	Koralnjaki dobijo od alg sladkorje in kisik/produkte fotosinteze. | x.2	Korale postanejo bele, ker pri povišani temperaturi simbiontske alge propadejo. | x.3	Primarna produkcija alg se do koncentracije 0.04 povečuje, potem ostaja enaka. | x.4	Večja ko je primarna produkcija, več hrane imajo korale in hitreje rastejo. | x.5	CO2/ogljikov dioksid se raztaplja v morski vodi i
+
+--- id=18980 vir=RIC/raziskovanje in poskusi.docx -> resitev naloge 18737
+DELOVANJE NEKEGA ENCIMA | x.1	Preglednica: | | pH | Razgradnja substrata v ml/min | | |---|---| | | 2 | 1 | | | 3 | 3 | | | 4 | 4 | | | 5 | 5 | | | 6 | 6 | | | 7 | 7 | | | 8 | 7 | | | 9 | 5 | | | 10 | 3 | | | 11 | 1 | | | 12 | 0,5 | | x.2	Enaka / 37 oC. | x.3	Aktivnost encima je največja pri pH 7 in 8. | x.4	Omogočajo potek kemijskih reakcij / pospešujejo reakcije. | x.5	Lizosomi / prebavne vakuol
+
+--- id=18981 vir=RIC/raziskovanje in poskusi.docx -> resitev naloge 18738
+SLADKORNA BOLEZEN | x.1	Glukoza predstavlja hrano / vir energije za naše celice. | x.2	Glukoza pride v kri iz jeter. | x.3	Trebušna slinavka. | x.4	Izloča prebavne encime / sodeluje v procesu prebave / ima še prebavno vlogo. | x.5	Dvig krvnega sladkorja povzroči izločanje vode iz telesnih celic zato, ker je kri hipertonična v primerjavi s celicami / zaradi razlike v koncentraciji vode v celicah in
+
+--- id=18982 vir=RIC/raziskovanje in poskusi.docx (brez preslikave)
+CELICA | x.1	Jedro, endoplazmatski retikulum, mitohondriji, celična membrana. | x.2	Jedro / plazmalema. | x.3	V rdečem kostnem mozgu / v bezgavkah / v limfatičnem tkivu. | x.4	Endoplazemski retikulum. | x.5	Med beljakovine. | x.6	Vežejo se na antigene / viruse / bakterije / toksine in jih s tem onesposobijo/ uničujejo antigene. | x.7	Premer vidnega polja je 180–190 μm. | Rešitev: A
+
+--- id=18983 vir=RIC/raziskovanje in poskusi.docx -> resitev naloge 18745
+KLOP | x.1	Klopa uvrščamo med pajkovce. | x.2	Okužba se z miši prenese na jelena tako, da se klop okuži s pitjem krvi miši, ko pa naslednjič zajeda jelena, prenese virus nanj. | x.3	Verjetnost prenosa virusa z miši na kravo je manjša zato, ker krave redkeje prebivajo skupaj z mišmi in klopi./Verjetnost prenosa virusa z miši na jelena je večja zato, ker jeleni živijo skupaj z mišmi in klopi v gozdu
+
+--- id=18984 vir=RIC/raziskovanje in poskusi.docx -> resitev naloge 18746
+EKOLOGIJA RASTLIN | x.1 | | Rastline | Voda v kozarcu | Povečanje mase vodne mete v % | Masa rastlin po poskusu v g | | |---|---|---|---| | | A | Deževnica | 60 | 16 | | | B | Voda iz Temze | 90 | 19 | | | C | Voda iz parka | 125 | 22,5 | | | D | Voda iz parka in vrtni gnoj | 310 | 41 | | x.2	Na različno povečanje mase rastlin je vplivala različna količina fosfatov, nitratov, amonijevih ionov, Mg 
+
+--- id=18985 vir=RIC/raziskovanje in poskusi.docx -> resitev naloge 18747
+PRIRASTEK LESA | x.1	Prirastek lesa se je med letoma 1990 in 2005 povečal za 2.200.000 do 2.400.000 m3. | x.2	Na povečanje prirastka lesa med letoma 1990 in 2005 je vplivalo povečanje površine gozdov v Sloveniji. | x.3	CO2 se je vezal med fotosintezo. | x.4	Drevesa porabijo organske snovi kot vir energije/vir snovi za rast in razmnoževanje/ ustvarjanje zalog snovi in energije (2 navedbi za 1 točko
+
+--- id=18986 vir=RIC/raziskovanje in poskusi.docx -> resitev naloge 18750
+IZLOČALA | x.1 | | Koncentracija raztopine NaCl (%) | Povprečen čas med dvema skrčitvama (v sekundah) | Pogostost krčenja vakuole (število skrčitev na minuto) | | |---|---|---| | | 0,00 | 6,6 | 9,1 | | | 0,25 | 10 | 6 | | | 0,50 | 20 | 3 | | | 0,75 | 30 | 2 | | | 1,00 | 60 | 1 | | | 1,25 | 120 | 0,5 | | x.2 | [SLIKA:raziskovanje in poskusi_image421.png] | x.3	Z naraščanjem koncentracije natrijeveg
+
+--- id=19214 vir=RIC/razmnoževanje, rast in razvoj.docx (brez preslikave)
+MNOGOČLENARJI | x.1	Skupna značilnost vseh mnogočlenarjev je trebušnjača. | x.2	Parni gangliji/bočne žile/(parne) celomske vrečke/metanefridiji. En odgovor za 1 točko. | x.3	Kri s transportnim barvilom prenese več kisika zato, ker se na transportno barvilo lahko veže več kisika kakor v samo transportno tekočino. | x.4	Dihalni plini se pri deževniku izmenjujejo na površini telesa/med celicami in tr
+
+--- id=19215 vir=RIC/razmnoževanje, rast in razvoj.docx (brez preslikave)
+DEDOVANJE | x.1	Dvojajčni dvojčki se razvijejo iz dveh jajčec, oplojenih z različnima semenčicama. | x.2	AaBbCc | x.3	ABC, ABc, AbC, Abc, aBc, aBC, abC, abc | x.4	aabbcc | x.5	AABbcc, AaBbCc, AA,bBcc, AAbbCc/aaBBCc, aaBbCC | x.6	25 % | x.7	Zato, ker sta se obe razvili iz jajčec iste osebe, njune mame/mitohondrijska DNK se deduje po materini strani (1 točka). Mitohondriji so v citoplazmi celic, mit
+
+--- id=19392 vir=RIC/razvrščanje organizmov v sisteme.docx (brez preslikave)
+ŽIVALI | x.1	Členonožci | x.2 | |  | organizem B | organizem D | | |---|---|---| | | telesne regije | glavoprsje in zadek | glava, oprsje in zadek | | | število hodilnih okončin | 8 / 4 pari | 6 / 3 pari | | | način premikanja | hoja | hoja in letenje | | x.3	Dihala organizma A: škrge | Dihala organizma D: traheje/vzdušnice/zračnice | x.4	E – Malpighijeve cevke, F – trebušnjača | x.5	Izločanje duš
+
+--- id=19393 vir=RIC/razvrščanje organizmov v sisteme.docx (brez preslikave)
+ŽIVALI | x.1	Pravilni odgovori prvih dveh vrstic se točkujejo s točko. | | črka organizma | taksonomske kategorije | | |---|---| | | D | mnogočlenarji | členonožci | žuželka | | | B | strunarji | vretenčarji | sesalci | | | A |  | iglokožci | morski ježek | | x.2 | | življenjski proces | struktura živali A | struktura živali B | | |---|---|---| | | izmenjava plinov z okoljem | cevaste vzdušnice | 
+
+--- id=19394 vir=RIC/razvrščanje organizmov v sisteme.docx -> resitev naloge 19231
+KOŽA IN ČUTILA V NJEJ | x.1	A: žlezo lojnico | B: žlezo znojnico | x.2	Masti povrhnjico in lase / povečana prožnost povrhnjice. / zaščita pred izsušitvijo. / Uravnavanje pH kože. | x.3	Hladi telo. / izločanje odpadnih produktov / izločanje strupenih snovi / termoregulacija | x.4	Mlečne žleze | x.5	a) Da je voda hladna. | b) Da je voda topla. | x.6	Čutnice za toploto zaznavajo razliko med temperatu
+
+--- id=19396 vir=RIC/razvrščanje organizmov v sisteme.docx -> resitev naloge 19234
+KROMPIR | x.1	Listi so mrežnato žilnati / listi so pecljati / pet števni cvet. 1 točka- ena navedena značilnost | x.2	Omogočajo nespolno razmnoževanje / vegetativno razmnoževanje. | x.3	Surovina za nastanek škroba: glukoza. | Organ, v katerem ta surovina nastaja: list. | x.4	Po floemu / po sitastih ceveh. | x.5	Venčni listi so razviti / dobro razvito cvetno odevalo / dvospolni cvet. | x.6	(Žuželka
+
+--- id=19397 vir=RIC/razvrščanje organizmov v sisteme.docx -> resitev naloge 19236
+AJDA | x.1	Dve. | x.2	Ajda vsebuje antioksidant rutin. | x.3	UV-žarki povzročajo poškodbe DNA / na vsebnost rutina v ajdi/mutacije / poškodbe encimov / poškodbe beljakovin / vplivajo na hitrost fotosinteze. | x.4	Vzamemo dve skupini gensko enakih rastlin, ki jih posadimo na različni nadmorski višini (1 točka). Po nekem času v rastlinah izmerimo količino rutina (1 točka). | x.5	Vsebnost rutina bo v
+
+--- id=19398 vir=RIC/razvrščanje organizmov v sisteme.docx -> resitev naloge 19237
+KORALNJAKI | x.1	Pritrjen na podlago / sesilni način življenja. | x.2	Zvezdasti / radialen. | x.3	Ožigalna celica / ožigalnica z ožigalko /ožigalka. | x.4	Lov / obramba. | x.5	Ker imajo kamene korale apnenčasto ogrodje. | x.6	Alge jim dajejo hrano in kisik / alge jim dajejo produkte fotosinteze. | x.7	Ker zooksantele za uspevanje potrebujejo svetlobo. | x.8	Plavajoče ličinke prenašajo morski tokov
+
+--- id=19399 vir=RIC/razvrščanje organizmov v sisteme.docx -> resitev naloge 19238
+JEZERO | x.1	3 | x.2	Dupeljsko jezero in Zeleno jezero (1 točka). Ker imata isti vrsti makrofitov, ki sta enako      številčni. (1 točka) | x.3	Pomanjkanje svetlobe. | x.4	Ne. Najgloblje (Krnsko) jezero ima največ vrst, naslednji dve po globini (Jezero na Planini pri Jezeru in Spodnje Kriško jezero) pa najmanj. | x.5	Pretvarjajo svetlobno energijo v kemijsko/energijo organskih snovi. | x.6	Živali 
+
+--- id=19400 vir=RIC/razvrščanje organizmov v sisteme.docx (brez preslikave)
+ŽIVALI | x.1	Praživali. / Protozoji. | x.2	Vse so enocelične./Te živali so enocelične, živali drugih sistematskih skupin so mnogocelične. | x.3	Žival A se premika s psevdopodiji ali panožicami, žival C se premika z bički/ z gibanjem bičkov. | x.4	Sprejemanje hrane/objemanje delcev hrane. / Živalim omogočajo pehranjevanje./Živalim omogočajo fagocitozo. | x.5	Skrčila bi se, ker bi voda zaradi hipert
+
+--- id=19401 vir=RIC/razvrščanje organizmov v sisteme.docx -> resitev naloge 19240
+DROSOPHILA | x.1	Poskusili bi ju križati. (1 točka) Če bi bil poskus križanja neuspešen, bi dokazali, da sta različni vrsti. Če bi dobili potomce, a bi bili ti neplodni, bi prav tako dokazali, da sta različni vrsti. (1 točka) Potrebna je utemeljitev različnosti vrst. | Sklicevanje na vrstno ime ali skupen izvor ne prinaša točk. | x.2	Drosophila yakuba. | x.3	Pred 40 milijoni let. | x.4	Takšne stru
+
+--- id=19402 vir=RIC/razvrščanje organizmov v sisteme.docx (brez preslikave)
+RASTLINE | x.1	A-praprotnice, B-semenke, C-mahovi. | x.2	Sporofitsko/nespolno generacijo/diploidno generacijo. | x.3	Za oploditev ni potrebna voda, razvijejo seme, dobro zaščiten gametofit v cvetu (dve od naštetih). | x.4	Asimilacijsko tkivo/stebričasto tkivo/gobasto tkivo, prevajalno tkivo/ksilem/floem, krovno tkivo. | x.5	Embrio/zarodek/kalček. | x.6	Iz diploidne zigote/iz oplojene jajčne celice
+
+--- id=19403 vir=RIC/razvrščanje organizmov v sisteme.docx (brez preslikave)
+BRSTNICE | x.1	Razvita imajo prava tkiva/vegetativne organe / v metagenezi prevladuje nespolna generacija – sporofit. / Imajo razvito steblo, liste in korenine. | x.2	Vsi odgovori pravilni za eno točko. | |  | Praprotnice | Golosemenke | Kritosemenke | Dvokaličnice | Enokaličnice | | |---|---|---|---|---|---| | | Sladka koreninica | + |  |  |  |  | | | Jelka |  | + |  |  |  | | | Mali zvonček |  |
+
+--- id=19404 vir=RIC/razvrščanje organizmov v sisteme.docx -> resitev naloge 19244
+PRAŽIVALI | x.1	Enocelične praživali so heterotrofne, enocelične alge fotoavtotrofne / praživali nimajo plastidov, klorofila, celične stene / velike vakuole, enocelične alge pa jih imajo / praživali imajo centriole, enocelične alge jih nimajo / praživali lahko kopičijo glikogen, enocelične alge pa škrob. | x.2	Evglena spada med alge, ker lahko preživi na osvetljenem gojišču brez organskih snovi / 
+
+--- id=19405 vir=RIC/razvrščanje organizmov v sisteme.docx (brez preslikave)
+SISTEMATIKA | x.1 | [SLIKA:razvrščanje organizmov v sisteme_image251.png] | Celična stana mora biti narisana na zunanji strani. | x.2	Celice s celičnimi stenami so značilne za rastline in glive. | x.3	Celična stena obdaja celico / protoplast z vseh strani, hitinjača pa pokriva celice povrhnjice samo z ene strani / celična stena pripada posamezni celici, hitinjača pa mnogoceličnemu organizmu. | x.4
+
+--- id=19406 vir=RIC/razvrščanje organizmov v sisteme.docx (brez preslikave)
+SISTEMATIKA ŽUŽELK | x.1	Členjene noge/hitinjača/neenakomerna členjenost. | x.2 | |  | Stonoge | Pajki | Žuželke | | |---|---|---|---| | | Število nog | veliko | 8 (štiri pare) | 6 (tri pare) | | x.3	Rake. | x.4	Jajčece, ličinka in odrasla žival. | x.5	Razmnoževanje/reprodukcija. | x.6	Delitev celic in specializacija/diferenciacija celic. | x.7	Omogočajo predrtje kože gostitelja in sesanje krvi. |
+
+--- id=19407 vir=RIC/razvrščanje organizmov v sisteme.docx (brez preslikave)
+MNOGOČLENARJI | x.1	Skupna značilnost vseh mnogočlenarjev je trebušnjača. | x.2	Parni gangliji/bočne žile/(parne) celomske vrečke/metanefridiji. En odgovor za 1 točko. | x.3	Kri s transportnim barvilom prenese več kisika zato, ker se na transportno barvilo lahko veže več kisika kakor v samo transportno tekočino. | x.4	Dihalni plini se pri deževniku izmenjujejo na površini telesa/med celicami in tr
+
+--- id=19408 vir=RIC/razvrščanje organizmov v sisteme.docx (brez preslikave)
+PRIMERJAVA STRUKTUR | x.1 | |  | Kraljestvo | Deblo | Poddeblo | Razred | | |---|---|---|---|---| | | Krt | živali | strunarji | vretenčarji | sesalci | | | Bramor | živali | mnogočlenarji | členonožci | žuželke | | Ena vrstica za 1 točko. | x.2	Morfološka značilnost krta: dlaka.Morfološka značilnost bramorja: trije pari okončin. | x.3	Za kopanje podzemnih rovov. | x.4	Vzrok je podoben način življ
+
+--- id=19409 vir=RIC/razvrščanje organizmov v sisteme.docx (brez preslikave)
+TALNI EKOSISTEM | x.1 | |  | Lastnost organizma | Skupina | | |---|---|---| | | A | Je enoceličen, ima kloroplaste. | Rastline/enocelične alge/alge | | | B | Ima biček, je enoceličen, nima celične stene. | Živali/praživali/bičkarji | | | C | Ima celično steno iz hitina in hife. | Glive/plesni | | | D | Ima celično steno, nima mitohondrijev. | Bakterije/cepljivke | | Dva ali trije pravilni odgovori
+
+--- id=19410 vir=RIC/razvrščanje organizmov v sisteme.docx (brez preslikave)
+MORFOLOGIJA ORGANIZMOV | x.1	C in I. | x.2	Na skici I je živčna celica. | x.3	D (goba), F (bakterije), G (alga). | x.4	E (pršica) | x.5 | | Kraljestvo | Deblo | Poddeblo | Razred ali nižja sistematska enota | | |---|---|---|---| | | živali | mnogočlenarji | členonožci | pipalkarji/pajkovci/pršice | | x.6	Zvezdasto ali radialno simetrijo. | x.7	Pritrjene živali na kopnem ne morejo aktivno loviti hr
+
+--- id=19411 vir=RIC/razvrščanje organizmov v sisteme.docx (brez preslikave)
+TRI GRAHOVA SEMENA | x.1	Da, saj je bilo med njimi možno uspešno križanje / ne vemo, ker nimamo podatkov o plodnosti potomcev. | x.2	Enak fenotip imajo semena, iz katerih so zrasle rastline A, B in C. | x.3	GgRr | x.4	Dihibridno dominatno recesivno križanje. | x.5	Zelena barva in hrapavost semena se dedujeta recesivno. | x.6	GGRr | x.7	Ggrr | x.8	Genotipi gamet rastline C so bili: GR, gR, Gr, gr. 
+
+--- id=19473 vir=RIC/regulacijski sistem.docx (brez preslikave)
+MIŠICE | x.1	Miozinski filamenti ne smejo segati čez polovico aktinskih filamentov. | [SLIKA:regulacijski sistem_image98.jpeg] | x.2 | | Značilnost | Gladko mišično tkivo | Skeletno mišično tkivo | | |---|---|---| | | Gradbena | kratke vretenaste celice / ni prečne progavosti / celice so enojedrne | dolge nitaste celice / prečne progaste / celice so mnogojedrne | | | Funkcionalna | krčenje pod nad
+
+--- id=19474 vir=RIC/regulacijski sistem.docx (brez preslikave)
+JETRA | x.1	Vloga arterije je oskrbeti jetrne celice s kisikom. | x.2	Dojetrna (dverna, portalna) vena prinaša kri iz prebavil/črevesja. | x.3	Kri v dojetrni veni vsebuje vsrkane proizvode prebave/maščobe, sladkorje, strupene snovi …, kri, ki pa izstopa, vsebuje manjšo količino hranilnih snovi in več presnovnih proizvodov jeter (smiselna primerjava ene od snovi, ki je povezana z delovanjem jeter).
+
+--- id=19475 vir=RIC/regulacijski sistem.docx (brez preslikave)
+GIBANJE | x.1	H gibalom sodita skelet/ogrodje/okostje in mišičje. | x.2	Razvoj podobne oblike telesa je posledica prilagoditve enakemu/podobnemu načinu premikanja/okolju. | x.3 | [SLIKA:regulacijski sistem_image100.png] | x.4	Za gibanje v vodi potrebujejo manj energije, ker jim vzgon vode navidezno zmanjša težo. | x.5	Letalno površino prhuti tvori letalna mrena (koža), letalno površino krila pa pe
+
+--- id=19476 vir=RIC/regulacijski sistem.docx (brez preslikave)
+RASTNI HORMON | x.1 | [SLIKA:regulacijski sistem_image101.png] | x.2 | [SLIKA:regulacijski sistem_image102.png] | x.3	Na promotor se veže polimeraza RNK, ki omogoča prepisovanje DNK/gena za rastni hormon v mRNK. | x.4	Dodati je treba antibiotik, proti kateremu je bakterija z vnesenim genom odporna/za katerega je bakterija neobčutljiva. | x.5	Zlepi gen za rastni hormon s plazmidom / zlepi koščke DN
+
+--- id=19477 vir=RIC/regulacijski sistem.docx (brez preslikave)
+URAVNAVANJE TELESNE TEMPERATURE | x.1	Jetra imajo višjo presnovo / opravljajo več presnovnih procesov / pospešeno celično dihanje kakor drugi organi. | x.2	Toplota se prenaša s krvjo po krvnem obtoku in s prevajanem/sevanjem/skozi telesne organe. | x.3	Vzdrževanje stalne telesne temperature nam omogoča optimalno raven delovanja encimov/ optimalno raven presnovnih procesov. | x.4 | [SLIKA:regulacij
+
+--- id=19555 vir=RIC/sprejemanje signalov - čutila.docx (brez preslikave)
+KOŽA IN ČUTILA V NJEJ | x.1	A: žlezo lojnico | B: žlezo znojnico | x.2	Masti povrhnjico in lase / povečana prožnost povrhnjice. / zaščita pred izsušitvijo. / Uravnavanje pH kože. | x.3	Hladi telo. / izločanje odpadnih produktov / izločanje strupenih snovi / termoregulacija | x.4	Mlečne žleze | x.5	a) Da je voda hladna. | b) Da je voda topla. | x.6	Čutnice za toploto zaznavajo razliko med temperatu
+
+--- id=19556 vir=RIC/sprejemanje signalov - čutila.docx (brez preslikave)
+SLUH IN RAVNOTEŽJE | x.1	Prenos tresljajev od bobniča do ovalnega okenca / prenos tresljajev preko votline srednjega ušesa / prenos dražljajev do notranjega ušesa. | x.2	polž označen s črko A | [SLIKA:sprejemanje signalov - čutila_image86.png] | x.3	Deformacija dlačic čutne celice / Nihanje osnovne (bazilarne) membrane / Nihanje krovne membrane. | x.4	Toni različnih višin zanihajo osnovno membrano
+
+--- id=19557 vir=RIC/sprejemanje signalov - čutila.docx (brez preslikave)
+ONESNAŽEVANJE | x.1	Ker imajo največjo površino, skozi katero vstopajo onesnažila / polutanti. | x.2	CO se laže veže na hemoglobin kakor kisik, zato hemoglobin ne more oskrbovati celic s kisikom. | x.3	SO2, CO2, NOX, CXHY … | x.4	Ker povzroča poškodbe slušnih čutnic v notranjem ušesu, kar povzroča naglušnost ali gluhost. / Ker deluje škodljivo na živčevje in hormonalni sistem/stres. | x.5	Ozon. | 
+
+--- id=19558 vir=RIC/sprejemanje signalov - čutila.docx (brez preslikave)
+ŽIVČEVJE | x.1 | [SLIKA:sprejemanje signalov - čutila_image13.png] | | naloga živčne celice | ustrezna črka (A, B, N) | | |---|---| | | prevaja informacijo med živčevjem in mišico | A | | | sprejema informacije iz okolja in jih prevaja v centralno živčevje | N | | | prevaja informacije od čutilne do gibalne živčne celice | B | | 2 pravilna 1 točka, 2 točki vse pravilno | x.2	Na membrani se odprejo
+
+--- id=19559 vir=RIC/sprejemanje signalov - čutila.docx -> resitev naloge 19499
+PREBAVA OGLJIKOVIH HIDRATOV | x.1	Enostavni ogljikovi hidrati: med. | Sestavljeni ogljikovi hidrati: kruh, solata, paprika. | x.2	Glukoza / fruktoza / saharoza / laktoza / maltoza / škrob / glikogen. | x.3	Prebavni encimi v ustih / amilaza začenjajo razgrajevati škrob do takih sladkorjev, ki so sladkega okusa. | x.4	Vzdražni prag / dražljajski prag. | x.5	Pomen je v nastanku majhnih molekul (enost
+
+--- id=19560 vir=RIC/sprejemanje signalov - čutila.docx (brez preslikave)
+ČUTILA | x.1	Po tem, da se samcu približajo. / Da reagirajo na oglašanje samca. / Po odzivu samice. | x.2	Eni skupini samic bi odstranili tipalnice, drugi pa bobničasti organ/sprednji par nog. | x.3	Imajo tipalnice in bobničasti organ. | x.4	Prepustnost/napetost na membrane/prepustnost za ione. | x.5	Membrana je nagubana. / Membrana ima povečano površino. / Ta del vsebuje večjo koncentracijo pigme
+
+--- id=19561 vir=RIC/sprejemanje signalov - čutila.docx (brez preslikave)
+ČUTILA | x.1	Omogočajo sprejem informacij iz okolja in odziv organizma nanje. | x.2 | [SLIKA:sprejemanje signalov - čutila_image89.jpeg] | x.3 | | Čutilo | Primarne čutnice | Sekundarne čutnice | | |---|---|---| | | Vid |  | X | | | Sluh in ravnotežje |  | X | | | Voh | X |  | | | Okus |  | X | | | Tip | X |  | | Trije pravilni odgovori za eno točko, pet za dve točki. | x.4	Spremeni se mirovni mem
+
+--- id=19562 vir=RIC/sprejemanje signalov - čutila.docx (brez preslikave)
+OKO | x.1	A – beločnica, B – šarenica | x.2	Žarke lomita roženica, leča/steklovina Dve strukturi za 1 točko. | x.3 | [SLIKA:sprejemanje signalov - čutila_image91.png] | x.4	Zaradi gub membrane, v katero je vgrajen vidni pigment, je vidnega pigmenta/rodopsina več, zato je večja verjetnost, da svetlobni žarek/foton zadane molekulo vidnega pigmenta/rodopsina. / Gube povečajo površino membrane z barvi
+
+--- id=19563 vir=RIC/sprejemanje signalov - čutila.docx (brez preslikave)
+PREHRANSKI DODATKI IN PREDELAVA ŽIVIL | x.1	Jod je potreben za delovanje ščitnice. | x.2	Posledica pomanjkanja joda pri otrocih je počasnejša presnova/upočasnjena rast/telesna in duševna zaostalost/pojav kretenizma. | x.3	To je povezano z njihovo topnostjo v maščobah/nepolarnostjo/netopnostjo v vodi. | x.4	Posledica pomanjkanja vitamina A pri otrocih je slepota/okvara vida/oči/mrežnice. | x.5	Kalc
+
+--- id=19564 vir=RIC/sprejemanje signalov - čutila.docx (brez preslikave)
+OGRODJE | x.1	Notranje ogrodje: spužva, morski ježek.Zunanje ogrodje: volek, potočni rak. | x.2	Ogrodje vsebuje več anorganskih snovi/mineralnih, ki se ne razkrojijo/razpadejo in zato laže fosilizirajo. | x.3	Na osnovi fosilov lahko sklepamo, da so se prvi kopenski vretenčarji razvili iz prednikov rib resoplavutaric. | x.4	Hrbtna struna je enotna palica, hrbtenico pa gradijo vretenca./Hrbtenica je
+
+--- id=19565 vir=RIC/sprejemanje signalov - čutila.docx (brez preslikave)
+GIBANJE | x.1	H gibalom sodita skelet/ogrodje/okostje in mišičje. | x.2	Razvoj podobne oblike telesa je posledica prilagoditve enakemu/podobnemu načinu premikanja/okolju. | x.3 | [SLIKA:sprejemanje signalov - čutila_image92.png] | x.4	Za gibanje v vodi potrebujejo manj energije, ker jim vzgon vode navidezno zmanjša težo. | x.5	Letalno površino prhuti tvori letalna mrena (koža), letalno površino kr
+
+--- id=19566 vir=RIC/sprejemanje signalov - čutila.docx (brez preslikave)
+SOŠKA POSTRV | x.1	Organizme, ki se uspešno križajo in imajo plodne potomce, uvrščamo v isto vrsto. | x.2	Potočnim postrvem ni uspelo naseliti teh pritokov, zaradi fizičnih ovir. | x.3	Dodatni ukrep je (postopen) izlov potočnih postrvi in križancev. | x.4	Drstenje sproži dolžina dneva/razmerje med dnevom in nočjo/količina svetlobe. | x.5	Krivulja (c). | x.6	Čutila se prilagodijo zaznavanju druge v
+
+--- id=19567 vir=RIC/sprejemanje signalov - čutila.docx (brez preslikave)
+ZGRADBA IN DELOVANJE UŠESA | x.1	Uvrščamo ju med mehanoreceptorje. | x.2 | [SLIKA:sprejemanje signalov - čutila_image93.png] | Del A se imenuje: kožnati polž/polžDel B se imenuje: polkrožni kanali | Ena točka za pravilno označene strukture, druga za pravilno poimenovanje. | x.3	Žrelo in srednje uho sta povezana z Evstahijevo tubo/cevko, po kateri se lahko iz žrela v srednje uho prenesejo bakterije
+
+--- id=20037 vir=RIC/transportni sistemi.docx (brez preslikave)
+TRANSPORTNI SISTEMI | x.1	Metulj | x.2	Hitrejši pretok krvi / boljša oskrba tkiva | x.3	Dihala | x.4	Dvoživke, plazilci, ptice, sesalci / tisti, ki imajo pljuča. ( naštete tri od štirih vretenčarskih skupin) | x.5	CO2 in nerabne snovi / odpadne snovi / nerabni produkti celične presnove | x.6	Pljučna arterija + črka S | x.7	Hemoglobin | x.8	Eritrociti
+
+--- id=20038 vir=RIC/transportni sistemi.docx (brez preslikave)
+BARVILA | x.1	Celična membrana / plazmalema | x.2	Vakuola / kromoplasti | x.3	Kromatografijo/ Papirno kromatografijo | x.4	Klorofil a, klorofil b, karoteni, ksantofili (dve od naštetih barvil) | x.5	Klorofil: absorbira svetlobno energijo in jo pretvarja v kemično / obsorbira energijo svetlobe | karoteni / ksantofili: absorbirajo svetlobno energijo. | x.6	(Puščica, ki kaže na membrano tilakoid) | [
+
+--- id=20039 vir=RIC/transportni sistemi.docx (brez preslikave)
+OBTOČILA | x.1	Krvni tlak / razlika v tlakih. | x.2	Razlika v osmotskih tlakih / osmotski tlak. | x.3	Limfni sistem / mezgovni sistem. | x.4	Difuzija / pasivni transport. | x.5	Vsebujejo hemoglobin / dihalni pigment / krvno barvilo. | x.6	Železo / Fe | x.7	Večje energijske potrebe ptičev / ugodnejše razmerje med P in V celice / hitrejša izmenjava dihalnih plinov. | x.8	Pri okužbi / pri infekciji. 
+
+--- id=20040 vir=RIC/transportni sistemi.docx (brez preslikave)
+TKIVA, ORGANI IN ORGANSKI SISTEMI | x.1	Prebavni sistem / prebavila. | x.2	Sprejem hrane, razgradnja hrane, vsrkavanje hranilnih snovi in iztrebljanje (za točko dovolj razgradnja in vsrkavanje). | x.3 | [SLIKA:transportni sistemi_image177.png] | Trije  pravilno označeni in poimenovani organi 1 točka. | Pet pravilnooznačenih in poimenovanih organov 2. točki. | x.4	Mišično, žlezno, krovno, živčno ..
+
+--- id=20041 vir=RIC/transportni sistemi.docx (brez preslikave)
+ONESNAŽEVANJE | x.1	Ker imajo največjo površino, skozi katero vstopajo onesnažila / polutanti. | x.2	CO se laže veže na hemoglobin kakor kisik, zato hemoglobin ne more oskrbovati celic s kisikom. | x.3	SO2, CO2, NOX, CXHY … | x.4	Ker povzroča poškodbe slušnih čutnic v notranjem ušesu, kar povzroča naglušnost ali gluhost. / Ker deluje škodljivo na živčevje in hormonalni sistem/stres. | x.5	Ozon. | 
+
+--- id=20042 vir=RIC/transportni sistemi.docx (brez preslikave)
+ŽIVALI | x.1	Žival A, žival B in žival C. | x.2	Organizem E / trakulja. | x.3	Hranilne snovi iz gostiteljevega črevesa absorbirajo skozi telesno površino / ugreznjeno povrhnjico. | x.4	Organizmi A, B in C / žuželka, deževnik in rak. | x.5	Po vzdušnicah / trahejah / zračnicah. | x.6	Metanefridiji so lijakasta izločala, ki se odpirajo v celom, Malpighijeve cevke pa so slepo zaprte cevke / metanefrid
+
+--- id=20043 vir=RIC/transportni sistemi.docx (brez preslikave)
+KRVNE SKUPINE | x.1	Starša sta heterozigota. / Starša imata genotip IA i, IB i. / Starša imata genotip B0 in A0. | x.2 | | genotip gamet | i / 0 | IA / A | | |---|---|---| | | i / 0 | ii / 00 | IA i  /A0 | | | IB / B | IB i  / B0 | IA IB / AB | | (1 točka) | Irenina brat in sestra lahko imata krvno skupino 0, A, B ali AB (1 točka). | x.3	Ne morejo, ker kri staršev vsebuje antigene A in B, za kater
+
+--- id=20044 vir=RIC/transportni sistemi.docx (brez preslikave)
+KRVNI OBTOK | x.1 | [SLIKA:transportni sistemi_image179.png] | x.2	Eritrociti prenašajo kisik. | x.3	Skrčenje srca / skrčenje srčnih prekatov (ventriklov). | x.4	Graf: | [SLIKA:transportni sistemi_image180.jpeg] | x.5	Med 22. in 7. uro. | x.6	Da, takrat se je opazovani osebi krvni tlak močno dvignil (okoli 17. ure). | x.7 | [SLIKA:transportni sistemi_image181.png] | Rešitev47.	naloga
+
+--- id=20045 vir=RIC/transportni sistemi.docx (brez preslikave)
+HEMOGLOBIN | x.1	Hemoglobin je v eritrocitih. | x.2	Ena aminokislina. | x.3	Hem. | x.4	Pri temperaturi 25 oC. | x.5	Pravilna oznaka osi (ime spremenljivke in enota) 1 točka. | Pravilno narisane in poimenovane tri krivulje 1 točka. | [SLIKA:transportni sistemi_image182.png] | x.6	Jetra. | x.7	Za celično dihanje / za presnovne procese – celično dihanje / za pridobivanje ATP / za pridobivanje energij
+
+--- id=20046 vir=RIC/transportni sistemi.docx (brez preslikave)
+DIHALA | x.1	Pri vrtinčarju z difuzijo direktno preko telesne površine, pri deževniku pa z difuzijo do krvi in z njo do celic. | x.2	Dihalo organizma A: škrge | Dihalo organizma B: vzdušnice/traheje/zračnice | Dihalo organizma C: škrge | x.3	Pljuča plazilcev imajo bolj nagubano dihalno površino kot pljuča dvoživk / pljuča plazilcev imajo večjo površino v primerjavi s prostornino. | x.4	Tanka koža,
+
+--- id=20047 vir=RIC/transportni sistemi.docx (brez preslikave)
+KRVNE SKUPINE | x.1	S črko C. | x.2	Antigen A in antigen B. | x.3	Po telesu prenašajo kisik. | x.4	AB. | x.5 | [SLIKA:transportni sistemi_image184.png] | x.6	Prva kapljica je bila kot kontrola, ob kateri so primerjali druge kapljice in ugotovili, ali so se eritrociti zlepili ali ne. | x.7 | |  | Genotip matere | Genotip očeta | | |---|---|---| | | 1. možnost | IA IA | IA IB | | | 2. možnost | IA i
+
+--- id=20048 vir=RIC/transportni sistemi.docx (brez preslikave)
+SRCE | x.1	[SLIKA:transportni sistemi_image185.png] | x.2	Črka A. | x.3	75 utripov v minuti. | x.4	Del krvi teče iz (desnega) ventrikla nazaj v (desni) atrij. | x.5	Ob koncu skrčenja/sistole ventriklov // na začetku relaksacije/diastole ventriklov. | x.6	Poveča jo. | x.7	Ker tako mišice dobijo več hrane in kisika. | x.8	Visok krvni tlak/motnje v delovanju srca … | Rešitev51.	naloga
+
+--- id=20049 vir=RIC/transportni sistemi.docx (brez preslikave)
+IMUNSKI SISTEM | x.1	Zdrava je oseba A. | x.2	Levkociti v krvi uničujejo tujke / onesposobijo antigene. / Vloga levkocitov je fagocitoza bakterij / tvorba protiteles. | x.3	Levkociti nastajajo v rdečem kostnem mozgu in bezgavkah/limfatičnih organih/vranici/priželjcu. | x.4	Antigeni so nam tuje beljakovine ali velike molekule, ki ne nastajajo v našem telesu. / So beljakovine, za katere nimamo genov
+
+--- id=20050 vir=RIC/transportni sistemi.docx (brez preslikave)
+TRANSPORTNI SISTEM | x.1	Z difuzijo. | x.2	Praživali/Spužve/Ožigalkarji/Ploski črvi/Valjasti črvi. En odgovor za 1 točko. | x.3	So majhne/ploščate/neaktivne/malo aktivne. En odgovor za 1 točko. | x.4	Pri sklenjenem ostaja kri ves čas v žilah, pri nesklenjenem pa zapušča žile in se razliva po telesnih votlinah. | x.5. in x.6. | [SLIKA:transportni sistemi_image186.png] | x.7	Transportni sistem rib j
+
+--- id=20051 vir=RIC/transportni sistemi.docx (brez preslikave)
+IZLOČALA | x.1 | | [SLIKA:transportni sistemi_image187.png] | [SLIKA:transportni sistemi_image188.png] | | Dve pravilni oznaki 1 točka, vse pravilno označeno 2 točki. | x.2	Ledvice uravnavajo količino vode v telesu, količino ionov/mineralov/soli, izločajo sečnino. / Uravnavajo krvni tlak/količino vode v krvni plazmi/količino v vodi topnih vitaminov. (Tri od navedenih nalog za 1 točko) | x.3	S filt
+
+--- id=20052 vir=RIC/transportni sistemi.docx (brez preslikave)
+SISTEMATIKA | x.1 | [SLIKA:transportni sistemi_image189.png] | Celična stana mora biti narisana na zunanji strani. | x.2	Celice s celičnimi stenami so značilne za rastline in glive. | x.3	Celična stena obdaja celico / protoplast z vseh strani, hitinjača pa pokriva celice povrhnjice samo z ene strani / celična stena pripada posamezni celici, hitinjača pa mnogoceličnemu organizmu. | x.4 | |  | Razre
+
+--- id=20053 vir=RIC/transportni sistemi.docx (brez preslikave)
+OSMOTSKI POJAVI V CELICAH | x.1	Vloga hemoglobina je vezava in prenos kisika. | x.2	Največ hemoglobina se je iz eritrocitov sprostilo pri koncentracijah od 0,4 do 0,7 % NaCl. | x.3	Količina sproščenega hemoglobina se ne bi povečevala zato, ker je v vseh epruvetah hipotonično okolje (1 točka). Vsi eritrociti lizirajo, iz njih se sprosti ves hemoglobin (1 točka). | x.4	V 0,9-odstotni raztopini NaCl:
+
+--- id=20054 vir=RIC/transportni sistemi.docx (brez preslikave)
+SRCE | x.1	Zato, da so celice redno oskrbovane s hrano in kisikom ter da kri odnaša produkte presnove. | x.2	B, E, A. | x.3	Kri v aorti ima manj kisika / v aorti bo mešana, oksigenirana in deoksigenirana. | x.4	Srčno mišično tkivo. | x.5	Njihova vloga je oskrba srca s hrano in kisikom. | x.6	Zaradi prekinitve odmira srčno mišično tkivo. / Infarkt srca. / Srčna kap. | x.7 | [SLIKA:transportni siste
+
+--- id=20055 vir=RIC/transportni sistemi.docx (brez preslikave)
+MNOGOČLENARJI | x.1	Skupna značilnost vseh mnogočlenarjev je trebušnjača. | x.2	Parni gangliji/bočne žile/(parne) celomske vrečke/metanefridiji. En odgovor za 1 točko. | x.3	Kri s transportnim barvilom prenese več kisika zato, ker se na transportno barvilo lahko veže več kisika kakor v samo transportno tekočino. | x.4	Dihalni plini se pri deževniku izmenjujejo na površini telesa/med celicami in tr
+
+--- id=20056 vir=RIC/transportni sistemi.docx -> resitev naloge 19910
+SRCE IN KRVNI TLAK | x.1 | [SLIKA:transportni sistemi_image191.png] | Puščica kaže steno levega prekata. | x.2	Levi prekat (ventrikel) ima debelejšo steno od desnega, ker mora ustvariti večjo silo (tlak), da kri doseže vse dele telesa. Desni pa kri potiska samo do pljuč. | x.3	A: arterija, B: kapilara. | x.4 | [SLIKA:transportni sistemi_image192.png] | x.5	Višji kot je krvni tlak, več filtrata nas
+
+--- id=20057 vir=RIC/transportni sistemi.docx -> resitev naloge 19911
+PRESNOVA V MIŠICAH | x.1	Mlečna kislina/laktat. | x.2	Na enoto glukoze se sprosti več energije/ATP. | x.3	Za potek ne potrebuje kisika. / Poteka hitreje. / Potrebnih je manj encimov. | x.4	Piruvična kislina/piruvat. | x.5	Prenaša elektrone/protone/vodik. | x.6	Kisik. | x.7	Hem. | Gladke mišične celice niso udeležene pri ekstremnih naporih, zato se delovanje v njih ne poveča in imajo za celično dih
+
+--- id=20058 vir=RIC/transportni sistemi.docx -> resitev naloge 19912
+LEDVICE | x.1	Odstranjevanje sečnine/uree/dušikovih razkrojkov (1 točka) in uravnavanje količine vode/soli v krvi/osmoregulacija (1 točka). | x.2	U – sečevod, V – sečnica. | x.3	Stene žil so iz ene plasti celic. | x.4	Voda, glukoza, Na+, Cl–, sečnina/manjše beljakovine/aminokisline/vitamini topni v vodi. Dve snovi za 1 točko, štiri snovi za 2 točki. | x.5	Ta značilnost omogoča povečan pritisk krvi
+
+--- id=20059 vir=RIC/transportni sistemi.docx -> resitev naloge 19913
+JETRA | x.1	Vloga arterije je oskrbeti jetrne celice s kisikom. | x.2	Dojetrna (dverna, portalna) vena prinaša kri iz prebavil/črevesja. | x.3	Kri v dojetrni veni vsebuje vsrkane proizvode prebave/maščobe, sladkorje, strupene snovi …, kri, ki pa izstopa, vsebuje manjšo količino hranilnih snovi in več presnovnih proizvodov jeter (smiselna primerjava ene od snovi, ki je povezana z delovanjem jeter).
+
+--- id=20060 vir=RIC/transportni sistemi.docx -> resitev naloge 19914
+URAVNAVANJE TELESNE TEMPERATURE | x.1	Jetra imajo višjo presnovo / opravljajo več presnovnih procesov / pospešeno celično dihanje kakor drugi organi. | x.2	Toplota se prenaša s krvjo po krvnem obtoku in s prevajanem/sevanjem/skozi telesne organe. | x.3	Vzdrževanje stalne telesne temperature nam omogoča optimalno raven delovanja encimov/ optimalno raven presnovnih procesov. | x.4 | [SLIKA:transport
+
+--- id=20061 vir=RIC/transportni sistemi.docx -> resitev naloge 19919
+CELICE | x.1	Virus herpesa, bakterija, ameba, vodna bolha. | x.2	Celuloza: celice čebuleRNA: virus herpesaHitin: vodna bolha | Dva pravilna odgovora ena točka, trije pravilni odgovori dve točki. | x.3	Pomen celuloze je dajati oporo celicam / gradi celično steno / oporna snov rastlinskih celic. | x.4	400 mikrometrov/0,4 mm. | x.5	V premeru vidnega polja pri 400-kratni povečavi so videli 8 celic. | 
+
+--- id=20567 vir=RIC/zgradba in delovanje človeka in drugih živali.docx (brez preslikave)
+ŽIVALI | x.1	Členonožci | x.2 | |  | organizem B | organizem D | | |---|---|---| | | telesne regije | glavoprsje in zadek | glava, oprsje in zadek | | | število hodilnih okončin | 8 / 4 pari | 6 / 3 pari | | | način premikanja | hoja | hoja in letenje | | x.3	Dihala organizma A: škrge | Dihala organizma D: traheje/vzdušnice/zračnice | x.4	E – Malpighijeve cevke, F – trebušnjača | x.5	Izločanje duš
+
+--- id=20569 vir=RIC/zgradba in delovanje človeka in drugih živali.docx -> resitev naloge 20525
+ORGANSKE SNOVI | x.1	Nukleinske kisline vsebujejo kromosomi/jedra in mitohondriji/ ribosomi jetrnih celic. | x.2	Nukleinske kisline vplivajo na presnovne procese preko encimov, katerih gradnjo vodijo. | x.3	V jetrih lahko pričakujemo glikogen, v ovsenih kosmičih pa škrob/celulozo. | x.4	Ogljikovi hidrati v semenih so rezervna hrana za razvijajoči se kalček. | x.5	Glikogen v jetrih je rezerva gluko
+
+--- id=20570 vir=RIC/zgradba in delovanje človeka in drugih živali.docx (brez preslikave)
+ŽIVALI | x.1	Žival A, žival B in žival C. | x.2	Organizem E / trakulja. | x.3	Hranilne snovi iz gostiteljevega črevesa absorbirajo skozi telesno površino / ugreznjeno povrhnjico. | x.4	Organizmi A, B in C / žuželka, deževnik in rak. | x.5	Po vzdušnicah / trahejah / zračnicah. | x.6	Metanefridiji so lijakasta izločala, ki se odpirajo v celom, Malpighijeve cevke pa so slepo zaprte cevke / metanefrid
+
+--- id=20571 vir=RIC/zgradba in delovanje človeka in drugih živali.docx -> resitev naloge 20527
+AJDA | x.1	Dve. | x.2	Ajda vsebuje antioksidant rutin. | x.3	UV-žarki povzročajo poškodbe DNA / na vsebnost rutina v ajdi/mutacije / poškodbe encimov / poškodbe beljakovin / vplivajo na hitrost fotosinteze. | x.4	Vzamemo dve skupini gensko enakih rastlin, ki jih posadimo na različni nadmorski višini (1 točka). Po nekem času v rastlinah izmerimo količino rutina (1 točka). | x.5	Vsebnost rutina bo v
+
+--- id=20572 vir=RIC/zgradba in delovanje človeka in drugih živali.docx -> resitev naloge 20528
+ORGANSKI SISTEMI | x.1	Tkivo je skupek celic z enako zgradbo in nalogo. | x.2	Mišično tkivo, živčno tkivo, krovno tkivo, žlezno tkivo, vezivno tkivo (krvno tkivo, rahlo vezivno tkivo) – dve od imenovanih | x.3	Organski sistem C | x.4 | [SLIKA:zgradba in delovanje človeka in drugih živali_image107.png] | x.5	Prebava / razgradnja hranilnih snovi in vsrkavanje hranilnih snovi v kri oz. limfo. | x.6	Š
+
+--- id=20573 vir=RIC/zgradba in delovanje človeka in drugih živali.docx -> resitev naloge 20529
+KOŽA | x.1	Celice v plasti A so mrtve / poroženele, celice v plasti B pa žive. | x.2	Rahlo vezivno tkivo (tudi samo vezivno tkivo), gladko mišično tkivo (tudi samo mišično tkivo), žlezno tkivo, krvno tkivo, živčno tkivo, enoplastni epitel (dve od naštetih za 1 točko). | x.3	Na ribosomih/na GER-u | x.4	Osmoregulacijsko vlogo (uravnavanje izločanja vode, soli in drugih metabolnih produktov), izločal
+
+--- id=20574 vir=RIC/zgradba in delovanje človeka in drugih živali.docx (brez preslikave)
+OGRODJE | x.1	A: nadlaktnica, B: golenica. | x.2	V njem nastajajo iz zarodnih celic krvne celice. / V njem nastajajo iz zarodnih celic eritrociti/rdeča krvna telesca, trombociti/krvne ploščice in nekatere vrste levkocitov/belih krvnih telesc. / V njem nastajajo krvne celice. | x.3	Telesu daje oporo, ščiti notranje organe,/omogoča premikanje (skupaj z mišicami)/ je zaloga mineralnih/rudninskih snov
+
+--- id=20575 vir=RIC/zgradba in delovanje človeka in drugih živali.docx -> resitev naloge 20533
+ENERGIJSKA VREDNOST ŽIVIL | x.1	Vsa energija, ki jo je oddajalo goreče živilo, se ni porabila za segrevanje vode, del energije se je izgubil v okolico. / Možno navesti dve verjetni napaki merjenja. | x.2	S puščico je označen termometer/temperaturni senzor. | x.3	Enako težak košček lesa bi segrel vodo za 6,4 oC / enako, ker sta oba sestavljena iz glukoze. | x.4	Zato ker arašidi vsebujejo pretežno m
+
+--- id=20576 vir=RIC/zgradba in delovanje človeka in drugih živali.docx -> resitev naloge 20534
+OKO | x.1	A – beločnica, B – šarenica | x.2	Žarke lomita roženica, leča/steklovina Dve strukturi za 1 točko. | x.3 | [SLIKA:zgradba in delovanje človeka in drugih živali_image110.png] | x.4	Zaradi gub membrane, v katero je vgrajen vidni pigment, je vidnega pigmenta/rodopsina več, zato je večja verjetnost, da svetlobni žarek/foton zadane molekulo vidnega pigmenta/rodopsina. / Gube povečajo površino
+
+--- id=20577 vir=RIC/zgradba in delovanje človeka in drugih živali.docx -> resitev naloge 20535
+DELITEV CELIC | x.1	Celica A nastane v jajčnikih, celica B pa v modih človeka. | x.2	Celica C vsebuje dvojno kromosomsko garnituro/diploidno število kromosomov/46 kromosomov, celici A in B pa enojno število kromosomov/haploidno število/23 kromosomov. | x.3	Na gensko raznovrstnost celice C vpliva rekombinacija kromosomov/naključna razporeditev kromosomov pri nastanku celic A in B ter oploditev. | x
+
+--- id=20578 vir=RIC/zgradba in delovanje človeka in drugih živali.docx -> resitev naloge 20536
+PRESNOVA V CELICAH | x.1	Iz okolja morajo dobiti kisik in hrano/ogljikove hidrate/glukozo/… (oboje za točko) | x.2	Prevladujoča skupina organskih snovi v živilih:1. skupine: ogljikovi hidrati,3. skupine: beljakovine,4. skupine: maščobe/lipidi. | x.3	Dijak bi moral zaužiti 1570g kruha/1,57 kg kruha (Priznano od 1500 do 1600 g/1,5 do 1,6 kg kruha). | x.4	Molekule iz organskih snovi 1. skupine se lah
+
+--- id=20780 vir=RIC/zgradba, razmnoževanje in delovanje bakterij.docx (brez preslikave)
+GOZD | x.1	B | x.2	Pionirski organizmi prenesejo velika nihanja v temperaturi. | x.3	svetloba, temperatura | x.4	Zaradi dihanja organizmov, ki živijo v tleh. | x.5	Razkrojijo se do mineralov / do anorganskih snovi. | x.6	v listih, plodovih, lesu, cvetovih, semenih, brstih, koreninah … | x.7	z glivami | x.8	s koreninami
+
+--- id=20781 vir=RIC/zgradba, razmnoževanje in delovanje bakterij.docx (brez preslikave)
+PROCITA IN EVCITA | x.1	procita: C | evcita: B | x.2 | [SLIKA:zgradba, razmnoževanje in delovanje bakterij_image106.png] | x.3 | | kraljestvo | procite | evcite | | |---|---|---| | | živali |  | + | | | rastline |  | + | | | cepljivke | + |  | | | glive |  | + | | x.4	V tem času zrastejo bakterijske kolonije. | x.5	Število bakterijskih kolonij, ki so zrasle na petrijevki, in površina petrijevke, p
+
+--- id=20782 vir=RIC/zgradba, razmnoževanje in delovanje bakterij.docx (brez preslikave)
+APLIKATIVNA BIOLOGIJA | x.1	Če je za nas antigen / če je za nas tuja snov ... | x.2	protitelesa | x.3	Spominske celice, ki nastanejo po cepljenju, omogočajo hiter imunski odgovor ob ponovni okužbi / Ker po cepljenju nastanejo protitelesa, ki ob poznejši okužbi takoj uničijo viruse. | x.4	Ker antibiotiki vplivajo na presnovo in razmnoževanje, virusi pa se ne razmnožujejo sami in tudi sami ne opravl
+
+--- id=20783 vir=RIC/zgradba, razmnoževanje in delovanje bakterij.docx (brez preslikave)
+KLONIRANJE | x.1	Da, ker so bakterije v koloniji potomci ene bakterije, torej so gensko enake / da, ker so nastale s cepitvijo / da, ker so se delile in so gensko enake. | x.2	Z vegetativnim razmnoževanjem. | x.3	Jagodnjak, ko se razvije iz pritlike / lilija iz zarodnega brsta / tulipan iz brsta čebulice / krompir iz gomolja... (Opomba: za 1. točko ena navedba. Potaknjenci niso naravni kloni) | x.
+
+--- id=20784 vir=RIC/zgradba, razmnoževanje in delovanje bakterij.docx (brez preslikave)
+CVETENJE VODA | x.1	V vodi je veliko mineralnih snovi. | x.2	Zmanjkalo je mineralnih snovi. | x.3	Celice alg razpadajo in se sprostijo organske snovi, te pa bakterije razgradijo v anorganske. | x.4	Zmanjkalo je kisika/ strupi v vodi. | x.5	Na sterilno petrijevko bi razlili 1 ml vode (1 točka) in po inkubaciji prešteli število razvitih kolonij( 1 točka). | x.6	Gojišče bi inkubirali v anaerobnih raz
+
+--- id=20785 vir=RIC/zgradba, razmnoževanje in delovanje bakterij.docx (brez preslikave)
+JEZERO | x.1	Pozimi je temperatura na površini nižja kakor na dnu, poleti pa je obratno. | x.2 | | Biopolimer, ki vsebuje dušik | Naloga biopolimera | | |---|---| | | Beljakovina | Ogradi celico / katalizira reakcije … | | | Nukleinska kislina | Zapisuje lastnosti organizmov / prenaša dedni zapis v naslednjo generacijo … | | 1 točka se podeli za pravilno zapisan stolpec ali vrstico. | x.3	Aminokis
+
+--- id=20786 vir=RIC/zgradba, razmnoževanje in delovanje bakterij.docx (brez preslikave)
+VIRUSI | x.1	Virus v bakterijo prenese – injicira svojo DNA / dedno snov. | x.2	Bakterije so razpadle. | x.3	Virusi so se sprostili iz bakterij (1 točka). Virusna DNA je izstopila iz bakterijske DNA in sprožila nastajanje novih virusov (lizni cikel) (2 točki). | x.4	Ker že ima v telesu protitelesa proti temu virusu. | x.5	Oslabljene / neaktivne viruse/ mrtve viruse gripe / virusne ovojnice / antig
+
+--- id=20787 vir=RIC/zgradba, razmnoževanje in delovanje bakterij.docx (brez preslikave)
+GENSKA REGULACIJA | x.1 | [SLIKA:zgradba, razmnoževanje in delovanje bakterij_image107.png] | x.2	Zaradi varčevanja z energijo / s snovjo. | x.3	Opomba: Na skici sta dva operona. Kandidat okroži enega od obeh. | [SLIKA:zgradba, razmnoževanje in delovanje bakterij_image108.png]x.4	Promotor / promoter. | x.5	S prepisovanjem / transkripcijo / sintezo ustrezne mRNA / s sprostitvijo regulacijske moleku
+
+--- id=20788 vir=RIC/zgradba, razmnoževanje in delovanje bakterij.docx (brez preslikave)
+PRESNOVA BAKTERIJ | x.1	Nimajo jedrnega ovoja / nimajo jedra; nimajo membranskih struktur / nimajo organelov; imajo samo eno molekulo DNA/en kromosom. | x.2	V uvihkih membrane / v membrani mezosoma / v celični membrani. | x.3	V končnih produktih / v encimih / v reaktantih. | x.4	Ni kisika/so anaerobni. | x.5	ATP, NADPH+H+ / NADPH2, CO2 | x.6	Priznana ena ali druga krivulja. | [SLIKA:zgradba, razmn
+
+--- id=20789 vir=RIC/zgradba, razmnoževanje in delovanje bakterij.docx (brez preslikave)
+TALNE ŽIVALI | x.1	Da imajo rastline na voljo minerale/hranila. / Da se obnavljajo porabljene mineralne snovi v tleh. | Nepriznano je samo kroženje snovi/brez navedbe mineralov. | x.2	Kraljestvo cepljivk/kraljestvo bakterij, kraljestvo gliv in kraljestvo živali. | x.3	Majhna/nizka. Rastlinska hrana je zaradi celuloze težko prebavljiva/količina iztrebkov je velika. | Nepravilno navajanje dolžine pr
+
+--- id=20790 vir=RIC/zgradba, razmnoževanje in delovanje bakterij.docx (brez preslikave)
+EKOLOGIJA | x.1	Kožuh z gosto dlako, plast podkožnega maščevja, široka stopala ali kopita, velika čokata telesa, majhna ušesa (dve od naštetih). | x.2	Široko strpnostno območje / so evritermni. | x.3	Velike živali imajo manj površine na enoto prostornine telesa/manjše razmerje med površino in volumnom (1 točka) in zato prek površine izgubljajo manj toplote (1 točka). | x.4	S selitvami. | x.5	Zarad
+
+--- id=20791 vir=RIC/zgradba, razmnoževanje in delovanje bakterij.docx (brez preslikave)
+CELICA | x.1	Prokariontska celica nima jedra, evkariontska ga ima/cepitev (1 točka). Še priznano tudi prokariontska celica je brez jedra. | x.2	Cepljivke/bakterije (1 točka). | x.3 | [SLIKA:zgradba, razmnoževanje in delovanje bakterij_image110.png] | Na skici rastlinske celice označena celična stena, vakuola in kloroplasti. Vse tri za eno točko (1 točka). | x.4	Voda in različni ioni/natrijevi/kali
+
+--- id=20792 vir=RIC/zgradba, razmnoževanje in delovanje bakterij.docx (brez preslikave)
+GENETIKA BAKTERIJ | x.1 | [SLIKA:zgradba, razmnoževanje in delovanje bakterij_image111.png] | x.2	Pomen podvajanja je nastanek dveh kopij dednega materiala.Pomen ločevanja je razdelitev kopij dednega materiala na hčerinski celici. | x.3	Zamenjavo nukleotida, izpad nukleotida/vrivanje nukleotida. | x.4	Transdukcija. | x.5	Med bakterijama se vzpostavi povezava (1 točka), po tej povezavi iz ene bakte
+
+--- id=20793 vir=RIC/zgradba, razmnoževanje in delovanje bakterij.docx (brez preslikave)
+SISTEMATIKA | x.1 | [SLIKA:zgradba, razmnoževanje in delovanje bakterij_image112.png] | Celična stana mora biti narisana na zunanji strani. | x.2	Celice s celičnimi stenami so značilne za rastline in glive. | x.3	Celična stena obdaja celico / protoplast z vseh strani, hitinjača pa pokriva celice povrhnjice samo z ene strani / celična stena pripada posamezni celici, hitinjača pa mnogoceličnemu orga
+
+--- id=20794 vir=RIC/zgradba, razmnoževanje in delovanje bakterij.docx (brez preslikave)
+PRESNOVA BAKTERIJ | x.1	Naraščanje temperature od 0 oC do 40 oC  pospeši presnovne procese (prepis zapisa iz slike ni pravilni odgovor). | x.2	Vzrok uničenja bakterij je koagulacija/skrknjenje beljakovin/denaturacija encimov. | x.3 | [SLIKA:zgradba, razmnoževanje in delovanje bakterij_image113.png] | Kriterij: Izbira osi in oznaka osi (lahko samo hitrost reakcije) 1 točka;oblika krivulje (začetek 
+
+--- id=20795 vir=RIC/zgradba, razmnoževanje in delovanje bakterij.docx (brez preslikave)
+TRADICIONALNO KMETIJSTVO | x.1	Različne rastline potrebujejo minerale v različnih razmerjih. S kolobarjenjem dosežemo, da se porabi večina obstoječih mineralov. | x.2	Za gradnjo organskih snovi, ki vsebujejo dušik. / Za gradnjo aminokislin/beljakovin /nukleotidov/organskih dušikovih baz/nukleinskih kislin. | x.3	Detelja/stročnice živi / živijo v sožitju z dušikovimi bakterijami, ki vežejo zračni d
+
+--- id=20796 vir=RIC/zgradba, razmnoževanje in delovanje bakterij.docx (brez preslikave)
+KEMIZEM CELICE | x.1	Ker so zelo tanke in se lahko zelo tesno navijejo. / Ker so tesno ovite okrog histonov. / Ker so spiralizirane. | x.2	V rastlinskih celicah najdemo DNA še v mitohondrijih in kloroplastih. | x.3	V bakterijskih celicah DNA gradi še plazmide. | x.4	Ker oblika molekul organskih baz samo v teh kombinacijah omogoča tvorbo dveh ali treh vodikovih vezi. / Ker sta le ti dve kombinaciji
+
+--- id=20797 vir=RIC/zgradba, razmnoževanje in delovanje bakterij.docx (brez preslikave)
+AKVARIJ | x.1	Naravni ekosistemi so samoohranjajoči/se sami ohranjajo, akvarij pa deluje samo, če ga vzdržujemo. | x.2	Manjši ko so mehurčki, večja je njihova površina, prek katere prehaja kisik iz zraka v vodo/večji mehurčki imajo manjšo površino, prek katere prehaja v vodo manj kisika. | x.3	Vir ogljikovega dioksida je še izdihani ogljikov dioksid, ki nastaja pri celičnem dihanju/heterotrofnih p
+
+--- id=20798 vir=RIC/zgradba, razmnoževanje in delovanje bakterij.docx (brez preslikave)
+TALNI EKOSISTEM | x.1	Ogljikovega dioksida. | x.2	Ker so v tleh samo organizmi, ki ogljikov dioksid proizvajajo, ne pa tudi organizmi, ki ga porabljajo. / Ker so v tleh samo organizmi, ki ogljikov dioksid proizvajajo, izmenjava plinov med zrakom v prsti in zrakom nad tlemi pa je počasna. | x.3	Vir organskih delcev so odmrli deli rastlin, odmrle živali. | x.4	Iz njih pridobijo energijo za svoje del
+
+--- id=20799 vir=RIC/zgradba, razmnoževanje in delovanje bakterij.docx (brez preslikave)
+RASTNI HORMON | x.1 | [SLIKA:zgradba, razmnoževanje in delovanje bakterij_image114.png] | x.2 | [SLIKA:zgradba, razmnoževanje in delovanje bakterij_image115.png] | x.3	Na promotor se veže polimeraza RNK, ki omogoča prepisovanje DNK/gena za rastni hormon v mRNK. | x.4	Dodati je treba antibiotik, proti kateremu je bakterija z vnesenim genom odporna/za katerega je bakterija neobčutljiva. | x.5	Zlepi 
+
+--- id=20800 vir=RIC/zgradba, razmnoževanje in delovanje bakterij.docx (brez preslikave)
+BAKTERIJE | x.1	Bakterije se od enoceličarjev drugih kraljestev razlikujejo po tem, da so prokarionti/da imajo DNA prosto v citoplazmi/da se delijo s cepitvijo. | x.2	Bakterije v omenjenem biotehnološkem postopku opravljajo mlečnokislinsko vrenje. | x.3 | [SLIKA:zgradba, razmnoževanje in delovanje bakterij_image116.png] | x.4 | [SLIKA:zgradba, razmnoževanje in delovanje bakterij_image117.png] | x.
+
+--- id=20889 vir=RIC/človek in narava.docx (brez preslikave)
+ŽIVALI | x.1	Členonožci | x.2 | |  | organizem B | organizem D | | |---|---|---| | | telesne regije | glavoprsje in zadek | glava, oprsje in zadek | | | število hodilnih okončin | 8 / 4 pari | 6 / 3 pari | | | način premikanja | hoja | hoja in letenje | | x.3	Dihala organizma A: škrge | Dihala organizma D: traheje/vzdušnice/zračnice | x.4	E – Malpighijeve cevke, F – trebušnjača | x.5	Izločanje duš
+
+--- id=20890 vir=RIC/človek in narava.docx (brez preslikave)
+EKOLOGIJA | x.1	Pri majhnih količinah odplak / ob ustreznem mikrobnem delovanju | x.2	Na mestu B: komunalna odpadna voda / industrijska voda | na mestu D: kmetijska odpadna voda | x.3	Mehansko, biološko, kemijsko stopnjo | x.4	Zaradi manjše onesnaženosti je večja koncentracija kisika in zato več rib. / Manjša onesnaženost. | x.5	Zaradi razgradnje organskih snovi naraste biokemijska poraba kisika i
+
+--- id=20891 vir=RIC/človek in narava.docx -> resitev naloge 20816
+LUBADAR | x.1	Zajedalstvo / parazitizem | x.2	Popolna preobrazba | x.3	S feromoni / z dišavnimi snovmi / s kemijskimi izločki | x.4	Samčke lovijo v pasti, v katerih so feromoni oz. dišavne snovi, ki jih oddajajo samičke, in tako se populacija lubadarja zmanjšuje. | x.5	Ker korenine ne dobijo hrane iz listov / ker je prekinjen asimilatni tok / ker so poškodovani floemski deli žil. | x.6	Insekticidi
+
+--- id=20892 vir=RIC/človek in narava.docx -> resitev naloge 20817
+PLANKTON | x.1	Zadrževanje v zgornjih slojih vode / organizmi počasneje tonijo / lebdenje | x.2	V zgornji plasti vode / v trofogenem sloju / v epilimniju / osvetljeni del vode | x.3	Ker tu ni dovolj svetlobe za fotosintezo. | x.4	Ribe se hranijo s planktonom. | x.5	Fitoplankton - zooplankton - ribja mladica - ščuka / fitoplankton - zooplankton - paglavec dvoživke - čaplja | x.6	Povečanje količine 
+
+--- id=20893 vir=RIC/človek in narava.docx -> resitev naloge 20818
+TUJE VRSTE | x.1 	Abiotski / biotski dejavniki so za to vrsto neugodni (lahko so našteti konkretni abiotski ali biotski dejavniki) | x.2 	Širjenje kavlerpe je hitrejše. | x.3 	Strup prizadene rastlinojede organizme / organizme, ki se neposredno hranijo s kavlerpo. | x.4 	V kompeticiji je kavlerpa uspešnejša. | x.5 | | odgovor | točkovanje | | |---|---| | | Kavlerpa vpliva prek prehranjevalne verig
+
+--- id=20894 vir=RIC/človek in narava.docx -> resitev naloge 20819
+ONESNAŽEVANJE | x.1	Ker imajo največjo površino, skozi katero vstopajo onesnažila / polutanti. | x.2	CO se laže veže na hemoglobin kakor kisik, zato hemoglobin ne more oskrbovati celic s kisikom. | x.3	SO2, CO2, NOX, CXHY … | x.4	Ker povzroča poškodbe slušnih čutnic v notranjem ušesu, kar povzroča naglušnost ali gluhost. / Ker deluje škodljivo na živčevje in hormonalni sistem/stres. | x.5	Ozon. | 
+
+--- id=20895 vir=RIC/človek in narava.docx -> resitev naloge 20820
+JEZERO | x.1	Pozimi je temperatura na površini nižja kakor na dnu, poleti pa je obratno. | x.2 | | Biopolimer, ki vsebuje dušik | Naloga biopolimera | | |---|---| | | Beljakovina | Ogradi celico / katalizira reakcije … | | | Nukleinska kislina | Zapisuje lastnosti organizmov / prenaša dedni zapis v naslednjo generacijo … | | 1 točka se podeli za pravilno zapisan stolpec ali vrstico. | x.3	Aminokis
+
+--- id=20896 vir=RIC/človek in narava.docx -> resitev naloge 20821
+EKOLOGIJA | x.1	Odnos med mravljami in ušmi: sožitje. | Odnos med ličinkami pikapolonic in listnimi ušmi: plenilstvo. | x.2	Mravljam preprečimo dostop na drevo in pikapolonice pojedo listne uši. | x.3	Pesticidi so strupeni in škodujejo uporabniku / uničujejo tudi koristne organizme / onesnažijo pridelek in tla ter zaidejo v podtalnico / … | x.4	Ker so zamudni, škropljenje vzame veliko manj časa, s
+
+--- id=20897 vir=RIC/človek in narava.docx -> resitev naloge 20822
+TALNE ŽIVALI | x.1	Da imajo rastline na voljo minerale/hranila. / Da se obnavljajo porabljene mineralne snovi v tleh. | Nepriznano je samo kroženje snovi/brez navedbe mineralov. | x.2	Kraljestvo cepljivk/kraljestvo bakterij, kraljestvo gliv in kraljestvo živali. | x.3	Majhna/nizka. Rastlinska hrana je zaradi celuloze težko prebavljiva/količina iztrebkov je velika. | Nepravilno navajanje dolžine pr
+
+--- id=20898 vir=RIC/človek in narava.docx -> resitev naloge 20823
+VINOGRADNIŠTVO | x.1	Ker imajo na ta način vse trsne cepljenke enake lastnosti kakor rastlina, s katere je cepič. | x.2	Poganjki iz cepičev so drugačni / imajo drugačen genotip kakor poganjki iz podlage. | x.3	S fungicidi uničujejo zajedavske glive, z insekticidi pa žuželke. | x.4	Količina sladkorja v plodovih se poveča, ker zdaj rastline produkte fotosinteze vlagajo v razvoj plodov. | x.5	Plesen 
+
+--- id=20899 vir=RIC/človek in narava.docx -> resitev naloge 20824
+TRADICIONALNO KMETIJSTVO | x.1	Različne rastline potrebujejo minerale v različnih razmerjih. S kolobarjenjem dosežemo, da se porabi večina obstoječih mineralov. | x.2	Za gradnjo organskih snovi, ki vsebujejo dušik. / Za gradnjo aminokislin/beljakovin /nukleotidov/organskih dušikovih baz/nukleinskih kislin. | x.3	Detelja/stročnice živi / živijo v sožitju z dušikovimi bakterijami, ki vežejo zračni d
+
+--- id=20900 vir=RIC/človek in narava.docx (brez preslikave)
+GLOBALNO SEGREVANJE | x.1	Metan/dušikovi oksidi/žveplovi oksidi. | x.2	Sproščanje CO2 povzroča celično dihanje in alkoholno vrenje. | x.3	Bili so v ogljikovih hidratih, beljakovinah, maščobah/škrobu/glukozi/aminokislinah … | x.4	To omogoča fotosinteza. | x.5	Manjša biomasa primarnih proizvajalcev/rastlin med fotosintezo veže manj CO2, zato ga več ostane v atmosferi. | x.6	V prehranjevalnih verigah
+
+--- id=20901 vir=RIC/človek in narava.docx -> resitev naloge 20826
+ŽIVO SREBRO | x.1	Največ Hg (metiliranega živega srebra) bodo vsebovali tuni, ker so na vrhu prehranjevalne verige in se zato v njihovih tkivih nakopiči največ metilnega živega srebra./Tuni, ker so na koncu prehranjevalne verige, vzdolž prehranjevalne verige se v tkivih živali živo srebro koncentrira/kopiči/bioakumulira. | x.2	Več kakor 3,14 kg. | x.3	Ne, ker bi pri takem načinu prehranjevanja kot
+
+--- id=20902 vir=RIC/človek in narava.docx -> resitev naloge 20827
+SOŠKA POSTRV | x.1	Organizme, ki se uspešno križajo in imajo plodne potomce, uvrščamo v isto vrsto. | x.2	Potočnim postrvem ni uspelo naseliti teh pritokov, zaradi fizičnih ovir. | x.3	Dodatni ukrep je (postopen) izlov potočnih postrvi in križancev. | x.4	Drstenje sproži dolžina dneva/razmerje med dnevom in nočjo/količina svetlobe. | x.5	Krivulja (c). | x.6	Čutila se prilagodijo zaznavanju druge v
+
+--- id=20903 vir=RIC/človek in narava.docx (brez preslikave)
+GLOBALNO SEGREVANJE | x.1	Koralnjaki dobijo od alg sladkorje in kisik/produkte fotosinteze. | x.2	Korale postanejo bele, ker pri povišani temperaturi simbiontske alge propadejo. | x.3	Primarna produkcija alg se do koncentracije 0.04 povečuje, potem ostaja enaka. | x.4	Večja ko je primarna produkcija, več hrane imajo korale in hitreje rastejo. | x.5	CO2/ogljikov dioksid se raztaplja v morski vodi i
+
+--- id=20904 vir=RIC/človek in narava.docx -> resitev naloge 20829
+RAST POPULACIJE | x.1	Točka A: Nataliteta je večja od mortalitete.Točka B: Nataliteta in mortaliteta sta enaki. | x.2	Na številčnost populacije vplivajo tudi selitve/migracije. | x.3	Vzrok, da neka populacija ne zraste nad raven, ki jo označuje črka B, je omejenost dobrin v okolju/upor okolja. | x.4	Da se je število ljudi na Zemlji glede na leto 0 podvojilo, je bilo potrebno 1500/1600 let. | x.5	V
+

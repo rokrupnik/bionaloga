@@ -45,9 +45,15 @@ zapis("RIC brez tipa", conn.execute(
     "SELECT COUNT(*) FROM naloga WHERE vir_tip='matura' AND tip_id IS NULL").fetchone()[0])
 
 print("\n=== ČISTOST ===")
+# T-26-008: štejemo tudi bloke pod-odgovorov 'NASLOV\nx.1 …' brez vprašanja —
+# merilo je isto kot pri uvozu, da preverba in uvoz ne moreta razhajati.
+from uvozi_ric import je_blok_resitev                              # noqa: E402
 resitve_kot_naloge = conn.execute(
     "SELECT COUNT(*) FROM naloga WHERE vir_tip='matura' AND besedilo LIKE 'Rešitev%'"
 ).fetchone()[0]
+resitve_kot_naloge += sum(1 for (b,) in conn.execute(
+    "SELECT besedilo FROM naloga WHERE vir_tip='matura' AND besedilo NOT LIKE 'Rešitev%'")
+    if je_blok_resitev(b))
 zapis("nalog, ki so v resnici bloki rešitev", resitve_kot_naloge, resitve_kot_naloge > 0)
 tabele_resitev = sum(1 for (b,) in conn.execute(
     "SELECT besedilo FROM naloga WHERE vir_tip='matura'")
