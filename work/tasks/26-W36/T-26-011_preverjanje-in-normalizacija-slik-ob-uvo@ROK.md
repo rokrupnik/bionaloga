@@ -1,7 +1,7 @@
 ---
 task: T-26-011
 title: Preverjanje in normalizacija slik ob uvozu
-status: ready
+status: notify
 cost-usd: 0.36
 assignee: [ROK]
 requested-by: Rok
@@ -47,15 +47,15 @@ Out:
 
 ## Acceptance criteria
 
-- [ ] Nova pomožna funkcija obstaja in jo uporabljajo vsa tri mesta zapisa
+- [x] Nova pomožna funkcija obstaja in jo uporabljajo vsa tri mesta zapisa
       slike ob uvozu (`klasificiraj.py`, `izvozi_slike.py`, `main.py:nalozi_sliko`).
-- [ ] Ponovljen scenarij iz T-26-010: JPEG s progresivnim zapisom ali Exif
+- [x] Ponovljen scenarij iz T-26-010: JPEG s progresivnim zapisom ali Exif
       glavo, prepisan skozi kateri koli od uvoznih poti, je po uvozu berljiv
       za `je_slika_berljiva()` (vrne `None`), medtem ko je pred prekodiranjem
       vračala napako.
-- [ ] `python test_vmesnik.py` — vse teste zeleno (izhodišče: 5/5).
-- [ ] `python scripts/check_tasks.py` — 0 napak.
-- [ ] Slika, ki je berljiva že ob zapisu, ni po nepotrebnem prekodirana
+- [x] `python test_vmesnik.py` — vse teste zeleno (izhodišče: 5/5).
+- [x] `python scripts/check_tasks.py` — 0 napak.
+- [x] Slika, ki je berljiva že ob zapisu, ni po nepotrebnem prekodirana
       (funkcija najprej preveri, šele nato po potrebi prekodira).
 
 ## Notes
@@ -99,7 +99,64 @@ ločeno nalogo"): isti postopek prekodiranja, ki je bil takrat izveden ročno za
 
 ## Result
 
-<!-- What shipped, what did not, commits, deviations. Written after execution. -->
+Vse sprejemne kriterije izpolnjeno; commit brez push (deploy ni v obsegu).
+
+### Kaj je shipano
+
+1. **`bionaloga/generator.py`** — nova funkcija `normaliziraj_sliko(pot)` tik
+   pod `je_slika_berljiva()`. Najprej preveri; če je slika berljiva, ne naredi
+   nič in ne prekodira. Če ni berljiva in gre za `.jpg`/`.jpeg`, požene
+   `magick <pot> -strip -interlace none -quality 95 <pot>` (prekodiranje na
+   mestu, ime datoteke ostane isto) in ponovno preveri. Vrne `None` ob uspehu
+   oz. opis preostale napake; ob neuspehu izpiše opozorilo in ne vrže izjeme.
+   Za druge formate (`.wmf`, `.emf`) ne poskuša ničesar — to ostane pri
+   `_preveri_slike()` ob izvozu (T-26-009). Dodan `import subprocess`.
+
+2. **`klasificiraj.py`** (standardni uvoz, ~vrstica 285) — klic
+   `normaliziraj_sliko(cilj)` po zapisu slike. Dodan import
+   `from bionaloga.generator import normaliziraj_sliko`.
+
+3. **`izvozi_slike.py`** (tok za velike datoteke, ~vrstica 143) — enak klic po
+   `shutil.copyfileobj(src, dst)`, enak import.
+
+4. **`bionaloga/main.py` `nalozi_sliko()`** (ročni upload, ~vrstica 227) — klic
+   `generator.normaliziraj_sliko(SLIKE_POT / ime)` po zapisu, pred
+   `baza.dodaj_sliko()`.
+
+### Odstopanje od načrta (majhno, namerno)
+
+V `klasificiraj.py` se pri `.emf`/`.wmf` po uspešni pretvorbi z LibreOffice
+`cilj` prestavi na nastalo `.png` datoteko (`cilj = png`), da se normalizacija
+požene nad datoteko, ki dejansko ostane na disku, in ne nad že izbrisanim
+izvirnikom. Načrt tega ni omenjal; brez tega bi klic tekel nad neobstoječo potjo.
+
+### Preverjanje
+
+| preverba | izid |
+|---|---|
+| realni pokvarjeni vzorec `UnexpectedEndOfFileError` (kopija, izvirnik nedotaknjen) | pred: `UnexpectedEndOfFileError` → po `normaliziraj_sliko()`: `None` |
+| realni pokvarjeni vzorec `UnrecognizedImageError` (kopija) | pred: `UnrecognizedImageError` → po: `None` |
+| berljiv JPEG skozi `normaliziraj_sliko()` | bajti nespremenjeni (ni odvečnega prekodiranja) |
+| e2e prek `POST /naloge/{id}/slika` s pokvarjenim JPEG-om | uvoz 200, datoteka po uvozu berljiva (`None`); testna naloga in datoteka pobrisani za sabo |
+| `python test_vmesnik.py` | 5/5 ok |
+| `python test_uvozi_ric.py` | vsi testi ok |
+| `python scripts/check_tasks.py` | 11 tasks, 0 errors |
+| uvoz obeh skript (`import klasificiraj, izvozi_slike`) | ok — nova odvisnost na paket `bionaloga` ne pokvari zagona |
+
+Za vzorce so bile uporabljene **kopije** treh od 9 neveznih neberljivih datotek
+iz `slike/` (izvirniki niso bili spremenjeni — te niso v obsegu te naloge,
+glej Scope/Out). Umetno reproduciran progresiven JPEG
+(`magick -interlace plane`) se je izkazal za berljiv, zato so bili uporabljeni
+realni vzorci obeh znanih načinov odpovedi.
+
+### Opombe
+
+- Obeh 9 obstoječih neberljivih datotek v `slike/` ta naloga namenoma ne
+  popravlja (Out of scope); nova logika velja od zdaj naprej za vsak nov uvoz.
+- `klasificiraj.py` in `izvozi_slike.py` je odslej treba zaganjati iz korena
+  projekta (kot doslej dokumentirano), ker uvažata paket `bionaloga`.
+- Nič ni bilo poslano navzven, nič izbrisano, brez `push` (POLICY D9/D5 —
+  deploy ni v obsegu).
 
 ## Ask (verbatim, from Discord, Rok)
 

@@ -1,5 +1,6 @@
 import io
 import re
+import subprocess
 from pathlib import Path
 from docx import Document
 from docx.image.image import Image as DocxImage
@@ -24,6 +25,43 @@ def je_slika_berljiva(pot) -> str | None:
     except Exception as e:  # UnrecognizedImageError in vse ostalo pri branju
         return f"{type(e).__name__}: {e}" if str(e) else type(e).__name__
     return None
+
+
+def normaliziraj_sliko(pot) -> str | None:
+    """Preveri sveže zapisano sliko in jo po potrebi prekodira na mestu.
+
+    Vrne None, če je slika (po morebitnem prekodiranju) berljiva za
+    `python-docx`, sicer opis napake, ki ostane.
+
+    Uporablja se takoj po zapisu slike ob uvozu (T-26-011), da se pokvarjeni
+    JPEG-i (Exif glava, progresiven zapis) ne nabirajo v `slike/`. Ime datoteke
+    se ne spremeni, ker nanj kaže `[SLIKA:...]` v besedilu naloge.
+    """
+    pot = Path(pot)
+    razlog = je_slika_berljiva(pot)
+    if razlog is None:
+        return None
+
+    # Prekodiramo samo JPEG; .wmf/.emf in podobno ImageMagick ne reši,
+    # to prijavi obstoječa preverba v _preveri_slike() ob izvozu.
+    if pot.suffix.lower() not in {".jpg", ".jpeg"}:
+        return razlog
+
+    try:
+        subprocess.run(
+            ["magick", str(pot), "-strip", "-interlace", "none", "-quality", "95", str(pot)],
+            check=True, capture_output=True, timeout=60,
+        )
+    except Exception as e:
+        print(f"OPOZORILO: prekodiranje slike ni uspelo ({pot.name}): {e}")
+        return razlog
+
+    razlog_po = je_slika_berljiva(pot)
+    if razlog_po:
+        print(f"OPOZORILO: slika je neberljiva tudi po prekodiranju ({pot.name}): {razlog_po}")
+    else:
+        print(f"Slika normalizirana ob uvozu: {pot.name} (prej: {razlog})")
+    return razlog_po
 
 
 def _preveri_slike(besedilo: str, slike_po_imenu: dict) -> list[str]:

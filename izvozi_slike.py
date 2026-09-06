@@ -19,6 +19,8 @@ import json
 import shutil
 from pathlib import Path
 
+from bionaloga.generator import normaliziraj_sliko
+
 
 def preberi_relacije(rels_xml: str) -> dict:
     """Vrne preslikavo {rId: ime_datoteke} za vse slike v relacijski datoteki."""
@@ -142,6 +144,7 @@ def izvozi_slike(vhodna_pot: str):
                 cilj = mapa_slik / novo_ime
                 with z.open(ime_v_zipu) as src, open(cilj, 'wb') as dst:
                     shutil.copyfileobj(src, dst)
+                normaliziraj_sliko(cilj)   # T-26-011: preveri in po potrebi prekodiraj
                 stevec += 1
 
         print(f"Izvoženih slik: {stevec} → {mapa_slik}/")

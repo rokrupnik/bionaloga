@@ -35,6 +35,8 @@ from xml.etree import ElementTree
 import anthropic
 from dotenv import load_dotenv
 
+from bionaloga.generator import normaliziraj_sliko
+
 load_dotenv(Path(__file__).parent / ".env", override=True)
 
 # ---------------------------------------------------------------------------
@@ -282,7 +284,9 @@ def ekstrahiraj_besedilo_in_slike(pot: Path) -> tuple[str, dict]:
                     png = _konvertiraj_emf(cilj)
                     if png:
                         cilj.unlink()
+                        cilj = png
                         novo_ime = png.name
+                normaliziraj_sliko(cilj)   # T-26-011: preveri in po potrebi prekodiraj
                 rid_to_ime[rid] = novo_ime
 
             doc_xml = z.read("word/document.xml").decode("utf-8")

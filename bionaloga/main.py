@@ -225,6 +225,9 @@ async def nalozi_sliko(naloga_id: int, slika: UploadFile = File(...)):
     with open(SLIKE_POT / ime, "wb") as f:
         shutil.copyfileobj(slika.file, f)
 
+    # T-26-011: preveri berljivost za generator in po potrebi prekodiraj
+    generator.normaliziraj_sliko(SLIKE_POT / ime)
+
     baza.dodaj_sliko(naloga_id, ime)
 
     # Dodaj placeholder na konec besedila, da se slika izriše v Wordu
