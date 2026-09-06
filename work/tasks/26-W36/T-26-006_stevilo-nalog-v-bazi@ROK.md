@@ -2,7 +2,7 @@
 task: T-26-006
 title: Koliko nalog je v bazi
 status: notify
-cost-usd: 0.15
+cost-usd: 0.60
 assignee: [ROK]
 requested-by: Rok
 week: 26-W36
