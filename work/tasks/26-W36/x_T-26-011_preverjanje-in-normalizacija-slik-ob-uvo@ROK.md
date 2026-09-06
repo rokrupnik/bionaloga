@@ -1,14 +1,14 @@
 ---
 task: T-26-011
 title: Preverjanje in normalizacija slik ob uvozu
-status: notify
+status: done
 cost-usd: 1.78
 assignee: [ROK]
 requested-by: Rok
 week: 26-W36
 created: 2026-09-06
-completed:
-notified:
+completed: 2026-09-06
+notified: 2026-09-06
 blocked-by: []
 visibility: team
 ---
@@ -163,3 +163,5 @@ realni vzorci obeh znanih načinov odpovedi.
 Ob uvozu naloge samodejno preveri, ali je slikovna datoteka berljiva za generator testov, in jo po potrebi normalizira/pretvori, da se pokvarjene ali neberljive slike ne nabirajo naknadno.
 
 Follow-up of T-26-010 (Odstranitev pokvarjenih slikovnih datotek iz slike/), closed ?.
+
+Closed 2026-09-06 by Rok via Discord: potrjujem
