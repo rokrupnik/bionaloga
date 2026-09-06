@@ -1,7 +1,7 @@
 ---
 task: T-26-009
 title: Preverba naj pokvarjene slike prijavi, ne pa da izvoz pade
-status: ready
+status: blocked
 cost-usd: 0.41
 assignee: [ROK]
 requested-by: ROK
@@ -82,3 +82,11 @@ padlo. Brez dodatne odvisnosti (Pillow ni nameščen).
 STATUS: ready — popravim `_preveri_slike()` v generator.py, da zazna
 pokvarjene slikovne datoteke (ne le manjkajoče/nepodprte) in jih izloči iz
 izvoza namesto da izvoz pade, ter dodam enak zaznavo v poročilo `preveri_ric.py`.
+
+Moss: planning ended without `STATUS: ready|needs-info`. Reply was:
+
+**Kaj se dogaja:** Preveril sem nalogo T-26-009 — gre za znano težavo, da preverba pri izvozu testa v Word včasih pade, ker naleti na pokvarjeno sliko med naključno izbranimi nalogami.
+
+Ugotovil sem točen vzrok in ga tudi potrdil na dejanski pokvarjeni datoteki: sistem trenutno preveri le, ali slika obstaja in ima pravo končnico, ne pa ali jo je dejansko mogoče odpreti. Zahteva je jasna in izvedljiva brez dodatnih vprašanj, zato sem napisal podroben načrt popravka v naloge datoteko — pokvarjene slike se bodo zaznale in prijavile, izvoz testa pa jih bo preskočil namesto da se sesuje.
+
+Od tebe ne rabim ničesar.
