@@ -2,7 +2,7 @@
 task: T-26-009
 title: Preverba naj pokvarjene slike prijavi, ne pa da izvoz pade
 status: notify
-cost-usd: 0.56
+cost-usd: 1.67
 assignee: [ROK]
 requested-by: ROK
 week: 26-W36
