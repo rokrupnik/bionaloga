@@ -1,14 +1,14 @@
 ---
 task: T-26-010
 title: Odstranitev pokvarjenih slikovnih datotek iz slike/
-status: notify
+status: done
 cost-usd: 5.69
 assignee: [ROK]
 requested-by: Rok
 week: 26-W36
 created: 2026-09-06
-completed:
-notified:
+completed: 2026-09-06
+notified: 2026-09-06
 blocked-by: []
 visibility: team
 ---
@@ -181,3 +181,5 @@ Brez `push` — deploy ni v obsegu te naloge.
 Iz mape slike/ odstrani 21 pokvarjenih slikovnih datotek (najdenih pri T-26-008/T-26-009), po potrebi jih nadomesti z veljavnimi.
 
 Follow-up of T-26-009 (Preverba naj pokvarjene slike prijavi, ne pa da izvoz pade).
+
+Closed 2026-09-06 by Rok via Discord: ok, lahko zacnes novo nalogo, to pa zapri
