@@ -60,3 +60,72 @@ nalogo.
    so ostali brez `tip_id` ali kjer je bila klasifikacija negotova.
 
 STATUS: ready — določim tip vseh 92 nalog brez `tip_id` po obstoječi tipologiji in posodobim bazo.
+
+## Result
+
+Vseh 92 nalog brez `tip_id` je klasificiranih in zapisanih v `baza.db`.
+`SELECT COUNT(*) FROM naloga WHERE tip_id IS NULL;` vrne **0**.
+`python3 scripts/check_tasks.py` → `7 tasks, 0 errors`.
+
+### Merilo klasifikacije
+
+Besedilo vsake naloge sem razdelil na podvprašanja in tip določil po
+**prevladujoči obliki odgovora** (kot predvideva `## Plan`, korak 2):
+
+| tip | merilo |
+|---|---|
+| 1 Izbirni tip | v besedilu so ponujene izbire `A) B) C) D)` |
+| 3 Daljši odgovor | ≥ 40 % podvprašanj zahteva razlago/utemeljitev (razložite, pojasnite, utemeljite, opišite, postavite hipotezo) |
+| 4 Dopolnjevanje/ujemanje | > 50 % podvprašanj je dopolnjevanje, označevanje na sliki, povezovanje, razvrščanje, risanje grafa |
+| 2 Kratki odgovor | vse ostalo |
+
+Merilo je zapisano kot skripta `scripts/tipi_nalog_T-26-007.py`, da je odločitev
+ponovljiva in preverljiva (skripta samo izpisuje, v bazo ne piše).
+
+### Razporeditev popravljenih nalog
+
+| tip | popravljenih |
+|---|---|
+| 1 Izbirni tip | 0 |
+| 2 Kratki odgovor | 84 |
+| 3 Daljši odgovor | 7 (18279, 18280, 18281, 18282, 18292, 18718, 20556) |
+| 4 Dopolnjevanje/ujemanje | 1 (8704) |
+| **skupaj** | **92** |
+
+Da med njimi ni nobenega izbirnega tipa, je pričakovano: 91 od 92 nalog je
+strukturiranih maturitetnih nalog RIC (`x.1`, `151.1.` …) z odprtimi
+podvprašanji, ne pa nalog z izbirnimi odgovori.
+
+### Sporni primeri (klasificirani, a jih velja pregledati)
+
+1. **25 zapisov niso naloge, ampak rešitve** (id 20037–20061, vir
+   `RIC/transportni sistemi.docx`). Besedilo so odgovori (»Rešitev 41. naloga«,
+   »x.1 Metulj«), ne vprašanja. Dobili so tip 2, ker je oblika odgovorov kratka,
+   vendar je pravi problem uvoza to, da so v tabeli `naloga` sploh. V bazi je
+   še 126 podobnih zapisov z rešitvami (61 s tipom 3, 43 s tipom 4, 22 brez).
+   **Predlog: ločena naloga** za pregled in izločitev/označitev teh zapisov —
+   tip je pri njih tako ali tako brez pomena.
+2. **8704** — edino besedilo z enim samim navodilom (»Na sliki obkrožite dele
+   ogrodja …«). Tip 4, ker je odgovor označevanje na sliki, ne zapis besedila;
+   pri enem samem podvprašanju je merilo prevladujoče oblike šibko.
+3. **Nekaj zapisov je sestavljenih iz dveh maturitetnih nalog hkrati**
+   (npr. 17835 = 151.1–151.10 + 152.1–152.5, 20977 = 76.x + 77.x). Tip je
+   določen za celoto; če bi zapise razdelili, bi bila lahko tipa različna.
+4. **Meja 2 ↔ 3 je v obstoječi bazi neenotna.** Primerljive strukturirane
+   naloge iz istega vira imajo že zdaj tako tip 2 (19889, 19890) kot tip 3
+   (19908, 19910). Uporabil sem svoje merilo dosledno na vseh 92; obstoječih
+   nalog nisem prekvalificiral (izven `## Scope`).
+
+### Deviacije in predpostavke
+
+- Pred pisanjem je narejena varnostna kopija `baza_T-26-007_backup.db`
+  (D4: dry run + backup + rollback). Rollback: `cp baza_T-26-007_backup.db baza.db`.
+  Kopija je izločena iz gita z novim vzorcem `baza_*_backup.db` v `.gitignore`.
+- Zapis je bil transakcijski, en `UPDATE … WHERE id=? AND tip_id IS NULL`
+  na nalogo; drugih polj se nisem dotaknil (`vsebina_koda`, `besedilo`,
+  `ima_sliko` … so nespremenjeni).
+- Deploy ni bil v obsegu naloge, zato ni potiska (`push`).
+
+### Commit
+
+`work: T-26-007 — tip_id za 92 nalog brez tipa`

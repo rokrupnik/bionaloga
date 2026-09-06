@@ -8,6 +8,7 @@ __pycache__/
 # Baza in podatki
 # baza.db
 baza_v0.db
+baza_*_backup.db
 
 # Vmesni rezultati uvoza RIC nalog (izpeljani iz input/ric/)
 ric_delo/
