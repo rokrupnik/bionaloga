@@ -1,14 +1,14 @@
 ---
 task: T-26-007
 title: Določitev manjkajočih tipov nalog
-status: notify
+status: done
 cost-usd: 3.66
 assignee: [ROK]
 requested-by: Rok
 week: 26-W36
 created: 2026-09-06
-completed:
-notified:
+completed: 2026-09-06
+notified: 2026-09-06
 blocked-by: []
 visibility: team
 ---
@@ -129,3 +129,5 @@ podvprašanji, ne pa nalog z izbirnimi odgovori.
 ### Commit
 
 `work: T-26-007 — tip_id za 92 nalog brez tipa`
+
+Closed 2026-09-06 by Rok via Discord: Da, lahko naredis novo nalogo. to nalogo pa zapri
