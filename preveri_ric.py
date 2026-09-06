@@ -72,7 +72,9 @@ slik = conn.execute("""SELECT COUNT(*) FROM slika s JOIN naloga n ON n.id=s.nalo
 zapis("slika zapisov (RIC)", f"{slik:,}")
 manjka = []
 napacen_format = []
+pokvarjene = []
 PODPRTI = {".png", ".jpg", ".jpeg", ".gif", ".bmp", ".tiff"}
+from bionaloga.generator import je_slika_berljiva                 # noqa: E402
 for r in conn.execute("""SELECT s.ime_datoteke FROM slika s JOIN naloga n ON n.id=s.naloga_id
                          WHERE n.vir_tip='matura'"""):
     p = SLIKE / r["ime_datoteke"]
@@ -80,11 +82,18 @@ for r in conn.execute("""SELECT s.ime_datoteke FROM slika s JOIN naloga n ON n.i
         manjka.append(r["ime_datoteke"])
     elif p.suffix.lower() not in PODPRTI:
         napacen_format.append(r["ime_datoteke"])
+    else:
+        razlog = je_slika_berljiva(p)
+        if razlog:
+            pokvarjene.append(f'{r["ime_datoteke"]} ({razlog})')
 zapis("manjkajočih datotek", len(manjka), bool(manjka))
 for m in manjka[:3]:
     print(f"       {m}")
 zapis("nepodprtih formatov (bi izpadle iz testa)", len(napacen_format), bool(napacen_format))
 for m in napacen_format[:3]:
+    print(f"       {m}")
+zapis("pokvarjenih datotek (bi izpadle iz testa)", len(pokvarjene), bool(pokvarjene))
+for m in pokvarjene[:3]:
     print(f"       {m}")
 osirotele = conn.execute("""SELECT COUNT(*) FROM slika s LEFT JOIN naloga n ON n.id=s.naloga_id
                             WHERE n.id IS NULL""").fetchone()[0]

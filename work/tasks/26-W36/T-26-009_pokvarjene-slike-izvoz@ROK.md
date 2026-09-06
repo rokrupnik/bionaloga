@@ -1,7 +1,7 @@
 ---
 task: T-26-009
 title: Preverba naj pokvarjene slike prijavi, ne pa da izvoz pade
-status: ready
+status: notify
 cost-usd: 0.56
 assignee: [ROK]
 requested-by: ROK
@@ -79,14 +79,52 @@ padlo. Brez dodatne odvisnosti (Pillow ni nameščen).
      nalogo, in preveri, da je v vrnjenih `napake` omenjena kot izpuščena
      (ne pade).
 
-STATUS: ready — popravim `_preveri_slike()` v generator.py, da zazna
-pokvarjene slikovne datoteke (ne le manjkajoče/nepodprte) in jih izloči iz
-izvoza namesto da izvoz pade, ter dodam enak zaznavo v poročilo `preveri_ric.py`.
+## Result
 
-Moss: planning ended without `STATUS: ready|needs-info`. Reply was:
+Popravljeno in preverjeno. Izvoz v Word ne pade več na pokvarjeni slikovni
+datoteki, preverba jo prijavi kot težavo.
 
-**Kaj se dogaja:** Preveril sem nalogo T-26-009 — gre za znano težavo, da preverba pri izvozu testa v Word včasih pade, ker naleti na pokvarjeno sliko med naključno izbranimi nalogami.
+**Spremembe**
 
-Ugotovil sem točen vzrok in ga tudi potrdil na dejanski pokvarjeni datoteki: sistem trenutno preveri le, ali slika obstaja in ima pravo končnico, ne pa ali jo je dejansko mogoče odpreti. Zahteva je jasna in izvedljiva brez dodatnih vprašanj, zato sem napisal podroben načrt popravka v naloge datoteko — pokvarjene slike se bodo zaznale in prijavile, izvoz testa pa jih bo preskočil namesto da se sesuje.
+- `bionaloga/generator.py`
+  - nova javna funkcija `je_slika_berljiva(pot)`: poskusi
+    `docx.image.image.Image.from_file(pot)` (ista pot, ki jo `add_picture()`
+    uporablja interno) v `try/except Exception`; vrne `None` ob uspehu, sicer
+    `"<TipNapake>: <sporočilo>"`. Brez nove odvisnosti (Pillow ni potreben).
+  - `_preveri_slike()`: za sliko, ki obstaja in ima podprto pripono, dodatno
+    preveri berljivost; ob napaki doda
+    `slika je pokvarjena (<ime>): <razlog>`. `generiraj_test()` tako nalogo
+    izpusti (obstoječi `continue`) in jo navede v `napake`.
+  - `_dodaj_besedilo_s_slikami()` nespremenjen — do `add_picture()` na
+    pokvarjeni sliki po zgornjem sploh ne pride.
+  - dopolnjen docstring `generiraj_test()`.
+- `preveri_ric.py`, razdelek `=== SLIKE ===`: nov števec
+  `pokvarjenih datotek (bi izpadle iz testa)` (po vzoru `napacen_format`),
+  označen z `!!`, z izpisom do 3 primerov skupaj z razlogom.
 
-Od tebe ne rabim ničesar.
+**Preverjeno**
+
+- `je_slika_berljiva()` na znano pokvarjeni
+  `slike/nukleinske kisline/nukleinske kisline_image56.jpeg`
+  → `UnrecognizedImageError`; na zdravi datoteki iste mape → `None`.
+- `generiraj_test([17933])` (edina RIC naloga s to sliko) vrne dokument in
+  napako `Naloga 17933: slika je pokvarjena (…) — izpuščena`; ne vrže izjeme.
+- `preveri_ric.py` 10× zapored: nobenega `UnrecognizedImageError` in nobenega
+  `Traceback`; razdelek `IZVOZ V WORD` se v vseh 10 zagonih izvede do konca.
+- `python3 scripts/check_tasks.py` → `9 tasks, 0 errors`.
+- `python3 test_vmesnik.py` → `vsi testi ok (5)`.
+
+**Opombe / odstopanja**
+
+- Za zagone je uporabljen `.venv/bin/python` — sistemski `python3` v tem okolju
+  nima `python-docx`/`fastapi`.
+- `preveri_ric.py` zdaj konča z izhodno kodo 1 (`1 TEŽAV`), ker je pokvarjena
+  slika po zahtevi naloge prijavljena kot težava. Prej je bila koda 0 (v ~5 od
+  6 zagonov) ali sesutje. To je pričakovano in ostane, dokler datoteka ni
+  popravljena — kar je izrecno izven obsega te naloge.
+- Preverba pokvarjenosti bere vseh 5.490 RIC slikovnih zapisov (in vsako sliko
+  v izvozu); zagon `preveri_ric.py` je zato nekaj sekund počasnejši. Sprejemljivo.
+- Popravljanje same pokvarjene datoteke in preostalih 20 pokvarjenih slik izven
+  RIC (najdeno pri T-26-008) ostaja odprto — vredno svoje naloge.
+
+Commit: glej `git log` za `T-26-009`.

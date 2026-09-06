@@ -2,6 +2,7 @@ import io
 import re
 from pathlib import Path
 from docx import Document
+from docx.image.image import Image as DocxImage
 from docx.shared import Inches, Pt
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 
@@ -12,8 +13,21 @@ SLIKE_POT = Path(__file__).parent.parent / "slike"
 PODPRTI_FORMATI = {".png", ".jpg", ".jpeg", ".gif", ".bmp", ".tiff"}
 
 
+def je_slika_berljiva(pot) -> str | None:
+    """Vrne None, če python-docx sliko zna odpreti, sicer opis napake.
+
+    Uporabi isto pot kot `doc.add_picture()` interno, zato zanesljivo napove,
+    ali bo vstavljanje slike padlo (pokvarjene datoteke v `slike/`).
+    """
+    try:
+        DocxImage.from_file(str(pot))
+    except Exception as e:  # UnrecognizedImageError in vse ostalo pri branju
+        return f"{type(e).__name__}: {e}" if str(e) else type(e).__name__
+    return None
+
+
 def _preveri_slike(besedilo: str, slike_po_imenu: dict) -> list[str]:
-    """Vrne seznam manjkajočih ali nepodprtih slik za nalogo."""
+    """Vrne seznam manjkajočih, nepodprtih ali pokvarjenih slik za nalogo."""
     napake = []
     for m in re.finditer(r'\[SLIKA:([^\]]+)\]', besedilo):
         ime = m.group(1).strip()
@@ -22,6 +36,10 @@ def _preveri_slike(besedilo: str, slike_po_imenu: dict) -> list[str]:
             napake.append(f"slika ne obstaja: {ime}")
         elif pot.suffix.lower() not in PODPRTI_FORMATI:
             napake.append(f"format ni podprt ({pot.suffix}): {ime}")
+        else:
+            razlog = je_slika_berljiva(pot)
+            if razlog:
+                napake.append(f"slika je pokvarjena ({ime}): {razlog}")
     return napake
 
 
@@ -155,7 +173,8 @@ def generiraj_test(ids_nalog: list[int], naslov: str = "Test iz biologije",
     """Ustvari .docx test z izbranimi nalogami.
 
     Vrne (vsebina_docx, seznam_napak).
-    Naloge z manjkajočimi/nepodprtimi slikami so izpuščene iz dokumenta.
+    Naloge z manjkajočimi/nepodprtimi/pokvarjenimi slikami so izpuščene iz
+    dokumenta.
     Če je z_resitvami=True, se na koncu doda razdelek z rešitvami; oštevilčenje
     ustreza nalogam v testu (izpuščene naloge ne pokvarijo številčenja).
     """
