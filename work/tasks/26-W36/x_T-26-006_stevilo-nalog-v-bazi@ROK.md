@@ -1,14 +1,14 @@
 ---
 task: T-26-006
 title: Koliko nalog je v bazi
-status: notify
+status: done
 cost-usd: 0.76
 assignee: [ROK]
 requested-by: Rok
 week: 26-W36
 created: 2026-09-06
-completed:
-notified:
+completed: 2026-09-06
+notified: 2026-09-06
 blocked-by: []
 visibility: team
 ---
@@ -75,3 +75,5 @@ Odstopanja in opombe:
 ## Ask (verbatim, from Discord, Rok)
 
 Nova naloga, prestej, koliko je vseh nalog v bazi
+
+Closed 2026-09-06 by Rok via Discord: Lahko gre dolocanje manjkajocih tipov v novo nalogo. Zapri to nalogo.
