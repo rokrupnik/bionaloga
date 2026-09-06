@@ -162,6 +162,6 @@ vzorči naloge in včasih zadene prav to. Napaka obstaja tudi na varnostni kopij
 pred posegom. Predlog: nova naloga — preverba naj pokvarjene slike prijavi kot
 težavo (in jih izvoz preskoči), ne pa da pade.
 
-Rok je 6. 9. 2026 predlog odobril → ustvarjena [T-26-009](T-26-009_pokvarjene-slike-izvoz@ROK.md).
+Rok je 6. 9. 2026 predlog odobril → ustvarjena T-26-009.
 
 Closed 2026-09-06 by Rok via Discord: v redu, zapri
