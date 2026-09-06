@@ -1,7 +1,7 @@
 ---
 task: T-26-010
 title: Odstranitev pokvarjenih slikovnih datotek iz slike/
-status: needs-info
+status: ready
 cost-usd: 2.83
 assignee: [ROK]
 requested-by: Rok
@@ -114,7 +114,17 @@ Možnosti, kot jih vidim:
 Ne izvajam nobene od njih sam: (2) in (3) sta nepovratni oz. presegata obseg te
 naloge (POLICY.md D9).
 
-STATUS: needs-info — brisanje 21 slik in čiščenje baze je izvedeno in preverjeno; odprto ostaja, kaj s 21 nalogami, ki so še vedno izpuščene iz izvoza, ker so brez slike neodgovorljive.
+### Odločitev Roka (2026-09-06, Discord)
+
+Rok je izbral možnost (2): za nalogo 17933 in za tiste od preostalih 20, kjer
+izvirni `.docx` obstaja v `input/` (18 od 20), poskusi znova izvleči slike iz
+izvirnika in preveriti veljavnost, preden se karkoli šteje za trajno izgubljeno.
+Za tiste, kjer vira ni ali je slika v viru prav tako pokvarjena (2 od 20), ostane
+stanje kot je (izpuščene iz izvoza).
+
+Naloga je pripravljena za izvedbo.
+
+STATUS: ready — Rok je potrdil obnovo slik iz izvirnikov (možnost 2); naslednji korak poskusi izvleči slike za nalogo 17933 in preostalih 18/20 z virom v `input/`.
 
 ## Ask (verbatim, from Discord, Rok)
 
