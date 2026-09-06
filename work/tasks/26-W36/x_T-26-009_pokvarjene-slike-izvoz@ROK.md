@@ -1,14 +1,14 @@
 ---
 task: T-26-009
 title: Preverba naj pokvarjene slike prijavi, ne pa da izvoz pade
-status: notify
+status: done
 cost-usd: 1.82
 assignee: [ROK]
 requested-by: ROK
 week: 26-W36
 created: 2026-09-06
-completed:
-notified:
+completed: 2026-09-06
+notified: 2026-09-06
 blocked-by: []
 visibility: team
 ---
@@ -128,3 +128,5 @@ datoteki, preverba jo prijavi kot težavo.
   RIC (najdeno pri T-26-008) ostaja odprto — vredno svoje naloge.
 
 Commit: glej `git log` za `T-26-009`.
+
+Closed 2026-09-06 by Rok via Discord: odstrani pokvarjene datoteke (nov task), tega lahko zapres
