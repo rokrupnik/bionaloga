@@ -2,7 +2,7 @@
 task: T-26-007
 title: Določitev manjkajočih tipov nalog
 status: ready
-cost-usd: 0.19
+cost-usd: 3.51
 assignee: [ROK]
 requested-by: Rok
 week: 26-W36
