@@ -2,7 +2,7 @@
 task: T-26-011
 title: Preverjanje in normalizacija slik ob uvozu
 status: notify
-cost-usd: 1.66
+cost-usd: 1.78
 assignee: [ROK]
 requested-by: Rok
 week: 26-W36
