@@ -1,7 +1,7 @@
 ---
 task: T-26-009
 title: Preverba naj pokvarjene slike prijavi, ne pa da izvoz pade
-status: blocked
+status: ready
 cost-usd: 0.41
 assignee: [ROK]
 requested-by: ROK
