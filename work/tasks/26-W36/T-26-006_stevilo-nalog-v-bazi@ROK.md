@@ -2,6 +2,7 @@
 task: T-26-006
 title: Koliko nalog je v bazi
 status: ready
+cost-usd: 0.15
 assignee: [ROK]
 requested-by: Rok
 week: 26-W36
