@@ -2,7 +2,7 @@
 task: T-26-008
 title: Izloči zapise rešitev, ki so v tabeli naloga kot naloge
 status: notify
-cost-usd: 3.77
+cost-usd: 3.87
 assignee: [ROK]
 requested-by: ROK
 week: 26-W36
