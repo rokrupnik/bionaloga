@@ -1,14 +1,14 @@
 ---
 task: T-26-008
 title: Izloči zapise rešitev, ki so v tabeli naloga kot naloge
-status: notify
+status: done
 cost-usd: 3.87
 assignee: [ROK]
 requested-by: ROK
 week: 26-W36
 created: 2026-09-06
-completed:
-notified:
+completed: 2026-09-06
+notified: 2026-09-06
 blocked-by: []
 visibility: team
 ---
@@ -163,3 +163,5 @@ pred posegom. Predlog: nova naloga — preverba naj pokvarjene slike prijavi kot
 težavo (in jih izvoz preskoči), ne pa da pade.
 
 Rok je 6. 9. 2026 predlog odobril → ustvarjena [T-26-009](T-26-009_pokvarjene-slike-izvoz@ROK.md).
+
+Closed 2026-09-06 by Rok via Discord: v redu, zapri
