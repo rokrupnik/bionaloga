@@ -20,3 +20,4 @@ at,task,kind,who,duration_s,cost_usd,model,input_tokens,output_tokens,cache_read
 2026-09-06T16:38:40+00:00,T-26-010,reply,Rok,29,0.1921,"claude-haiku-4-5-20251001,claude-sonnet-5",8,1636,190423,33083,4,needs-info
 2026-09-06T16:44:13+00:00,T-26-010,task,Rok,326,2.5414,"claude-haiku-4-5-20251001,claude-opus-5[1m]",76,20192,2531502,76510,38,notify
 2026-09-06T17:35:44+00:00,T-26-010,reply,Rok,16,0.1310,"claude-haiku-4-5-20251001,claude-sonnet-5",2,357,24432,29146,1,notify
+2026-09-06T17:37:43+00:00,T-26-011,plan,Rok,116,0.3643,"claude-haiku-4-5-20251001,claude-sonnet-5",20,7364,557465,44252,15,ready
