@@ -1,7 +1,7 @@
 ---
 task: T-26-006
 title: Koliko nalog je v bazi
-status: open
+status: ready
 assignee: [ROK]
 requested-by: Rok
 week: 26-W36
@@ -16,22 +16,16 @@ visibility: team
 
 ## Goal
 
-<!-- One paragraph. What changes for the user when this is done. -->
+Rok dobi točno število nalog, ki so trenutno shranjene v bazi.
 
 ## Scope
 
-In:
-Out:
+In: preštetje vrstic v tabeli `naloga` v `baza.db` in zapis rezultata v to nalogo.
+Out: sprememba podatkov, sprememba sheme, poročilo po vsebini/tipu (razen če Rok kasneje zaprosi).
 
 ## Acceptance criteria
 
-<!--
-Prefer commands: a criterion that is a command exits 0 or it does not, and
-nobody has to argue about it. Where "done" is a human judgement (copy,
-design), say so and describe what done looks like instead of faking a check.
--->
-
-- [ ]
+- [ ] `sqlite3 baza.db "SELECT COUNT(*) FROM naloga;"` izveden, rezultat zapisan v `## Result` spodaj
 
 ## Notes
 
@@ -39,7 +33,7 @@ design), say so and describe what done looks like instead of faking a check.
 
 ## Plan
 
-<!-- Exact files and current vs. target state. Written before execution. -->
+Poženi `sqlite3 baza.db "SELECT COUNT(*) FROM naloga;"` in zapiši število v `## Result`.
 
 ## Result
 
