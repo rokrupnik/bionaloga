@@ -1,7 +1,7 @@
 ---
 task: T-26-008
 title: Izloči zapise rešitev, ki so v tabeli naloga kot naloge
-status: open
+status: ready
 assignee: [ROK]
 requested-by: ROK
 week: 26-W36
@@ -52,7 +52,41 @@ ročno.
 
 ## Plan
 
-<!-- Napisano pred izvedbo. -->
+Potrjeno pregledano: id 20037–20061 (`RIC/transportni sistemi.docx`) so res
+bloki rešitev oblike `NASLOV\nx.1 <kratek odgovor>\nx.2 ...` — obstoječi
+`je_blok_resitev()` v `uvozi_ric.py` tega vzorca ne lovi (lovi le `Rešitev...`
+in razpredelnico točk). Ta vzorec pa ni edinstven zapisom rešitev: enak
+`NASLOV\nx.1 ...` obstaja tudi pri pravih vprašanjih (npr. id 16138
+`CELICA / x.1 V čem se prokariontska celica ... ?`). Ločnica: prava vprašanja
+imajo `?` ali ukazno besedo (glej `UKAZ` v `scripts/tipi_nalog_T-26-007.py`),
+bloki rešitev ne.
+
+1. Varnostna kopija: `cp baza.db baza_T-26-008_backup.db` pred vsakim pisanjem.
+   Rollback: `cp baza_T-26-008_backup.db baza.db` (zapiši v Result).
+2. V `uvozi_ric.py` dodaj `je_blok_resitev_xn(besedilo)`: ujema vzorec
+   `^[A-ZČŠŽĐ][A-ZČŠŽĐ0-9 ,\-/()]{2,60}\n\s*[Xx]\.1\b` IN ne vsebuje `?` IN ne
+   vsebuje nobene besede iz `UKAZ`.
+3. Suhi tek najprej: poženi detekcijo brez pisanja, izpiši vse ujemajoče id +
+   prvih ~150 znakov v `porocilo_T-26-008_kandidati.txt`, ročno preleti ~20
+   naključnih — preveri, da med njimi ni pravih vprašanj (posebej pozoren na
+   kratke ukazne naloge brez `?`, ki bi jih vzorec lahko napačno ujel).
+4. Za vsak potrjen blok poskusi preslikavo v `naloga.resitev` prave naloge —
+   po zgledu obstoječega `preslikaj_resitve()` (`uvozi_ric.py:475`), samo kadar
+   je preslikava nedvoumna (isti `vir_datoteka`, ujemajoč naslov/zaporedje tik
+   pred blokom). Kjer ni nedvoumna: rešitve NE pripiši (načelo iz kode:
+   "napačna rešitev je slabša od nobene").
+5. Izbriši potrjene bloke iz `naloga` (`DELETE FROM naloga WHERE id IN (...)`)
+   in pripadajoče vrstice v `slika`, če obstajajo.
+6. Dopolni `je_blok_resitev()` v `uvozi_ric.py` z novim vzorcem, da ga
+   prihodnji uvozi RIC ne bodo več uvozili kot naloge.
+7. Dopolni razdelek ČISTOST v `preveri_ric.py`, da `resitve_kot_naloge` šteje
+   tudi ta vzorec (ne le `besedilo LIKE 'Rešitev%'`).
+8. Preveri:
+   - `python preveri_ric.py` → ČISTOST vrne 0 blokov rešitev
+   - `sqlite3 baza.db "SELECT COUNT(*) FROM naloga WHERE id BETWEEN 20037 AND 20061"` → 0
+   - `python test_uvozi_ric.py` in `python test_vmesnik.py` gresta skozi
+9. V `## Result` zapiši: število izbrisanih zapisov, število uspešno
+   preslikanih rešitev, pot do `porocilo_T-26-008_kandidati.txt`, rollback ukaz.
 
 ## Result
 
