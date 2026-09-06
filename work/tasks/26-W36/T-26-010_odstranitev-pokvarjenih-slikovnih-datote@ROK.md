@@ -2,7 +2,7 @@
 task: T-26-010
 title: Odstranitev pokvarjenih slikovnih datotek iz slike/
 status: ready
-cost-usd: 2.83
+cost-usd: 3.02
 assignee: [ROK]
 requested-by: Rok
 week: 26-W36
