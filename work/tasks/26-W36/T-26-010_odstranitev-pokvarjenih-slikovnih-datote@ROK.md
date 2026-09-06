@@ -1,7 +1,7 @@
 ---
 task: T-26-010
 title: Odstranitev pokvarjenih slikovnih datotek iz slike/
-status: needs-info
+status: ready
 cost-usd: 0.62
 assignee: [ROK]
 requested-by: Rok
@@ -21,8 +21,12 @@ visibility: team
 
 ## Scope
 
-In:
-Out:
+In: brisanje 21 pokvarjenih slikovnih datotek iz `slike/` (seznam v `## Notes`)
+in čiščenje pripadajočih vrstic v tabeli `slika`; posodobitev `naloga.ima_sliko`
+za prizadete naloge, kjer po brisanju ne ostane nobena druga slika.
+Out: poskus obnove slik iz izvirnih `.docx` datotek (Rok je izbral brez
+obnove — glej `## Result`); 9 dodatnih pokvarjenih datotek v `slike/`, ki niso
+vezane na noben zapis v `slika` (izven te naloge, glej `## Notes`).
 
 ## Acceptance criteria
 
@@ -32,7 +36,13 @@ nobody has to argue about it. Where "done" is a human judgement (copy,
 design), say so and describe what done looks like instead of faking a check.
 -->
 
-- [ ]
+- [ ] Nobena od 21 datotek, navedenih v `## Notes`, ne obstaja več v `slike/`
+- [ ] `SELECT count(*) FROM slika WHERE id IN (<21 id-jev iz tabele v ## Notes>)` vrne 0
+- [ ] Za vsak prizadeti `naloga_id`: `naloga.ima_sliko` je 0, če po brisanju
+      zanj v `slika` ne ostane nobena vrstica, sicer nespremenjeno
+- [ ] `bionaloga.generator.je_slika_berljiva()` po spremembi ne javi nobene od
+      teh 21 kot pokvarjene (ker ne obstajajo več) in izvoz teh nalog (brez
+      slike) ne pade
 
 ## Notes
 
@@ -84,31 +94,35 @@ veljavna (ni bila pokvarjena že pred izvozom `izvozi_slike.py`), ni preverjeno.
 
 <!-- Exact files and current vs. target state. Written before execution. -->
 
+1. Za vseh 21 vrstic iz tabele v `## Notes`: izbriši datoteko `slike/<ime_datoteke>`.
+2. Za vsako od 21 vrstic: izbriši ustrezno vrstico v tabeli `slika` (po `id`).
+3. Za vsak prizadeti `naloga_id`: če po koraku 2 zanj v `slika` ne ostane
+   nobena vrstica, nastavi `naloga.ima_sliko = 0`.
+4. Preveri z `je_slika_berljiva()` / obstoječim skriptom iz T-26-009, da se
+   nobena od teh 21 ne javi več kot pokvarjena naloga, in da izvoz nalog
+   (brez slike) ne pade.
+
 ## Result
 
-Naloge nisem izvedel — čaka na odločitev, glej spodaj.
+**Odločitev Roka (2026-09-06, Discord):** brez poskusa obnove iz izvirnikov —
+izbriši vseh 21 datotek iz `slike/` in počisti pripadajoče zapise v tabeli
+`slika` (in `naloga.ima_sliko`, kjer je to posledično potrebno). To odgovori
+na obe odprti vprašanji spodaj: pri (1) izbrana možnost "kar izbriši, brez
+poskusa obnove"; pri (2) izbrana možnost "počisti tudi zapis v bazi", in to za
+vseh 21, ne le za tiste 3 brez izvirnika.
 
-**Vprašanji za Rok:**
+Prejšnji dve odprti vprašanji (za referenco):
 
-1. Ali naj slike, kjer viri obstajajo (18/20), poskusim znova izvleči iz
-   izvornega `.docx` (`input/done/...`) in preveriti, ali je ta različica
-   veljavna, preden trajno izbrišem trenutno pokvarjeno datoteko — ali naj
-   preprosto izbrišem vseh 21 datotek iz `slike/` brez poskusa obnove?
-   Predlagan privzeti odgovor: poskusi obnovo tam, kjer vir obstaja (18
-   primerov); kjer vira ni ali je slika v viru prav tako pokvarjena, samo
-   izbriši.
-2. Za slike, ki jih ni mogoče nadomestiti (vsaj tisti 3, kjer vira ni ali je
-   tudi ta pokvarjen): ali naj po brisanju datoteke počistim tudi vrstico v
-   tabeli `slika` (in po potrebi `naloga.ima_sliko`), da se naloga spet pojavi
-   v izvozu (brez slike), ali naj ostane kot je zdaj — naloga trajno izločena
-   iz vsakega izvoza (trenutno obnašanje po T-26-009)? Predlagan privzeti
-   odgovor: počisti referenco v bazi, da naloga ostane uporabna (brez slike),
-   namesto da je za vedno neuporabna.
+1. Obnova iz izvirnika (18/20 primerov) pred brisanjem, ali kar brisanje brez
+   poskusa obnove — **izbrano: brez obnove.**
+2. Po brisanju datoteke počisti tudi vrstico v `slika` (in po potrebi
+   `naloga.ima_sliko`), da naloga ostane uporabna brez slike — **izbrano: da,
+   počisti bazo.**
 
-Brisanje datotek in spreminjanje baze je nepovratno dejanje (POLICY.md D9), zato
-čaka na potrditev, ne izvajam ga sam.
+Brisanje datotek in spreminjanje baze je nepovratno dejanje (POLICY.md D9);
+odločitev je zdaj potrjena s strani Roka, plan zgoraj je pripravljen za izvedbo.
 
-STATUS: needs-info — Rok, ali naj za 21 pokvarjenih slik poskusim obnovo iz izvornih datotek kjer obstajajo, in ali naj po brisanju počistim tudi bazo (glej dve vprašanji in predlagana privzeta odgovora v `## Result`)?
+STATUS: ready — Rok je izbral brisanje vseh 21 slik brez poskusa obnove in čiščenje zapisov v bazi; plan je pripravljen, čaka na izvedbo.
 
 ## Ask (verbatim, from Discord, Rok)
 
