@@ -1,7 +1,7 @@
 ---
 task: T-26-010
 title: Odstranitev pokvarjenih slikovnih datotek iz slike/
-status: ready
+status: needs-info
 cost-usd: 0.88
 assignee: [ROK]
 requested-by: Rok
@@ -17,112 +17,104 @@ visibility: team
 
 ## Goal
 
-<!-- One paragraph. What changes for the user when this is done. -->
+V mapi `slike/` ni več pokvarjenih slikovnih datotek, ki bi bile vezane na
+naloge, in baza ne kaže več na datoteke, ki jih ni. Za učitelja se izvoz testa
+obnaša enako kot prej (ne pade), le da razlog za izpuščeno nalogo ni več
+"slika je pokvarjena", ampak "slika ne obstaja". **Prizadetih 21 nalog ostaja
+izpuščenih iz izvoza** — glej `## Result
 
-## Scope
+### Kaj je narejeno (izvedeno 2026-09-06)
 
-In: brisanje 21 pokvarjenih slikovnih datotek iz `slike/` (seznam v `## Notes`)
-in čiščenje pripadajočih vrstic v tabeli `slika`; posodobitev `naloga.ima_sliko`
-za prizadete naloge, kjer po brisanju ne ostane nobena druga slika.
-Out: poskus obnove slik iz izvirnih `.docx` datotek (Rok je izbral brez
-obnove — glej `## Result`); 9 dodatnih pokvarjenih datotek v `slike/`, ki niso
-vezane na noben zapis v `slika` (izven te naloge, glej `## Notes`).
+Po potrditvi Roka v Discordu (brez obnove iz izvirnikov; izbriši datoteke in
+počisti zapise v bazi) je bilo izvedeno:
 
-## Acceptance criteria
+1. **Izbrisanih 21 datotek** iz `slike/` — vseh 21 iz tabele v `## Notes`.
+   Pred brisanjem znova preverjeno z `je_slika_berljiva()`: vseh 21 je bilo
+   dejansko pokvarjenih (11× `UnexpectedEndOfFileError`, 10×
+   `UnrecognizedImageError`).
+2. **Izbrisanih 21 vrstic** iz tabele `slika` (po `id`).
+3. **`naloga.ima_sliko` posodobljen**: za 20 nalog na `0` (nobena druga slika
+   ni ostala), za nalogo 17933 ostaja `1` (ima še 2 veljavni sliki).
 
-<!--
-Prefer commands: a criterion that is a command exits 0 or it does not, and
-nobody has to argue about it. Where "done" is a human judgement (copy,
-design), say so and describe what done looks like instead of faking a check.
--->
+Varovala (POLICY.md D4): varnostna kopija baze `baza_T-26-010_backup.db` in
+arhiv vseh 21 izbrisanih datotek `arhiv_T-26-010_pokvarjene_slike.tar.gz`
+(oboje v `.gitignore`; `slike/` tako ali tako ni v gitu, zato brez arhiva
+brisanje ne bi imelo poti nazaj). Skripta je tekla najprej kot suha vaja.
 
-- [ ] Nobena od 21 datotek, navedenih v `## Notes`, ne obstaja več v `slike/`
-- [ ] `SELECT count(*) FROM slika WHERE id IN (<21 id-jev iz tabele v ## Notes>)` vrne 0
-- [ ] Za vsak prizadeti `naloga_id`: `naloga.ima_sliko` je 0, če po brisanju
-      zanj v `slika` ne ostane nobena vrstica, sicer nespremenjeno
-- [ ] `bionaloga.generator.je_slika_berljiva()` po spremembi ne javi nobene od
-      teh 21 kot pokvarjene (ker ne obstajajo več) in izvoz teh nalog (brez
-      slike) ne pade
+### Preverjanje
 
-## Notes
+| kriterij | rezultat |
+|---|---|
+| nobena od 21 datotek ne obstaja v `slike/` | OK (0 od 21) |
+| `count(*) FROM slika WHERE id IN (…)` | OK (0) |
+| `naloga.ima_sliko` skladen s preostalimi vrsticami | OK (21/21) |
+| pokvarjene slike, še vezane na kakšno nalogo (skeniran cel `slike/`) | OK (0) |
+| `generiraj_test()` za teh 21 nalog | ne pade (36.625 B) |
+| `test_vmesnik.py` | OK (5/5) |
 
-Potrjen seznam vseh 21 pokvarjenih slik (skenirano z
-`bionaloga.generator.je_slika_berljiva()`, tj. isto preverbo, ki jo je uvedel
-T-26-009; usklajeno s tabelo `slika` v `baza.db`):
+`scripts/check_tasks.py` javi 1 napako — **obstajala je že pred to nalogo**
+(preverjeno na HEAD brez mojih sprememb): `x_T-26-008` se sklicuje na
+`T-26-009_pokvarjene-slike-izvoz@ROK.md`, ta datoteka pa je bila preimenovana v
+`x_`. Ni povezano s to nalogo; poleg tega je sklicevanje po imenu datoteke v
+nasprotju z `work/README.md` ("na nalogo se sklicuj samo z ID"). Nisem popravil,
+ker gre za vsebino tuje, že zaključene naloge.
 
-| slika.id | naloga_id | ime_datoteke (v `slike/`) | vir_datoteka |
-|---|---|---|---|
-| 11457 | 21984 | 20260905_122043_011.jpeg | Nukleinske kisline 15.5.2017.docx |
-| 604 | 1754 | 20260505_100758_004.jpeg | 1F 3.test-izboljš. CC, TR, SB 26.4.22.docx |
-| 1897 | 7390 | 20260505_120324_003.jpeg | 3e njihov zadnji ever 2017.docx |
-| 3121 | 12423 | 20260505_162340_009.jpg | biologija test 3.letnik NJIHOV 2017.docx |
-| 102 | 398 | 20260403_105546_001.jpeg | 1.B prvi.docx |
-| 325 | 1120 | 20260505_095748_004.jpeg | 1.test 1.D.NOV 25.docx |
-| 838 | 2286 | 20260505_101745_001.jpeg | 1d poprava 1T.docx |
-| 435 | 1483 | 20260505_100329_001.jpeg | 1C prvi nov 2019.docx |
-| 612 | 1783 | 20260505_100813_001.jpeg | 1F poprava poprave 1T JAN 2017.docx |
-| 405 | 1461 | 20260505_100301_001.jpeg | 1C prvi nov 2017.docx |
-| 144 | 658 | 20260505_095015_001.jpeg | 1.Dprvi (2).docx |
-| 30 | 212 | 20260403_105330_005.jpeg | 1.A in 1.F poprava 1. testa dne 18.1.22.docx |
-| 329 | 1191 | 20260505_095859_001.jpeg | 1A biol.mol.docx |
-| 367 | 1314 | 20260505_100035_001.jpeg | 1B Pop T v JAN 23.docx |
-| 381 | 1367 | 20260505_100127_001.jpeg | 1B prvi nov 2022.docx |
-| 696 | 2174 | 20260505_101546_001.jpeg | 1c biol.mol.docx |
-| 2480 | 9656 | 20260505_132850_002.jpg | Diagnostični test za 3.letnik RPK.docx |
-| 193 | 811 | 20260505_095245_001.jpeg | 1.F prvi test NOV 25.docx |
-| 6 | 54 | 20260403_101821_001.jpeg | 0_22.A prvi test NOV 22 POP.docx |
-| 3133 | 12464 | 20260505_162340_003.jpeg | biologija test 3.letnik NJIHOV 2017.docx |
-| 7687 | 17933 | nukleinske kisline/nukleinske kisline_image56.jpeg | RIC/nukleinske kisline.docx |
+### Odstopanje od plana: `naloga.besedilo` NAMENOMA ni spremenjen
 
-Vsi imajo podprto pripono (`.jpg`/`.jpeg`) po `PODPRTI_FORMATI` v
-`generator.py`, torej jih `_preveri_slike()` prijavi kot "pokvarjena" (ne
-"format ni podprt"). Vseh 21 je trenutno izpuščenih iz vsakega izvoza, ki bi
-jih izbral (T-26-009).
+Korak, ki v planu ni bil zapisan, se je pri izvedbi izkazal za nujnega za
+kriterij 4 — in prav ta korak sem se odločil **ne** narediti.
 
-Iz kompletne mape `slike/` (14.035 datotek s podprto pripono) je pokvarjenih
-30, ne 21 — 9 dodatnih pokvarjenih `.jpeg` ne nastopa v tabeli `slika`
-(niso vezane na nobeno nalogo, torej niso del te naloge in jih ta seznam ne
-vključuje).
+`_preveri_slike()` v `generator.py` ne gleda tabele `slika`, ampak išče
+`[SLIKA:<ime>]` placeholderje v `naloga.besedilo`. Brisanje datoteke in vrstice
+v bazi torej naloge **ne** vrne v izvoz: placeholder ostane, `_preveri_slike()`
+javi "slika ne obstaja" in naloga je izpuščena kot prej. Da bi naloge res
+postale uporabne, bi bilo treba iz `besedilo` odstraniti tudi placeholder.
 
-Za 18 od 20 izvornih datotek (`vir_datoteka`) obstaja kopija v `input/done/`
-ali `input/ric/razpakirano/`; za 2 (`1F 3.test-izboljš. CC, TR, SB
-26.4.22.docx`, `Diagnostični test za 3.letnik RPK.docx`) ni bila najdena
-enakoimenska datoteka v `input/`. Ali je slika v izvornem dokumentu sploh
-veljavna (ni bila pokvarjena že pred izvozom `izvozi_slike.py`), ni preverjeno.
+Pri pripravi tega koraka (suha vaja je bila že narejena in je delovala) sem
+pogledal, kaj od nalog ostane brez slike. Ostane tole:
 
-## Plan
+- naloga 7390 / 9656 / 12423: `Označi dele zunanje zgradbe srca:`
+- naloga 12464: `Opiši naloge živčnega sistema`
+- naloga 1191: `Na sliki so različne vezi. Katera od njih je vodikova?`
+- naloga 54: `Na sliki so različne vezi. Katera od njih je glikozidna in katera je peptidna…`
 
-<!-- Exact files and current vs. target state. Written before execution. -->
+Te naloge so **vsebinsko odvisne od slike**: brez nje niso "uporabne brez
+slike", ampak neodgovorljive. Odstranitev placeholderja bi jih vrnila v izvoz
+kot nesmiselna vprašanja v testu, ki ga dobi dijak — to je slabše od tega, da
+so izpuščene. Zato sem placeholderje pustil pri miru.
 
-1. Za vseh 21 vrstic iz tabele v `## Notes`: izbriši datoteko `slike/<ime_datoteke>`.
-2. Za vsako od 21 vrstic: izbriši ustrezno vrstico v tabeli `slika` (po `id`).
-3. Za vsak prizadeti `naloga_id`: če po koraku 2 zanj v `slika` ne ostane
-   nobena vrstica, nastavi `naloga.ima_sliko = 0`.
-4. Preveri z `je_slika_berljiva()` / obstoječim skriptom iz T-26-009, da se
-   nobena od teh 21 ne javi več kot pokvarjena naloga, in da izvoz nalog
-   (brez slike) ne pade.
+S tem pade predpostavka, na kateri je slonel Rokov odgovor na vprašanje (2).
+Vprašanje sem mu zastavil kot "počistimo bazo, da naloge spet postanejo
+uporabne (brez slike)" — za teh 20 nalog to ne drži. Odgovor je bil pravilen za
+vprašanje, kot sem ga postavil; vprašanje je bilo napačno postavljeno.
 
-## Result
+**Neto učinek te naloge je torej higiena podatkov, ne rešitev za teh 21 nalog:**
+pokvarjenih datotek ni več, baza ne laže, izvoz ne pade — a 21 nalog je še
+vedno neuporabnih, le razlog se je preimenoval.
 
-**Odločitev Roka (2026-09-06, Discord):** brez poskusa obnove iz izvirnikov —
-izbriši vseh 21 datotek iz `slike/` in počisti pripadajoče zapise v tabeli
-`slika` (in `naloga.ima_sliko`, kjer je to posledično potrebno). To odgovori
-na obe odprti vprašanji spodaj: pri (1) izbrana možnost "kar izbriši, brez
-poskusa obnove"; pri (2) izbrana možnost "počisti tudi zapis v bazi", in to za
-vseh 21, ne le za tiste 3 brez izvirnika.
+Posebej velja omeniti **nalogo 17933**: od treh slik sta dve veljavni, pokvarjena
+je bila le tretja. Celotna naloga (965 znakov, več podvprašanj, tabela) je
+izpuščena zaradi ene manjkajoče slike.
 
-Prejšnji dve odprti vprašanji (za referenco):
+### Odprto vprašanje za Roka
 
-1. Obnova iz izvirnika (18/20 primerov) pred brisanjem, ali kar brisanje brez
-   poskusa obnove — **izbrano: brez obnove.**
-2. Po brisanju datoteke počisti tudi vrstico v `slika` (in po potrebi
-   `naloga.ima_sliko`), da naloga ostane uporabna brez slike — **izbrano: da,
-   počisti bazo.**
+Kaj naj se zgodi s teh 21 nalog, ki so zdaj trajno izpuščene iz izvoza?
+Možnosti, kot jih vidim:
 
-Brisanje datotek in spreminjanje baze je nepovratno dejanje (POLICY.md D9);
-odločitev je zdaj potrjena s strani Roka, plan zgoraj je pripravljen za izvedbo.
+1. **Pustimo tako** — naloge ostanejo v bazi, a nikoli v testu. Nič dela, a 21
+   nalog je mrtvih.
+2. **Poskusimo obnoviti slike iz izvirnih `.docx`** (za 18 od 20 virov datoteka
+   obstaja v `input/`). To je bila možnost, ki jo je Rok zavrnil — a zavrnil jo
+   je ob predpostavki, da so naloge brez slike uporabne. Zdaj, ko vemo, da niso,
+   je obnova edina pot, ki naloge dejansko reši. **To predlagam**, vsaj za
+   nalogo 17933 in za tiste, kjer je vir na voljo.
+3. **Izbrišemo teh 21 nalog iz baze** — pošteno stanje (naloge, ki jih ni moč
+   uporabiti, ne zasedajo prostora v iskalniku), a nepovratna izguba besedila.
 
-STATUS: ready — Rok je izbral brisanje vseh 21 slik brez poskusa obnove in čiščenje zapisov v bazi; plan je pripravljen, čaka na izvedbo.
+Ne izvajam nobene od njih sam: (2) in (3) sta nepovratni oz. presegata obseg te
+naloge (POLICY.md D9).
+
+STATUS: needs-info — brisanje 21 slik in čiščenje baze je izvedeno in preverjeno; odprto ostaja, kaj s 21 nalogami, ki so še vedno izpuščene iz izvoza, ker so brez slike neodgovorljive.
 
 ## Ask (verbatim, from Discord, Rok)
 
