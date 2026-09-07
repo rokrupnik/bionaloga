@@ -2,7 +2,7 @@
 task: T-26-013
 title: Napaka je v modulu `reformx_align_akcija` (`reformx_align_akcija/models/sale_ord
 status: needs-info
-cost-usd: 0.21
+cost-usd: 0.33
 assignee: [ROK]
 requested-by: Rok
 week: 26-W37
