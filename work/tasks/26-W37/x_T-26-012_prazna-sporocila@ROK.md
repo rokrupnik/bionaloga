@@ -1,14 +1,14 @@
 ---
 task: T-26-012
 title: Prazna sporočila
-status: blocked
+status: done
 cost-usd: 0.39
 assignee: [ROK]
 requested-by: Rok
 week: 26-W37
 created: 2026-09-07
-completed:
-notified:
+completed: 2026-09-07
+notified: 2026-09-07
 blocked-by: []
 visibility: team
 ---
@@ -48,4 +48,4 @@ design), say so and describe what done looks like instead of faking a check.
 
 ## Ask (verbatim, from Discord, Rok)
 
-
+Closed 2026-09-07 by Rok via Discord: Zapri
