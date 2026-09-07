@@ -1,14 +1,14 @@
 ---
 task: T-26-013
 title: Napaka je v modulu `reformx_align_akcija` (`reformx_align_akcija/models/sale_ord
-status: needs-info
+status: done
 cost-usd: 0.33
 assignee: [ROK]
 requested-by: Rok
 week: 26-W37
 created: 2026-09-07
-completed:
-notified:
+completed: 2026-09-07
+notified: 2026-09-07
 blocked-by: []
 visibility: team
 ---
@@ -76,3 +76,5 @@ Problem: `vrstica.discount` je pri popustu `0` **falsy** (0 je enako False v Pyt
 Dodatno pri dupliciranju: polje `rfx_akcija_popust` (oznaka "to je akcijski popust") ima `copy=False`, medtem ko se `discount` sam skopira — zato ima duplikat popust brez oznake, in ob prvi spremembi na vrstici (npr. ko poskusi nastaviti 0) se akcija znova sproži in ga prepiše.
 
 Za pravi popravek (razlikovati "0 ker ni bilo nastavljeno" od "0 ker je uporabnik hotel 0") je potrebna sprememba kode — to gre kot naloga v <#1545574191359594657>, ne morem je narediti tu.
+
+Closed 2026-09-07 by Rok via Discord: Pomota, zapri nalogo
