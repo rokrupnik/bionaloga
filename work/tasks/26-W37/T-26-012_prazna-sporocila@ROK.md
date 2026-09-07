@@ -2,7 +2,7 @@
 task: T-26-012
 title: Prazna sporočila
 status: blocked
-cost-usd: 0.26
+cost-usd: 0.39
 assignee: [ROK]
 requested-by: Rok
 week: 26-W37
