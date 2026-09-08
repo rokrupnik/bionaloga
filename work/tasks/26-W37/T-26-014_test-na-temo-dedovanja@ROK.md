@@ -1,7 +1,7 @@
 ---
 task: T-26-014
 title: Test na temo dedovanja
-status: ready
+status: notify
 cost-usd: 0.28
 assignee: [ROK]
 requested-by: Vital
@@ -28,9 +28,9 @@ Out: klasifikacija novih nalog, sprememba obstoječih nalog, spletni vmesnik.
 
 ## Acceptance criteria
 
-- [ ] `output/T-26-014/test_dedovanje.docx` obstaja in ga je mogoče odpreti kot veljaven .docx
-- [ ] Dokument vsebuje natanko 19 nalog: 10 izbirnega tipa, 4 kratek odgovor, 5 daljši odgovor
-- [ ] Vse naloge imajo `vsebina_koda` pod `03.%` (Dedovanje in podteme)
+- [x] `output/T-26-014/test_dedovanje.docx` obstaja in ga je mogoče odpreti kot veljaven .docx
+- [x] Dokument vsebuje natanko 19 nalog: 10 izbirnega tipa, 4 kratek odgovor, 5 daljši odgovor
+- [x] Vse naloge imajo `vsebina_koda` pod `03.%` (Dedovanje in podteme)
 
 ## Notes
 
@@ -59,7 +59,57 @@ razpoložljivostjo.
 
 ## Result
 
-<!-- What shipped, what did not, commits, deviations. Written after execution. -->
+**Dostavljeno:** `output/T-26-014/test_dedovanje.docx` (100.971 B), priložen v
+Discord nit. Naslov dokumenta: „Test: Dedovanje“, 19 zaporedno oštevilčenih
+nalog (1–19), brez rešitev.
+
+**Kako je nastalo:** enkratna skripta `output/T-26-014/sestavi.py` (v repozitoriju,
+`random.seed(20260908)` → ponovljivo). Namesto klica HTTP endpointa
+`GET /naloge/nakljucne-po-tipu` kliče iste funkcije neposredno
+(`baza.poisci_naloge` + `generator.generiraj_test`), da ni treba zaganjati
+strežnika — logika izbora je identična. `poisci_naloge(["03.00.00"], …)` filtrira
+po prefiksu `03.%`, torej zajame celotno poglavje Dedovanje s podtemami.
+
+**Izbrani id-ji nalog:**
+- izbirni tip (10): 21949, 4019, 17401, 978, 19608, 16048, 3980, 17796, 19645, 10310
+- kratki odgovor (4): 9804, 3727, 8352, 3352
+- daljši odgovor (5): 21852, 4097, 8396, 10948, 13089
+
+**Preverjeno:**
+- `Document(pot)` se odpre brez izjeme; oštevilčenje odstavkov = 1…19
+- porazdelitev `tip_id` iz baze: {1: 10, 2: 4, 3: 5}
+- vseh 19 nalog ima `vsebina_koda` s prefiksom `03.` (podteme 03.00.01–03.00.04)
+- `generiraj_test` je vrnil prazen seznam napak → nobena naloga ni bila izpuščena
+  zaradi manjkajoče ali pokvarjene slike
+- `python3 scripts/check_tasks.py` → `14 tasks, 0 errors`
+
+**Odstopanje od načrta (odločeno samostojno, POLICY D1/„own“):** prvi izbor po
+čistem naključju je vseboval zapise, ki niso samostojne naloge — odlomek rešitev
+(id 22336), zapis, ki se začne z odgovori „A) B in 0. …“ in vsebuje zlepljeni
+naslednji nalogi (id 17701), ključ rešitev „x.1 … x.2 …“ (id 19715) in
+3.145-znakov dolg večdelni sklop z ostankom markdown tabele (id 17844). Takega
+testa učitelju ni mogoče dati v roke, zato skripta pred izborom uporabi
+kakovostni filter:
+- dolžina besedila 60–2500 znakov;
+- zavrne besedila, ki se začnejo z `|`, z odgovorno možnostjo (`A)`, `b.` …), z
+  `x.<številka>`, z lastnim oštevilčenjem (`6.\t…`, ki bi se podvojilo z
+  oštevilčenjem generatorja) ali z besedo „naloga“;
+- zahteva vprašaj ali začetek z vprašalnico/velelnikom (Kaj, Kako, Katera,
+  Razloži, Opiši, Napiši …);
+- dodatno prepreči skoraj podvojene naloge v istem testu (normaliziran ključ
+  prvih 80 znakov) — brez tega sta se v izboru znašli dve različici iste naloge
+  o križancih graha (4019 in 17716).
+
+Po filtru je bazen še vedno velik (izbirni 454, kratki 243, daljši 129), zato
+naključnost izbora ni okrnjena.
+
+**Ni v obsegu / opaženo za naprej:** v poglavju 03 je precej zapisov, ki so
+napačno razdeljeni ali so pravzaprav rešitve (ocena po filtru: ~40 % zapisov
+odpade). To je vprašanje kakovosti uvoza, ne tega testa — vredno svoje naloge.
+
+**Commit:** glej git log za T-26-014 (skripta + ta datoteka; `.docx` ni v gitu,
+ker `.gitignore` izključuje `*.docx` — dokument je dostavljen kot priloga v
+Discordu in ga skripta kadar koli reproducira).
 
 ## Ask (verbatim, from Discord, Vital)
 
