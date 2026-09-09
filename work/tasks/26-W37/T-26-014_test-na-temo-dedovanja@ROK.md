@@ -159,8 +159,29 @@ pregled, in dokument znova izvoziti z dodanim razdelkom "Rešitve" na koncu
 (mehanika `generiraj_test(..., z_resitvami=True)` že obstaja, glej
 `## Preverjeno pred nadaljevanjem`). Isti izbor 19 nalog se ne spreminja.
 
+## Plan (krog 2 — osnutek rešitev, 2026-09-09)
+
+1. Iz `baza.db` prebrati `besedilo` in `tip_id` za vseh 19 id-jev, navedenih
+   zgoraj v `## Result` (isti izbor, brez ponovnega naključnega izbora).
+2. Za vsako od 19 nalog sestaviti kratek osnutek rešitve na podlagi besedila
+   naloge; vsak osnutek na začetku jasno označiti kot osnutek, npr.
+   `[OSNUTEK – preveri] ...`.
+3. Osnutke zapisati v stolpec `naloga.resitev` samo za teh 19 vrstic
+   (`UPDATE naloga SET resitev=? WHERE id=?`); nobena druga vrstica ali polje
+   se ne spreminja.
+4. Znova poklicati `generator.generiraj_test(ids_nalog, naslov="Test: Dedovanje",
+   z_resitvami=True)` — mehanika je preverjena in obstaja
+   (`bionaloga/generator.py:209-263`); prepiše `output/T-26-014/test_dedovanje.docx`.
+5. Preveriti: `Document(pot)` se odpre brez izjeme; razdelek "Rešitve" na koncu
+   vsebuje natanko 19 vnosov, vsak z oznako osnutka; besedilo in vrstni red
+   19 nalog pred razdelkom "Rešitve" ostaneta nespremenjena glede na prejšnjo
+   dostavo.
+6. V Discord odgovoru priložiti posodobljeni dokument
+   (`PRILOGA: output/T-26-014/test_dedovanje.docx`) in izrecno povedati, da so
+   rešitve osnutek in jih je treba pred rabo pri pouku pregledati.
+
 ## Ask (verbatim, from Discord, Vital)
 
 sestavi mi test na temo dedovanja. Notri naj bo 10 nalog izbirnega tipa, 4 naloge s kratkimi odgovori in 5 nalog z daljšim odgovorom.
 
-STATUS: open — Vital je izbral osnutek rešitev; naloga gre nazaj v izvedbo (napiši osnutek rešitev za 19 nalog, dodaj razdelek "Rešitve", znova izvozi dokument).
+STATUS: ready — napišem osnutek rešitev za vseh 19 nalog, jih jasno označim kot osnutek in znova izvozim isti test z dodanim razdelkom "Rešitve".
