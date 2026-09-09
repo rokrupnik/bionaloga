@@ -64,7 +64,7 @@ Discord nit. Naslov dokumenta: „Test: Dedovanje“, 19 zaporedno oštevilčeni
 nalog (1–19), brez rešitev.
 
 **Kako je nastalo:** enkratna skripta `output/T-26-014/sestavi.py` (v repozitoriju,
-`random.seed(20260908)` → ponovljivo). Namesto klica HTTP endpointa
+`random.seed([telefon])` → ponovljivo). Namesto klica HTTP endpointa
 `GET /naloge/nakljucne-po-tipu` kliče iste funkcije neposredno
 (`baza.poisci_naloge` + `generator.generiraj_test`), da ni treba zaganjati
 strežnika — logika izbora je identična. `poisci_naloge(["03.00.00"], …)` filtrira
