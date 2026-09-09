@@ -1,7 +1,7 @@
 ---
 task: T-26-014
 title: Test na temo dedovanja
-status: open
+status: needs-info
 cost-usd: 1.90
 assignee: [ROK]
 requested-by: Vital
@@ -120,6 +120,38 @@ Vital je potrdil (Discord, 2026-09-09): test je uporaben kot probna verzija.
 Dodatna zahteva: na koncu testa naj bodo dodane rešitve. Isti izbor 19 nalog
 (id-ji navedeni v `## Result`) se ne spreminja, doda se le seznam rešitev.
 
+## Preverjeno pred nadaljevanjem (2026-09-09)
+
+`generator.generiraj_test(..., z_resitvami=True)` že podpira dodajanje
+razdelka "Rešitve" na koncu dokumenta (bionaloga/generator.py:209-263) — bere
+stolpec `naloga.resitev` za vsako izbrano nalogo. Mehanika je torej gotova in
+ne zahteva kode.
+
+Težava je v podatkih: preverjeno v `baza.db` — za vseh 19 izbranih nalog
+(id-ji navedeni zgoraj v `## Result`) je `resitev` prazen (NULL). To ni
+izjema: v celotnem poglavju 03.% ima shranjeno rešitev le 171 od 1814 nalog
+(9 %), v celi bazi 1182 od 17529 (7 %) — rešitve pri uvozu iz starih Wordovih
+testov večinoma niso bile zajete. Klic z `z_resitvami=True` bi zato vrnil
+razdelek "Rešitve" s 19-krat samim pomišljajem ("—"), kar ni uporabno.
+
+## Result — vprašanje
+
+Da dodam pravi seznam rešitev, moram besedilo rešitev dobiti od nekod. Dve
+možnosti:
+
+1. **Vital priloži obstoječi ključ rešitev** (že napisan, iz izvirnega testa
+   ali priročnika) — najbolj zanesljivo, brez tveganja napake.
+2. **Rešitve napišem sam/AI** na podlagi besedila vsake naloge — hitro, a gre
+   za strokovno biološko vsebino, ki jo mora Vital pred uporabo pri pouku na
+   hitro preveriti (tveganje vsebinske napake ni preverljivo s testom).
+
+**Predlagan privzeti odgovor, če Vital ne pove drugače:** izberem možnost 2 —
+sam sestavim osnutek rešitev za vseh 19 nalog in jih jasno označim kot osnutek
+za pregled, dokument pa dostavim z rešitvami vred (Vital ga lahko pred rabo
+še popravi).
+
 ## Ask (verbatim, from Discord, Vital)
 
 sestavi mi test na temo dedovanja. Notri naj bo 10 nalog izbirnega tipa, 4 naloge s kratkimi odgovori in 5 nalog z daljšim odgovorom.
+
+STATUS: needs-info — Vital, ali naj rešitve za teh 19 nalog napišem sam kot osnutek za tvoj pregled, ali imaš že pripravljen ključ rešitev, ki naj ga uporabim?
