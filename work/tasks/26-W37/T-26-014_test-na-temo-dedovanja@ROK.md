@@ -2,7 +2,7 @@
 task: T-26-014
 title: Test na temo dedovanja
 status: open
-cost-usd: 2.29
+cost-usd: 2.50
 assignee: [ROK]
 requested-by: Vital
 week: 26-W37
