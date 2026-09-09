@@ -1,7 +1,7 @@
 ---
 task: T-26-014
 title: Test na temo dedovanja
-status: notify
+status: open
 cost-usd: 1.71
 assignee: [ROK]
 requested-by: Vital
@@ -23,7 +23,9 @@ daljšim odgovorom (19 nalog skupaj), naključno izbranimi iz obstoječe baze.
 
 ## Scope
 
-In: izvoz enega .docx testa na temo dedovanja z zahtevanim številom nalog po tipu.
+In: izvoz enega .docx testa na temo dedovanja z zahtevanim številom nalog po tipu;
+na koncu dokumenta dodan seznam rešitev za vseh 19 nalog (isti izbor nalog kot
+v že dostavljenem dokumentu, brez ponovnega naključnega izbora).
 Out: klasifikacija novih nalog, sprememba obstoječih nalog, spletni vmesnik.
 
 ## Acceptance criteria
@@ -31,6 +33,7 @@ Out: klasifikacija novih nalog, sprememba obstoječih nalog, spletni vmesnik.
 - [x] `output/T-26-014/test_dedovanje.docx` obstaja in ga je mogoče odpreti kot veljaven .docx
 - [x] Dokument vsebuje natanko 19 nalog: 10 izbirnega tipa, 4 kratek odgovor, 5 daljši odgovor
 - [x] Vse naloge imajo `vsebina_koda` pod `03.%` (Dedovanje in podteme)
+- [ ] Dokument na koncu vsebuje rešitve za vseh 19 nalog (isti nabor id-jev kot v Result), ločeno od nalog
 
 ## Notes
 
@@ -110,6 +113,12 @@ odpade). To je vprašanje kakovosti uvoza, ne tega testa — vredno svoje naloge
 **Commit:** glej git log za T-26-014 (skripta + ta datoteka; `.docx` ni v gitu,
 ker `.gitignore` izključuje `*.docx` — dokument je dostavljen kot priloga v
 Discordu in ga skripta kadar koli reproducira).
+
+## Notes (dodatek 2026-09-09)
+
+Vital je potrdil (Discord, 2026-09-09): test je uporaben kot probna verzija.
+Dodatna zahteva: na koncu testa naj bodo dodane rešitve. Isti izbor 19 nalog
+(id-ji navedeni v `## Result`) se ne spreminja, doda se le seznam rešitev.
 
 ## Ask (verbatim, from Discord, Vital)
 
