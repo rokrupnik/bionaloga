@@ -2,7 +2,7 @@
 task: T-26-014
 title: Test na temo dedovanja
 status: notify
-cost-usd: 2.72
+cost-usd: 4.43
 assignee: [ROK]
 requested-by: Vital
 week: 26-W37
