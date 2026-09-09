@@ -1,7 +1,7 @@
 ---
 task: T-26-014
 title: Test na temo dedovanja
-status: needs-info
+status: open
 cost-usd: 2.29
 assignee: [ROK]
 requested-by: Vital
@@ -150,8 +150,17 @@ sam sestavim osnutek rešitev za vseh 19 nalog in jih jasno označim kot osnutek
 za pregled, dokument pa dostavim z rešitvami vred (Vital ga lahko pred rabo
 še popravi).
 
+## Notes (dodatek 2026-09-09, odločitev)
+
+Vital je odgovoril (Discord, 2026-09-09): "nimam rešitev. Naredi osnutek." —
+izbrana je možnost 2. Za vseh 19 nalog (id-ji navedeni v `## Result`) je treba
+sam/AI napisati osnutek rešitev, jih v dokumentu jasno označiti kot osnutek za
+pregled, in dokument znova izvoziti z dodanim razdelkom "Rešitve" na koncu
+(mehanika `generiraj_test(..., z_resitvami=True)` že obstaja, glej
+`## Preverjeno pred nadaljevanjem`). Isti izbor 19 nalog se ne spreminja.
+
 ## Ask (verbatim, from Discord, Vital)
 
 sestavi mi test na temo dedovanja. Notri naj bo 10 nalog izbirnega tipa, 4 naloge s kratkimi odgovori in 5 nalog z daljšim odgovorom.
 
-STATUS: needs-info — Vital, ali naj rešitve za teh 19 nalog napišem sam kot osnutek za tvoj pregled, ali imaš že pripravljen ključ rešitev, ki naj ga uporabim?
+STATUS: open — Vital je izbral osnutek rešitev; naloga gre nazaj v izvedbo (napiši osnutek rešitev za 19 nalog, dodaj razdelek "Rešitve", znova izvozi dokument).
