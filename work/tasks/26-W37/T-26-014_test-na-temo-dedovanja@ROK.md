@@ -1,7 +1,7 @@
 ---
 task: T-26-014
 title: Test na temo dedovanja
-status: ready
+status: notify
 cost-usd: 2.72
 assignee: [ROK]
 requested-by: Vital
@@ -33,7 +33,7 @@ Out: klasifikacija novih nalog, sprememba obstoječih nalog, spletni vmesnik.
 - [x] `output/T-26-014/test_dedovanje.docx` obstaja in ga je mogoče odpreti kot veljaven .docx
 - [x] Dokument vsebuje natanko 19 nalog: 10 izbirnega tipa, 4 kratek odgovor, 5 daljši odgovor
 - [x] Vse naloge imajo `vsebina_koda` pod `03.%` (Dedovanje in podteme)
-- [ ] Dokument na koncu vsebuje rešitve za vseh 19 nalog (isti nabor id-jev kot v Result), ločeno od nalog
+- [x] Dokument na koncu vsebuje rešitve za vseh 19 nalog (isti nabor id-jev kot v Result), ločeno od nalog
 
 ## Notes
 
@@ -180,8 +180,62 @@ pregled, in dokument znova izvoziti z dodanim razdelkom "Rešitve" na koncu
    (`PRILOGA: output/T-26-014/test_dedovanje.docx`) in izrecno povedati, da so
    rešitve osnutek in jih je treba pred rabo pri pouku pregledati.
 
+## Result (krog 2 — osnutek rešitev, 2026-09-09)
+
+**Dostavljeno:** `output/T-26-014/test_dedovanje.docx` (103.566 B) — isti test
+(naslov „Test: Dedovanje“, istih 19 nalog v istem vrstnem redu), z novim
+razdelkom „Rešitve“ na koncu, na svoji strani (`add_page_break`).
+
+**Kako je nastalo:** enkratna skripta `output/T-26-014/dodaj_resitve.py`.
+Osnutki rešitev za vseh 19 nalog so zapisani v `naloga.resitev`, nato je
+dokument znova izvožen z `generator.generiraj_test(ids, naslov="Test: Dedovanje",
+z_resitvami=True)`. Koda projekta ni bila spremenjena — mehanika je že
+obstajala.
+
+**Zapis v bazo (POLICY D4):** varnostna kopija `baza_T-26-014_backup.db` narejena
+pred zapisom; skripta brez argumenta teče kot suhi tek, zapisuje šele z
+`--write`; spremenjenih je natanko 19 vrstic in v njih samo stolpec `resitev`
+(pred zapisom so bile vse `NULL`). Vračilo: prekopiraj varnostno kopijo čez
+`baza.db` ali postavi `resitev = NULL` za teh 19 id-jev.
+
+**Preverjeno:**
+- `Document(pot)` se odpre brez izjeme
+- prvi del dokumenta: 19 zaporedno oštevilčenih nalog (1…19), nespremenjenih
+- razdelek „Rešitve“: natanko 19 vnosov, oštevilčenih 1…19, nobeden ni „—“
+- vseh 19 rešitev nosi predpono `[OSNUTEK – preveri]`
+- `generiraj_test` je vrnil prazen seznam napak (nobena naloga izpuščena);
+  4 slike so v dokumentu
+- primerjava `baza.db` z `baza_T-26-014_backup.db`: 17.529 nalog v obeh,
+  0 sprememb v `besedilo`/`vsebina_koda`/`tip_id`/`ima_sliko`, 19 sprememb v
+  `resitev` in to točno na pričakovanih id-jih; skupaj ima rešitev 1.201 nalog
+  (prej 1.182)
+- `python3 scripts/check_tasks.py` → `14 tasks, 0 errors`
+
+**Odstopanje / opaženo (ni popravljeno, POLICY D1 — javljeno naročniku):**
+naloga 13 v testu (id 8352, „Na skici je prikazan proces…“) ima v besedilu dva
+placeholderja za sliki. Prva (`20260505_122428_003.png`) je pravilna — shema
+vnosa človeškega gena v bakterijski plazmid. Druga
+(`20260505_122428_002.png`) NE sodi k tej nalogi: je zaslonska slika povsem
+druge naloge (desničnost/levičnost, tabela z verjetnostmi A–D) in je ostanek
+napačne razdelitve pri uvozu. Popravek bi pomenil spremembo besedila obstoječe
+naloge, kar je izrecno `Out` v `## Scope`, zato ni bil narejen; rešitev za
+nalogo 13 se nanaša na pravo (prvo) sliko. Vitalu je v odgovoru ponujena
+zamenjava te naloge, če mu tako ne ustreza. To je še en primer istega problema
+kakovosti uvoza v poglavju 03, ki je opisan v prvem `## Result`.
+
+**Omejitev osnutka:** rešitve je napisal operator na podlagi besedila nalog
+(Vital je 2026-09-09 potrdil to možnost, ker ključa rešitev nima). Strokovne
+pravilnosti ni mogoče preveriti z avtomatskim testom — zato oznaka
+`[OSNUTEK – preveri]` pri vsaki rešitvi in izrecno opozorilo v Discord odgovoru.
+
+**Priloga za Discord:** `PRILOGA: output/T-26-014/test_dedovanje.docx`
+(javnega URL-ja ni — dokument ni objavljen na spletu, zato ni vrstice `PREVERI:`).
+
+**Commit:** glej git log za T-26-014 (skripta + ta datoteka; `.docx` ni v gitu,
+ker `.gitignore` izključuje `*.docx`).
+
 ## Ask (verbatim, from Discord, Vital)
 
 sestavi mi test na temo dedovanja. Notri naj bo 10 nalog izbirnega tipa, 4 naloge s kratkimi odgovori in 5 nalog z daljšim odgovorom.
 
-STATUS: ready — napišem osnutek rešitev za vseh 19 nalog, jih jasno označim kot osnutek in znova izvozim isti test z dodanim razdelkom "Rešitve".
+STATUS: notify — test z osnutkom rešitev za vseh 19 nalog je izvožen in preverjen.
