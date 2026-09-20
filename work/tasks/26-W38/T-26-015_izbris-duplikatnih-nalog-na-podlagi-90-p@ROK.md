@@ -42,6 +42,25 @@ design), say so and describe what done looks like instead of faking a check.
 
 <!-- Links, file paths, the records involved. -->
 
+Možnosti za merjenje "podobnosti" (predstavljene Vitalu 2026-09-20, čaka se
+njegova odločitev):
+
+1. **Znakovna/besedna primerjava (string similarity)** — primerja dobesedno
+   besedilo dveh nalog (npr. RapidFuzz/`difflib`). Hitro, brez stroškov,
+   dobro zazna skoraj-identične kopije (ista naloga, prepisana z manjšimi
+   popravki črkovanja/ločil). Ne zazna dveh nalog, ki sprašujejo isto stvar
+   z drugimi besedami.
+2. **Pomenska primerjava (embeddings / AI)** — vsako nalogo pretvori v
+   številski "pomenski prstni odtis" in primerja te; zazna tudi vsebinsko
+   enake naloge, zapisane povsem drugače. Bolj zanesljivo, a počasnejše in
+   ima majhen strošek (klic AI za vsako nalogo, ~17.500 nalog).
+3. **Kombinacija** — najprej hitra znakovna primerjava za grobo predizbiro,
+   nato pomenska primerjava le za sumljive pare — najhitreje in poceni, s
+   skoraj enako natančnostjo kot čista pomenska primerjava.
+
+Odprto ostaja tudi, ali naj se pri odločitvi "je podvojeno" upošteva samo
+besedilo naloge, ali tudi vsebinsko poglavje/tip naloge kot dodaten filter.
+
 ## Plan
 
 <!-- Exact files and current vs. target state. Written before execution. -->
