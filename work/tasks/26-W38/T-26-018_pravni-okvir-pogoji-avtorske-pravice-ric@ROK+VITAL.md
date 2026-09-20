@@ -2,6 +2,7 @@
 task: T-26-018
 title: Pravni okvir: pogoji uporabe, avtorske pravice, GDPR, RIC
 status: waiting
+discord-thread: 1551343483774570586
 assignee: [ROK, VITAL]
 requested-by: Rok
 week: 26-W38
