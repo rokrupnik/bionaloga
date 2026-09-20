@@ -2,6 +2,7 @@
 task: T-26-017
 title: Infrastruktura: domena, strežnik, baza, shramba, Cloudflare
 status: waiting
+discord-thread: 1551343481904173126
 assignee: [ROK]
 requested-by: Rok
 week: 26-W38
