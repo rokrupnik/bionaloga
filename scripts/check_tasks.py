@@ -31,7 +31,7 @@ WORK = os.path.join(ROOT, 'work')
 TASKS = os.path.join(WORK, 'tasks')
 SELFTEST = os.environ.get('CHECK_SELFTEST') == '1'
 
-STATES = {'open', 'planning', 'ready', 'in-progress', 'review', 'integrating',
+STATES = {'open', 'planning', 'ready', 'in-progress', 'review', 'integrating', 'waiting',
           'changes-requested', 'needs-info', 'waits-info', 'blocked', 'notify', 'done'}
 REQUIRED = ('task', 'title', 'status', 'assignee', 'requested-by', 'week',
             'created', 'completed', 'blocked-by')

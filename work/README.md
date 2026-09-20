@@ -79,6 +79,7 @@ tell when it ships.
 ```text
 open -> planning -> ready -> in-progress -> review -> notify -> done
 from anywhere:  blocked | needs-info -> waits-info -> back to where it came from
+                waiting (until: a week/date, or a person's own task) -> open
 ```
 
 - `open` — captured, not yet worked out.
@@ -90,6 +91,11 @@ from anywhere:  blocked | needs-info -> waits-info -> back to where it came from
 - `needs-info` — an input or decision is missing and the person has not been
   asked yet. `waits-info` — they have been asked and owe an answer.
 - `notify` — shipped and verified; the requester has not been told yet.
+- `waiting` — postponed on purpose until `until:` (a week `YY-Wnn` or a date);
+  `scripts/waiting.py postpone` puts it there and moves the file into that
+  week's folder, `scripts/waiting.py wake` (daily) returns it to `open`. A
+  `waiting` task without `until:` is a person's own work: the bot keeps its
+  post and thread but never plans or executes it.
 - `done` — finished, `completed:` set, filename starts with `x_`.
 
 ### How a task gets done
