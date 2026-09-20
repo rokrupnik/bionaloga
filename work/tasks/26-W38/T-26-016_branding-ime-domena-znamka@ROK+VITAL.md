@@ -2,6 +2,7 @@
 task: T-26-016
 title: Branding: ime, domena in znamka storitve
 status: waiting
+discord-thread: 1551343479760879656
 assignee: [ROK, VITAL]
 requested-by: Rok
 week: 26-W38
