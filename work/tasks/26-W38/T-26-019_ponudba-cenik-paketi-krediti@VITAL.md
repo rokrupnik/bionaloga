@@ -2,6 +2,7 @@
 task: T-26-019
 title: Ponudba in cenik: paketi, krediti, naročnina na šolsko leto, plačila
 status: waiting
+discord-thread: 1551343485679042600
 assignee: [VITAL]
 requested-by: Rok
 week: 26-W38
