@@ -1,7 +1,7 @@
 ---
 task: T-26-015
 title: Izbris duplikatnih nalog na podlagi 90% podobnosti vsebine
-status: open
+status: needs-info
 discord-thread: 1551338945625849916
 assignee: [ROK]
 requested-by: Vital
@@ -17,12 +17,15 @@ visibility: team
 
 ## Goal
 
-<!-- One paragraph. What changes for the user when this is done. -->
+Baza `naloga` (trenutno 17.529 vrstic, 756 izvornih datotek) naj ne vsebuje
+vsebinsko podvojenih nalog — kjer je ena naloga vsebinsko ≥90% podobna drugi,
+naj v bazi ostane samo ena.
 
 ## Scope
 
-In:
-Out:
+In: iskanje in izbris podvojenih nalog v tabeli `naloga` (in pripadajočih
+zapisov v `slika`) na podlagi podobnosti besedila.
+Out: še ni določeno — glej odprta vprašanja spodaj.
 
 ## Acceptance criteria
 
@@ -45,6 +48,28 @@ design), say so and describe what done looks like instead of faking a check.
 ## Result
 
 <!-- What shipped, what did not, commits, deviations. Written after execution. -->
+
+Odprta vprašanja pred izvedbo (POLICY D9 — trajen izbris podatkov je
+nepovratno dejanje: opišem, kaj bi izvedel, ne izvedem brez eksplicitne
+potrditve Roka; privzete vrednosti spodaj so predlog, ne odločitev):
+
+1. **Metrika podobnosti.** Predlagam primerjavo polja `besedilo` z
+   string-similarity algoritmom (npr. RapidFuzz/`difflib.SequenceMatcher`,
+   normaliziran tekst — brez presledkov/velikih črk) in pragom ≥90%. Ali naj
+   se pri odločitvi upošteva samo besedilo naloge, ali tudi `vsebina_koda` /
+   `tip_id` kot dodaten filter (da se ne primerjajo naloge iz povsem
+   različnih poglavij)?
+2. **Katero nalogo obdržati** v paru/skupini duplikatov? Predlog: obdrži
+   tisto s popolnejšimi metapodatki (ima `vsebina_koda`, `tezavnost`,
+   sliko), ob enakosti pa najstarejšo (najnižji `id`). Je to pravilo
+   sprejemljivo, ali naj velja kaj drugega (npr. vedno obdrži najstarejšo)?
+3. **Slike.** Ali se ob izbrisu naloge izbrišejo tudi pripadajoči zapisi v
+   tabeli `slika` (predlog: da — sicer bi ostali osiroteli zapisi), in ali
+   se izbrišejo tudi slikovne datoteke v `slike/`, ali te ostanejo?
+4. **Postopek.** Predlagam: najprej pripraviti seznam najdenih domnevnih
+   duplikatov (brez brisanja) za pregled, šele po potrditvi Roka izvesti
+   dejanski izbris na varnostni kopiji `baza.db`, narejeni tik pred
+   posegom.
 
 ## Ask (from Discord, Vital)
 
