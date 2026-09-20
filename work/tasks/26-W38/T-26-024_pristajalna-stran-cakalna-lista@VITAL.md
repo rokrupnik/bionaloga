@@ -2,6 +2,7 @@
 task: T-26-024
 title: Pristajalna stran in čakalna lista
 status: waiting
+discord-thread: 1551343495812489337
 assignee: [VITAL]
 requested-by: Rok
 week: 26-W38
