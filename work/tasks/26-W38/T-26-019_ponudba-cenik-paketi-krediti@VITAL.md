@@ -45,7 +45,7 @@ Out: implementacija plačil (naloga po tej), marketing.
 |---|---|---|---|
 | **Osnovni** | en učitelj, začetek | lastna baza do 500 nalog, ročno sestavljanje, izvoz .docx, 10 kreditov | ~39 € |
 | **Glavni** | en učitelj, redna raba | brez omejitve nalog, naključni izbor po tipu, rešitve v izvozu, 40 kreditov, dostop do skupne baze (branje) | ~89 € |
-| **Premium** | učitelj ali predmetni aktiv | vse iz Glavnega + AI-generiranje testov, deljenje v skupno bazo, 120 kreditov, do 3 učitelji | ~179 € |
+| **Premium** | učitelj ali predmetni aktiv | vse iz Glavnega + AI-generiranje testov, popravljanje testov (T-26-025), deljenje v skupno bazo, 120 kreditov, do 3 učitelji | ~179 € |
 | **Šola** | vsi učitelji predmeta na šoli | Premium za do 10 uporabnikov, skupna šolska baza, e-račun | ~390 € |
 
 **Krediti:** 1 kredit = obdelava ene naložene datoteke do 5 MB (razrez +

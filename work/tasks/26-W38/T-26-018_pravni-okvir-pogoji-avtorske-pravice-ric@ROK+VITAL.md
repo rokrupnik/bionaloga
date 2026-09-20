@@ -36,7 +36,7 @@ jih je pregledal odvetnik.
 
 - [ ] `docs/pravno/pogoji.md`, `zasebnost.md`, `dpa.md` napisani po točkah spodaj
 - [ ] v aplikaciji je postopek prijave kršitve (obrazec/e-naslov) in odstranitve v 48 urah
-- [ ] RIC-u poslan dopis (Vital), odgovor zabeležen pod `## Result`
+- [ ] RIC-u poslan dopis (T-26-026, Vital), odgovor povzet tu pod `## Result`
 - [ ] odvetnik pregledal; pripombe vgrajene
 - [ ] odločitev, na katerem paketu (če sploh) so RIC naloge, zapisana v T-26-019
 
@@ -72,7 +72,7 @@ Vse pravice pridržane.« brez licence za nadaljnjo uporabo. Izjema za uradna
 besedila (ZASP 9. člen: zakoni, uradna besedila zakonodajne, upravne in sodne
 narave) za izpitne pole ni zanesljiva — nanjo se ne opiramo. Zato:
 - **Ne** ponujava RIC nalog kot lastne baze na plačljivem paketu **brez
-  pisnega dovoljenja RIC-a**. Vital pošlje dopis: kdo sva, kaj je storitev,
+  pisnega dovoljenja RIC-a**. Vital pošlje dopis (besedilo v T-26-026): kdo sva, kaj je storitev,
   da bi naloge prikazovala z navedbo vira (»RIC, matura 2019, jesenski rok«)
   in povezavo na izvorno polo; prosiva za neizključno licenco za izobraževalno
   rabo v plačljivi storitvi. RIC je javni zavod — verjetni izidi: dovoljenje z
