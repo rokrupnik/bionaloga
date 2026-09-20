@@ -2,6 +2,7 @@
 task: T-26-023
 title: Generiranje testov z AI iz uporabnikove baze
 status: waiting
+discord-thread: 1551343493455155220
 assignee: [VITAL]
 requested-by: Rok
 week: 26-W38
