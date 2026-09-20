@@ -2,6 +2,7 @@
 task: T-26-020
 title: Večuporabniška aplikacija: računi, šole, ločeni podatki
 status: waiting
+discord-thread: 1551343487633465528
 assignee: [VITAL]
 requested-by: Rok
 week: 26-W38
