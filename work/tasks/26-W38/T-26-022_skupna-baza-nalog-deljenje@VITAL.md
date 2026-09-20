@@ -2,6 +2,7 @@
 task: T-26-022
 title: Skupna baza nalog: deljenje z drugimi učitelji
 status: waiting
+discord-thread: 1551343491433631795
 assignee: [VITAL]
 requested-by: Rok
 week: 26-W38
