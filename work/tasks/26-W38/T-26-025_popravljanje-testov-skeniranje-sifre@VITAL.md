@@ -2,6 +2,7 @@
 task: T-26-025
 title: Popravljanje testov: skeniranje, AI ocenjevanje, šifre namesto imen
 status: waiting
+discord-thread: 1551347534369132675
 assignee: [VITAL]
 requested-by: Rok
 week: 26-W38
