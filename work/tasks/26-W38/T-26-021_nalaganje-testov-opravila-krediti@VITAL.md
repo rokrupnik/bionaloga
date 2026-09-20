@@ -2,6 +2,7 @@
 task: T-26-021
 title: Nalaganje testov kot storitev: opravila v ozadju, krediti, stroški
 status: waiting
+discord-thread: 1551343489789333664
 assignee: [VITAL]
 requested-by: Rok
 week: 26-W38
