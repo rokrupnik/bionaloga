@@ -2,6 +2,7 @@
 task: T-26-026
 title: Dopis RIC-u: dovoljenje za uporabo maturitetnih nalog v aplikaciji
 status: waiting
+discord-thread: 1551347535757705257
 assignee: [VITAL]
 requested-by: Rok
 week: 26-W38
@@ -22,7 +23,7 @@ naveden kot vir; o cenah in paketih ne govori.
 
 ## Scope
 
-In: dopis po e-pošti na info@ric.si (in po navadni pošti, če ni odgovora v
+In: dopis po e-pošti na [e-pošta] (in po navadni pošti, če ni odgovora v
    treh tednih), en opomnik, zapis odgovora pod `## Result`, prenos odločitve
    v T-26-018 in T-26-019.
 Out: pogajanja o ceni licence (če RIC to odpre, prevzame Rok).
@@ -83,6 +84,6 @@ Out: pogajanja o ceni licence (če RIC to odpre, prevzame Rok).
   dobljeno na napačni predpostavki, pade, ko RIC izve drugače, in s tem pade
   vse iz T-26-018. Če RIC vpraša, kako se orodje financira, odgovori po
   resnici (naročnina učiteljev in šol) in vprašanje predaj Roku.
-- Naslovnik: info@ric.si, po možnosti tudi predmetna skupina za biologijo
+- Naslovnik: [e-pošta], po možnosti tudi predmetna skupina za biologijo
   (imena so v predmetnem izpitnem katalogu).
 - Rok za odgovor si postavi tri tedne; potem en prijazen opomnik.
