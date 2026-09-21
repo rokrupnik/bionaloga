@@ -1,7 +1,7 @@
 ---
 task: T-26-015
 title: Izbris duplikatnih nalog na podlagi 90% podobnosti vsebine
-status: needs-info
+status: waits-info
 cost-usd: 0.50
 discord-thread: 1551338945625849916
 assignee: [ROK]
@@ -41,6 +41,13 @@ design), say so and describe what done looks like instead of faking a check.
 ## Notes
 
 <!-- Links, file paths, the records involved. -->
+
+**Odločitev (Vital, 2026-09-21): metrika podobnosti = možnost 3, kombinacija**
+(hitra znakovna predizbira + pomenska primerjava za sumljive pare).
+
+Še odprto (POLICY D9, čaka Roka): katero nalogo obdržati ob najdenem paru/
+skupini duplikatov, ravnanje s pripadajočimi slikami, in končna potrditev za
+dejanski izbris (glej vprašanja 2–4 spodaj).
 
 Možnosti za merjenje "podobnosti" (predstavljene Vitalu 2026-09-20, čaka se
 njegova odločitev):
