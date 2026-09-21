@@ -2,7 +2,7 @@
 task: T-26-015
 title: Izbris duplikatnih nalog na podlagi 90% podobnosti vsebine
 status: waits-info
-cost-usd: 0.50
+cost-usd: 0.79
 discord-thread: 1551338945625849916
 assignee: [ROK]
 requested-by: Vital
